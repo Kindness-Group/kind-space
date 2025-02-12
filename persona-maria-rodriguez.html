@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindness App Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 8px;
+            margin-top: 24px;
+        }
+        h3 {
+            color: #2b6cb0;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        li:before {
+            content: "•";
+            color: #4299e1;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        .pre-conditions, .post-conditions {
+            background-color: #f7fafc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .interaction-flow {
+            background-color: #f7fafc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .interaction-flow ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .interaction-flow li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Persona: The Kindness Chronicler</h2>
+
+<h3>Name</h3>
+<p>Maria Rodriguez</p>
+
+<h3>Technology</h3>
+<ul>
+    <li>iPhone 13 with iOS 16, primarily using Safari</li>
+    <li>iPad Air for evening browsing</li>
+    <li>Regular user of map-based apps like Google Maps and social apps like Instagram</li>
+</ul>
+
+<h3>Love/Hate</h3>
+<h4>Loves:</h4>
+<ul>
+    <li>Documenting positive moments in her community</li>
+    <li>Inspiring others through storytelling</li>
+    <li>Using technology to create meaningful connections</li>
+    <li>Visual representation of positive impact</li>
+</ul>
+
+<h4>Hates:</h4>
+<ul>
+    <li>Complicated posting processes</li>
+    <li>Negative social media environments</li>
+    <li>Missing opportunities to share uplifting stories</li>
+    <li>Difficulty finding local community engagement</li>
+</ul>
+
+<h3>Proficiency</h3>
+<ul>
+    <li>Intermediate technology user</li>
+    <li>Comfortable with social media and location services</li>
+    <li>Regular user of photo-sharing apps</li>
+    <li>Familiar with map-based applications</li>
+</ul>
+
+<h3>Attitudes and Behaviors</h3>
+<ul>
+    <li>Works as a local coffee shop barista, witnessing daily interactions</li>
+    <li>Active community member who volunteers weekly</li>
+    <li>Believes in the ripple effect of kindness</li>
+    <li>Checks the app daily for inspiration</li>
+    <li>Enjoys participating in community initiatives</li>
+    <li>Uses the app's suggestions to perform daily acts of kindness</li>
+    <li>Values privacy while sharing positive stories</li>
+    <li>Wants to create a more connected and compassionate community</li>
+</ul>
+
+<h2>User Story</h2>
+<p>As a community-minded individual, I want to easily document and map acts of kindness I witness during my workday, so I can inspire others and visualize the spread of kindness in my neighborhood.</p>
+
+<h2>Use Case: Documenting a Chain of Kindness</h2>
+<p>Maria witnesses a customer paying for a homeless person's meal at her coffee shop, which leads to that person helping someone else later.</p>
+
+<h3>Pre-conditions</h3>
+<div class="pre-conditions">
+    <ul>
+        <li>Maria is logged into the app</li>
+        <li>Location services are enabled</li>
+        <li>She's on her lunch break</li>
+    </ul>
+</div>
+
+<h3>Post-conditions</h3>
+<div class="post-conditions">
+    <ul>
+        <li>Two connected acts of kindness are posted</li>
+        <li>Both locations are marked on the kindness map</li>
+        <li>Daily kindness counter is updated</li>
+    </ul>
+</div>
+
+<h2>Interaction Flow</h2>
+<div class="interaction-flow">
+    <ol>
+        <li>Maria opens the app and taps the "Share Kindness" button</li>
+        <li>App presents options for type of kindness post (Witnessed/Experienced/Connected Story)</li>
+        <li>Maria selects "Connected Story" option</li>
+        <li>App displays map for location tagging</li>
+        <li>Maria confirms current location (coffee shop) for first act</li>
+        <li>App prompts for story details</li>
+        <li>Maria enters description of the first act (customer buying meal)</li>
+        <li>Maria adds relevant tags (#PayItForward #CommunityKindness)</li>
+        <li>App prompts for second location</li>
+        <li>Maria drops pin at nearby park for second act</li>
+        <li>Maria enters details of the connected act of kindness</li>
+        <li>App shows preview of both stories and map markers</li>
+        <li>Maria reviews and taps "Share Kindness"</li>
+        <li>App confirms posting and adds two heart markers to the map</li>
+        <li>App shows success message with total kindness acts in the area</li>
+        <li>Maria's post appears in the main feed and on the map view</li>
+    </ol>
+</div>
+</body>
+</html>
