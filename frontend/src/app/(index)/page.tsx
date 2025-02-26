@@ -23,9 +23,9 @@ export default function Home() {
 <section>
     <div id="purpose" className="py-16 bg-white text-gray-900">
         <h1 className="md:text-4xl text-2xl text-center font-bold">Our Purpose</h1>
-        <p className="text-left max-md:text-sm md:pt-12 container mx-auto">Kind-Space is a social media platform designed to inspire and amplify kindness! On the Kindness Feed, you can post details of random acts of kindness you’ve experienced or observed, tagging your location on our interactive map. Each act is marked with a heart as kindness spreads in different areas. Our daily kindness suggestions give you ideas each day for making the world a better place.</p>
+        <p className="text-left max-md:text-sm md:pt-12 container mx-auto">Kind-Space is a social media platform designed to inspire and amplify kindness! On the <a href="" className="py-2 px-3 text-purple-700 md:hover:bg-transparent md:border-0 md:hover:text-teal-400 md:p-0"><strong>Kindness Feed</strong></a>, you can post details of random acts of kindness you’ve experienced or observed, tagging your location on our interactive <a href="" className="py-2 px-3 text-purple-700 md:hover:bg-transparent md:border-0 md:hover:text-teal-400 md:p-0"><strong>Kindness Map</strong></a>. Each act is marked with a heart as kindness spreads in different areas. Our <a href="" className="py-2 px-3 text-purple-700 md:hover:bg-transparent md:border-0 md:hover:text-teal-400 md:p-0"><strong>Daily Kindness Suggestions</strong></a> give you ideas each day for making the world a better place.</p>
         <p className="text-left max-md:text-sm md:py-6 container mx-auto">By fostering a culture of positivity and connection, Kind-Space hopes to transform everyday moments into a collective movement of compassion!</p>
-        <Button color={"light"} className="m-auto focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700">Share Kindness</Button>
+        <Button color={"light"} className="m-auto focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700">Sign Up to Share Kindness</Button>
     </div>
 </section>
 
