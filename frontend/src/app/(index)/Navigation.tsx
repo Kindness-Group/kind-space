@@ -5,10 +5,10 @@ import Link from "next/link";
 // app/Navigation.tsx
 export function Navigation() {
     return (
-        <Navbar className="border-black border-4 bg-slate-300" fluid>
+        <Navbar className="border-black border-4 bg-white" fluid>
 
             <NavbarBrand as={Link} href="/">
-                <img className="w-[30%] mr-3" src="/heart-icon.png" alt="icon" />
+                <img className="w-[10%] mr-3" src="/heart-icon.png" alt="icon" />
                 <span className="text-xl font-semibold">Kind Space</span>
             </NavbarBrand>
             <NavbarToggle />
