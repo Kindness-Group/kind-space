@@ -20,8 +20,8 @@ export function SuggestionCard() {
                     </div>
                 </div>
                 </div>
-                <div className='relative flex items-end justify-end mt-auto mr-8'>
-                    <img src="/heart-icon-cropped.png" className="w-[2%]" alt="heart icon"/>
+                <div className='relative flex md:items-end md:justify-end justify-center mt-auto mr-8'>
+                    <img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
                     <p>### People plan to do this!</p>
                 </div>
             </section>

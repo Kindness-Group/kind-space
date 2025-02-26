@@ -4,8 +4,8 @@ import {intersection} from "ts-interface-checker";
 
 export function MoreSuggestionCard() {
     return (
-        <section className="relative w-[45vh] h-[45vh] ">
-        <div className="text-gray-900 p-16 flex flex-col items-center justify-center ">
+        <section className="relative md:w-[45vh] md:h-[45vh] w-[62vh] h-[62vh]">
+        <div className="text-gray-900 md:p-16 p-28 flex flex-col items-center justify-center ">
             <div className="absolute inset-0 bg-cover bg-center w-full h-full"
                  style={{backgroundImage: "url('/giving-flower.png')"}}>
                 <div className="absolute inset-0 bg-gradient-to-b from-white/85 to-white/40">
@@ -17,12 +17,12 @@ export function MoreSuggestionCard() {
             </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full mt:4">
+        <div className="flex flex-col items-center justify-center w-full md:mt-8">
             <div className="flex items-center justify-center my-4">
-                <img src="/heart-icon-cropped.png" className="w-[5%]" alt="heart icon"/>
+                <img src="/heart-icon-cropped.png" className="w-5" alt="heart icon"/>
                 <p>### People plan to do this!</p>
             </div>
-            <div className="flex items-center justify-center gap-x-[10%] whitespace-nowrap">
+            <div className="flex items-center justify-center gap-x-[10%] whitespace-nowrap mb-16">
                 <Button color={"light"}
                         className="focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700">Plan to do
                     it!</Button>

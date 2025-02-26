@@ -8,11 +8,13 @@ export default function DailySuggestionPage() {
         <>
             <Banner/>
             <SuggestionCard/>
-            <section id="more-suggestions" className="text-black m-16">
-                <h1 className="md:text-4xl text-2xl text-center font-bold">More Suggestions</h1>
+            <section id="more-suggestions" className="text-black">
+                <h1 className="md:text-4xl text-2xl text-center font-bold m-16">More Suggestions</h1>
+                <div className="flex flex-col items-center gap-y-32 md:flex-row md:gap-x-[10%] md:mx-8" >
             <MoreSuggestionCard/>
             <MoreSuggestionCard/>
             <MoreSuggestionCard/>
+                </div>
             </section>
         </>
     )
