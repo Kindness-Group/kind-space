@@ -21,7 +21,7 @@ export function SuggestionCard() {
                 </div>
                 </div>
                 <div className='relative flex items-end justify-end mt-auto mr-8'>
-                    <img src="/heart-icon-cropped.png" className="w-[2%] focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700" alt="heart icon"/>
+                    <img src="/heart-icon-cropped.png" className="w-[2%]" alt="heart icon"/>
                     <p>### People plan to do this!</p>
                 </div>
             </section>
