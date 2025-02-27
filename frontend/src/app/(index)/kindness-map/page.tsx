@@ -32,7 +32,11 @@ export default function () {
             </section>
 
             <section id="map-placeholder">
-
+                    <div className="py-64 my-4 bg-gray-500 text-white">
+                        <div className="container mx-auto max-md:max-w-md">
+                            <p className="text-center md:py-24 container mx-auto">Kindness Map Placeholder</p>
+                        </div>
+                    </div>
             </section>
         </>
     )
