@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import '../globals.css'
 import {Navigation} from "@/app/(index)/Navigation";
 import React from "react";
+import {Footer} from "flowbite-react";
 
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout(props : RootLayoutProps) {
         <body>
         <Navigation/>
         {children}
+        <Footer/>
         </body>
         </html>
     )

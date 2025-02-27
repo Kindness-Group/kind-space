@@ -12,13 +12,10 @@ export function Navigation() {
                 <span className="text-xl font-semibold">Kind Space</span>
             </NavbarBrand>
             <NavbarToggle />
-            <NavbarCollapse>
-                {/*<NavbarLink as={Link} href="/frontend/public" active>*/}
-                {/*    Home*/}
-                {/*</NavbarLink>*/}
-                {/*<NavbarLink as={Link} href="/about">*/}
-                {/*    About*/}
-                {/*</NavbarLink>*/}
+            <NavbarCollapse className="w-full flex flex-col md:flex-row md:justify-center md:items-center">
+                <NavbarLink as={Link} href="" active>Kindness Feed</NavbarLink>
+                <NavbarLink as={Link} href="">Kindness Map</NavbarLink>
+                <NavbarLink as={Link} href="">Daily Suggestion</NavbarLink>
             </NavbarCollapse>
         </Navbar>
     );
