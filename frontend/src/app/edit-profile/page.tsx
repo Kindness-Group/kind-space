@@ -29,7 +29,10 @@ export default function EditProfile({}: EditProfileProps) {
                         <path d="M12 4.5L4.5 12L12 19.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </div>
-                <h1 className="text-3xl font-bold">Edit Profile</h1>
+                <section id="banner" className="text-black m-16 flex items-center justify-center">
+                    <img src="/heart-icon.png" className="w-12"/>
+                    <h1 className="md:text-2xl text-xl text-center font-bold">Edit Profile</h1>
+                </section>
             </div>
 
             <div className="flex flex-col items-center mb-8">
