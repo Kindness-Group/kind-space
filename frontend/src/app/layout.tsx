@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import '../globals.css'
+import './globals.css'
 import {Navigation} from "@/app/(index)/Navigation";
 import React from "react";
 import {Footer} from "flowbite-react";
