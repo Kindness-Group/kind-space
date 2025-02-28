@@ -1,7 +1,7 @@
-import {SuggestionCard} from "@/app/daily-suggestion-page/SuggestionCard";
+import {SuggestionCard} from "@/app/kindness-suggestions/SuggestionCard";
 import {Banner} from "@/app/layout-components/Banner"
 import {Button} from "flowbite-react";
-import {MoreSuggestionCard} from "@/app/daily-suggestion-page/MoreSuggestionCard";
+import {MoreSuggestionCard} from "@/app/kindness-suggestions/MoreSuggestionCard";
 
 export default function DailySuggestionPage() {
     return (

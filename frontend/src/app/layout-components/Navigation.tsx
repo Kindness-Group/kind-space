@@ -13,9 +13,9 @@ export function Navigation() {
             </NavbarBrand>
             <NavbarToggle />
             <NavbarCollapse>
-                <NavbarLink as={Link} href="" active>Kindness Feed</NavbarLink>
+                <NavbarLink as={Link} href="/kindness-feed" active>Kindness Feed</NavbarLink>
                 <NavbarLink as={Link} href="/kindness-map">Kindness Map</NavbarLink>
-                <NavbarLink as={Link} href="/daily-suggestion-page">Daily Suggestion</NavbarLink>
+                <NavbarLink as={Link} href="/kindness-suggestions">Daily Suggestion</NavbarLink>
             </NavbarCollapse>
         </Navbar>
     );
