@@ -7,7 +7,7 @@ export default function KindnessFeedPage() {
 }
 
 
-import { Button, Card } from 'flowbite-react';
+import {Banner, Button, Card} from 'flowbite-react';
 import { LuHeart, LuMessageSquare } from 'react-icons/lu';
 
 interface KindnessPostProps {
@@ -69,25 +69,12 @@ export function KindnessFeed() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <div className="flex justify-between items-center mb-4">
-                <div className="w-8 h-8">
-                    <LuHeart size={32} />
-                </div>
-                <div className="flex space-x-4">
-                    <a href="#" className="hover:underline">Home</a>
-                    <span>|</span>
-                    <a href="#" className="hover:underline">Kindness Feed</a>
-                    <span>|</span>
-                    <a href="#" className="hover:underline">Map</a>
-                    <span>|</span>
-                    <a href="#" className="hover:underline">Daily Suggestions</a>
-                </div>
-                <a href="#" className="hover:underline">Login/Sign-Up</a>
-            </div>
-
             <div className="text-center mb-8">
-                <h1 className="text-4xl font-bold mb-2">"Kindness Feed"</h1>
-                <p className="text-xl">"Spreading Kindness One Post at Time"</p>
+                <section id="banner" className="text-black m-16 flex items-center justify-center">
+                    <img src="/heart-icon.png" className="w-12"/>
+                    <h1 className="md:text-2xl text-xl text-center font-bold">Kindness Feed</h1>
+                </section>
+                <p className="text-xl">Spreading Kindness One Post at Time</p>
             </div>
 
             <div className="flex justify-center mb-8">

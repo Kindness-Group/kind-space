@@ -16,6 +16,10 @@ export function Navigation() {
                 <NavbarLink as={Link} href="/kindness-feed" active>Kindness Feed</NavbarLink>
                 <NavbarLink as={Link} href="/kindness-map">Kindness Map</NavbarLink>
                 <NavbarLink as={Link} href="/kindness-suggestions">Daily Suggestion</NavbarLink>
+                <NavbarLink as={Link} href="/login">Login</NavbarLink>
+                <NavbarLink as={Link} href="/signup">Sign-Up</NavbarLink>
+                <NavbarLink as={Link} href="/viewprofile">Profile</NavbarLink>
+                <NavbarLink as={Link} href="/edit-profile">Edit Profile</NavbarLink>
             </NavbarCollapse>
         </Navbar>
     );

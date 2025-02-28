@@ -27,23 +27,7 @@ const SignupPage: React.FC = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Navigation */}
-            <nav className="border-b border-gray-200 py-4 px-6 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <div className="bg-gray-100 p-2 rounded">
-                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor" />
-                        </svg>
-                    </div>
-                    <h1 className="text-xl font-semibold">Kind Space</h1>
-                </div>
-                <div className="flex items-center gap-8">
-                    <Link href="/feed" className="text-gray-700 hover:text-gray-900">Kindness Feed</Link>
-                    <Link href="/map" className="text-gray-700 hover:text-gray-900">Kindness Map</Link>
-                    <Link href="/suggestion" className="text-gray-700 hover:text-gray-900">Daily Suggestion</Link>
-                    <Link href="/login" className="text-blue-600 font-medium">Login</Link>
-                </div>
-            </nav>
+
 
             {/* Main Content */}
             <div className="flex-grow flex justify-center items-center p-6">
@@ -124,11 +108,7 @@ const SignupPage: React.FC = () => {
                     {/* Image Section */}
                     <div className="w-1/2 bg-gray-100 flex items-center justify-center p-8">
                         <div className="w-full h-full">
-                            <svg viewBox="0 0 200 200" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M100 180c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z" fill="#e74c3c"/>
-                                <path d="M65 95c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15zm70 0c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z" fill="#e74c3c"/>
-                                <path d="M65 95c0 19.3 15.7 35 35 35s35-15.7 35-35" fill="none" stroke="#ffffff" strokeWidth="5"/>
-                            </svg>
+                            <img src="/helping-hands2.jpg" alt="holding hands"/>
                         </div>
                     </div>
                 </div>

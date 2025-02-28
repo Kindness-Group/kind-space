@@ -19,6 +19,16 @@ export default function Home() {
                 </div>
             </section>
 
+            <section id="suggestion-preview" >
+                <div className="py-16 bg-white text-gray-900">
+                    <div className="container mx-auto max-md:max-w-md">
+                        <h1 className="md:text-4xl text-2xl text-center font-bold">Daily Suggestion</h1>
+                        <p className="p-8 text-center text-lg">Today's act of kindness suggestion:</p>
+                        <p className="text-center md:py-24 container mx-auto"> Suggestion Preview Placeholder</p>
+                    </div>
+                </div>
+            </section>
+
             <section id="purpose" className="text-gray-100 relative w-full h-[75vh]">
                 <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/heart-hands2.png')" }}>
                     <div className="absolute inset-0 backdrop-blur bg-gradient-to-b from-indigo-900/95 to-transparent"></div>
@@ -47,16 +57,6 @@ export default function Home() {
                     <h1 className="md:text-4xl text-2xl text-center font-bold">Kindness Feed</h1>
                     <p className="p-8 text-center text-lg">See what acts of kindness other users are posting about!</p>
                     <p className="text-center md:py-24"> Kindness Feed Preview Placeholder</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="map-preview" >
-                <div className="py-16 bg-white text-gray-900">
-                    <div className="container mx-auto max-md:max-w-md">
-                    <h1 className="md:text-4xl text-2xl text-center font-bold">Daily Suggestion</h1>
-                    <p className="p-8 text-center text-lg">Today's act of kindness suggestion:</p>
-                    <p className="text-center md:py-24 container mx-auto"> Suggestion Preview Placeholder</p>
                     </div>
                 </div>
             </section>
