@@ -20,7 +20,9 @@ export default function () {
                            className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700 p-2.5 pl-10"
                            placeholder= "Search for Location"/>
                   </div>
-                    <Button color={"light"} className="bg-gray-50 border border-gray-900 focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700 text-gray-900 text-sm ml-1">Go</Button>
+                    <Button color={"light"} className="font-bold bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 group-hover:from-teal-400 group-hover:to-purple-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4 text-sm ml-1">Go</Button>
+
+                    {/*<Button color={"light"} className="bg-gray-50 border border-gray-900 focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700 text-gray-900 text-sm ml-1">Go</Button>*/}
                 </div>
 
                 <div id="filter" className="flex h-full items-center">
