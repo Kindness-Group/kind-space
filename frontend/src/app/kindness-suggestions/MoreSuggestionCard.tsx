@@ -23,9 +23,13 @@ export function MoreSuggestionCard() {
                 <p>### People plan to do this!</p>
             </div>
             <div className="flex items-center justify-center gap-x-[10%] whitespace-nowrap mb-16">
-                <Button color={"light"} className="font-bold bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 group-hover:from-teal-400 group-hover:to-purple-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Plan to do it!</Button>
+                <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                    <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Plan to do it!</Button>
+                </div>
 
-                <Button color={"light"} className="font-bold bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 group-hover:from-teal-400 group-hover:to-purple-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
+                <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                    <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
+                </div>
                 {/*<Button color={"light"}*/}
                 {/*        className="focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700">Plan to do*/}
                 {/*    it!</Button>*/}
