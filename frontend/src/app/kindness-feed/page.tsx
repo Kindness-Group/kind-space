@@ -78,9 +78,10 @@ export function KindnessFeed() {
             </div>
 
             <div className="flex justify-center mb-8">
-                <Button color="dark" className="px-4">
-                    "Share New Kind Act"
-                </Button>
+                <Button color={"light"} className="font-bold bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 group-hover:from-teal-400 group-hover:to-purple-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Share New Kind Act</Button>
+                {/*<Button color="dark" className="px-4">*/}
+                {/*    Share New Kind Act*/}
+                {/*</Button>*/}
             </div>
 
             <div className="max-w-2xl mx-auto">

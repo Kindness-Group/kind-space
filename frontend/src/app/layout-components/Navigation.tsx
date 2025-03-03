@@ -5,6 +5,7 @@ import Link from "next/link";
 // app/Navigation.tsx
 export function Navigation() {
     return (
+        <div className="relative p-1 bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400" >
         <Navbar className="border-black border-4 p-4 bg-white" fluid>
 
             <NavbarBrand as={Link} href="/">
@@ -47,5 +48,6 @@ export function Navigation() {
             </NavbarCollapse>
 
         </Navbar>
+        </div>
     );
 }
