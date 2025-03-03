@@ -17,9 +17,9 @@ export function ProfileCard(prop: ProfileProps) {
 	}
 	return (
 		<>
-			<div className="w-full md:w-[95%] border border-gray-200 min-h-screen mx-auto md:px-9 shadow-md rounded-lg py-16 bg-white">
+			<div className="w-full border flex flex-col pt-14 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded bg-white">
 				{/* Header */}
-				<header className="flex items-center justify-center space-x-2 mb-6">
+				<header className="flex justify-center space-x-2 mb-6">
 					<span className="text-xl">❤️</span>
 					<span className="text-lg font-medium">Hi {name}!</span>
 				</header>
@@ -28,8 +28,8 @@ export function ProfileCard(prop: ProfileProps) {
 				<section className="text-center mb-6 p-4">
 					<img src={profilePic} alt="profile picture" className="w-48 h-48 mx-auto"/>
 					<h2 className="mt-4 text-xl font-semibold">{username}</h2>
-					<p className="mt-2 text-sm text-gray-600">
-						Bio: {bio}
+					<p className="mt-2 text-sm leading-7 text-gray-900">
+						<span className="font-semibold">Bio:</span> {bio}
 					</p>
 				</section>
 
