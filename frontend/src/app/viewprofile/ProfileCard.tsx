@@ -19,9 +19,15 @@ export function ProfileCard(prop: ProfileProps) {
 		<>
 			<div className="w-full border flex flex-col pt-14 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded bg-white">
 				{/* Header */}
-				<header className="flex justify-center space-x-2 mb-6">
-					<span className="text-xl">❤️</span>
-					<span className="text-lg font-medium">Hi {name}!</span>
+
+				<header className="flex items-center justify-center space-x-2 mb-6">
+					<div id="banner" className="text-black m-16 flex items-center justify-center">
+						<img src="/heart-icon.png" className="w-12"/>
+						<h1 className="md:text-2xl text-xl text-center font-bold">Hi {name}!</h1>
+					</div>
+					{/*<span className="text-xl">❤️</span>*/}
+					{/*<span className="text-lg font-medium">Hi {name}!</span>*/}
+
 				</header>
 
 				{/* Profile Section */}
