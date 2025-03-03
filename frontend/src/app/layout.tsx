@@ -8,8 +8,8 @@ import {Footer} from "flowbite-react";
 
 
 export const metadata: Metadata = {
-    title: 'Title Goes Here',
-    description: 'description goes here',
+    title: 'Kind Space',
+    description: 'Kind-Space is a social media platform designed to inspire and amplify kindness by allowing users to share, witness, and engage in acts of kindness. Through the Kindness Feed, users can post details of random acts of kindness they’ve experienced or observed, tagging locations to create a dynamic, interactive map. Each act is marked with a heart, growing in visibility as kindness spreads in different areas. Additionally, Kind-Space offers daily kindness suggestions to encourage users to participate in making the world a better place. By fostering a culture of positivity and connection, Kind-Space transforms everyday moments into a collective movement of compassion.',
 }
 
 type RootLayoutProps = {

@@ -6,7 +6,7 @@ import Link from "next/link";
 export function Navigation() {
     return (
         <div className="relative p-1 bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400" >
-        <Navbar className="border-black border-4 p-4 bg-white" fluid>
+        <Navbar className="border-black border-4 p-2.5 bg-white" fluid>
 
             <NavbarBrand as={Link} href="/">
                 <img className="w-[10%] mr-3" src="/heart-icon.png" alt="icon" />
