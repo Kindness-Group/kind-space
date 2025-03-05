@@ -12,9 +12,15 @@ export default function Home() {
                     <h1 className="md:text-8xl text-4xl text-center font-bold">Kind Space</h1>
                     <p className="text-center text-lg p-10">Leaves a smile on your face</p>
                     <div className="flex items-center justify-center gap-x-[6%] md:pt-80 pt-60 whitespace-nowrap">
-                    <Button color={"light"} className="text-gray-900 focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700"><strong>Kindness Feed</strong></Button>
-                    <Button color={"light"} className="text-gray-900 focus:ring-4 focus:purple hover:ring-4 hover:ring-purple-700"><strong>Map</strong></Button>
-                    <Button color={"light"} className="text-gray-900 focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700"><strong>Daily Suggestion</strong></Button>
+                        <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                            <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Kindness Feed!</Button>
+                        </div>
+                        <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                            <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Map</Button>
+                        </div>
+                        <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                            <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Daily Suggestion</Button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -37,7 +43,7 @@ export default function Home() {
                     <h1 className="md:text-5xl text-3xl text-center font-bold drop-shadow-lg">Our Purpose</h1>
                     <p className="text-left leading-loose drop-shadow-lg tracking-wide md:text-xl md:pt-20 pt-8">Kind-Space is a social media platform designed to inspire and amplify kindness! On the <a href="" className="py-2 px-3 text-white md:hover:bg-transparent md:border-0 md:hover:text-purple-700  md:p-0"><strong>Kindness Feed</strong></a>, you can post details of random acts of kindness you’ve experienced or observed, tagging your location on our interactive <a href="" className="py-2 px-3 text-white md:hover:bg-transparent md:border-0 md:hover:text-purple-700  md:p-0"><strong>Kindness Map</strong></a>. Each act is marked with a heart as kindness spreads in different areas. Our <a href="" className="py-2 px-3 text-white md:hover:bg-transparent md:border-0 md:hover:text-purple-700  md:p-0"><strong>Daily Kindness Suggestions</strong></a> give you ideas each day for making the world a better place.</p>
                     <p className="text-left leading-loose drop-shadow-lg tracking-wide md:text-xl py-8">By fostering a culture of positivity and connection, Kind-Space hopes to transform everyday moments into a collective movement of compassion!</p>
-                    <Button color={"light"} className="m-auto md:mt-8 focus:ring-4 text-gray-900 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700"><strong>Sign Up to Share Kindness</strong></Button>
+                    <Button color={"light"} className="m-auto md:mt-8 bg-white text-gray-900 focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4"><strong>Sign Up to Share Kindness</strong></Button>
                 </div>
             </section>
 

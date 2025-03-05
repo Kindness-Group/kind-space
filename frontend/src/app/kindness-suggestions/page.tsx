@@ -44,12 +44,68 @@ export default function DailySuggestionPage() {
         date: "03/18"}
     ]
 
+    let moreSuggestion: Suggestion[] = [
+        { content: "Write a heartfelt thank-you note to someone who has positively impacted your life. A handwritten note can brighten someone's day and remind them of their importance.", date: "03/04" },
+        { content: "Hold the door open for someone, even if they are a few steps behind. A small act of courtesy can make someone feel seen and appreciated.", date: "03/04" },
+        { content: "Leave an encouraging comment on someone’s social media post. Words of kindness can uplift someone who might be struggling or doubting themselves.", date: "03/04" },
+
+        { content: "Donate gently used clothes or household items to a local charity. Your unused items could bring warmth and comfort to someone in need.", date: "03/05" },
+        { content: "Offer to take a friend's or coworker’s shift if they need a break. Acts of generosity within a team build trust and support.", date: "03/05" },
+        { content: "Compliment a stranger sincerely, whether it’s about their style, smile, or kindness. Unexpected compliments can brighten someone’s entire day.", date: "03/05" },
+
+        { content: "Call or text a family member you haven’t spoken to in a while just to check in. A simple conversation can rekindle connections and remind them they’re loved.", date: "03/06" },
+        { content: "Pick up litter in your neighborhood or at a local park. A cleaner environment benefits everyone and sets an example of caring for the community.", date: "03/06" },
+        { content: "Leave a generous tip for your server at a restaurant or café. Service workers often rely on tips, and an extra bit of generosity can mean a lot.", date: "03/06" },
+
+        { content: "Let someone go ahead of you in line, whether at a grocery store or in traffic. Giving others a small advantage can relieve stress and spread positivity.", date: "03/07" },
+        { content: "Send an anonymous small gift or flowers to someone who might need cheering up. A surprise act of kindness can make someone feel valued and remembered.", date: "03/07" },
+        { content: "Share an inspiring book with a friend and let them borrow it. Good stories and wisdom should be passed along to encourage growth and learning.", date: "03/07" },
+
+        { content: "Write a heartfelt thank-you note to someone who has positively impacted your life. A handwritten note can brighten someone's day and remind them of their importance.", date: "03/08" },
+        { content: "Hold the door open for someone, even if they are a few steps behind. A small act of courtesy can make someone feel seen and appreciated.", date: "03/08" },
+        { content: "Leave an encouraging comment on someone’s social media post. Words of kindness can uplift someone who might be struggling or doubting themselves.", date: "03/08" },
+
+        { content: "Donate gently used clothes or household items to a local charity. Your unused items could bring warmth and comfort to someone in need.", date: "03/09" },
+        { content: "Offer to take a friend's or coworker’s shift if they need a break. Acts of generosity within a team build trust and support.", date: "03/09" },
+        { content: "Compliment a stranger sincerely, whether it’s about their style, smile, or kindness. Unexpected compliments can brighten someone’s entire day.", date: "03/09" },
+
+        { content: "Call or text a family member you haven’t spoken to in a while just to check in. A simple conversation can rekindle connections and remind them they’re loved.", date: "03/10" },
+        { content: "Pick up litter in your neighborhood or at a local park. A cleaner environment benefits everyone and sets an example of caring for the community.", date: "03/10" },
+        { content: "Leave a generous tip for your server at a restaurant or café. Service workers often rely on tips, and an extra bit of generosity can mean a lot.", date: "03/10" },
+
+        { content: "Let someone go ahead of you in line, whether at a grocery store or in traffic. Giving others a small advantage can relieve stress and spread positivity.", date: "03/11" },
+        { content: "Send an anonymous small gift or flowers to someone who might need cheering up. A surprise act of kindness can make someone feel valued and remembered.", date: "03/11" },
+        { content: "Share an inspiring book with a friend and let them borrow it. Good stories and wisdom should be passed along to encourage growth and learning.", date: "03/11" },
+
+        { content: "Write a heartfelt thank-you note to someone who has positively impacted your life. A handwritten note can brighten someone's day and remind them of their importance.", date: "03/12" },
+        { content: "Hold the door open for someone, even if they are a few steps behind. A small act of courtesy can make someone feel seen and appreciated.", date: "03/12" },
+        { content: "Leave an encouraging comment on someone’s social media post. Words of kindness can uplift someone who might be struggling or doubting themselves.", date: "03/12" },
+
+        { content: "Donate gently used clothes or household items to a local charity. Your unused items could bring warmth and comfort to someone in need.", date: "03/13" },
+        { content: "Offer to take a friend's or coworker’s shift if they need a break. Acts of generosity within a team build trust and support.", date: "03/13" },
+        { content: "Compliment a stranger sincerely, whether it’s about their style, smile, or kindness. Unexpected compliments can brighten someone’s entire day.", date: "03/13" },
+
+        { content: "Call or text a family member you haven’t spoken to in a while just to check in. A simple conversation can rekindle connections and remind them they’re loved.", date: "03/14" },
+        { content: "Pick up litter in your neighborhood or at a local park. A cleaner environment benefits everyone and sets an example of caring for the community.", date: "03/14" },
+        { content: "Leave a generous tip for your server at a restaurant or café. Service workers often rely on tips, and an extra bit of generosity can mean a lot.", date: "03/14" },
+
+        { content: "Let someone go ahead of you in line, whether at a grocery store or in traffic. Giving others a small advantage can relieve stress and spread positivity.", date: "03/15" },
+        { content: "Send an anonymous small gift or flowers to someone who might need cheering up. A surprise act of kindness can make someone feel valued and remembered.", date: "03/15" },
+        { content: "Share an inspiring book with a friend and let them borrow it. Good stories and wisdom should be passed along to encourage growth and learning.", date: "03/15" }
+    ]
+
+
     const [todaySuggestion, setTodaySuggestion] = useState<Suggestion | null>(null);
+
+    const [todayMoreSuggestions, setTodayMoreSuggestions] = useState<Suggestion[]>([]);
+
 
     useEffect(() => {
         const todayDate = new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' }); // '03/02'
         const matchingSuggestion = suggestion.find(suggestion => suggestion.date === todayDate);
         setTodaySuggestion(matchingSuggestion || null);
+        const matchingMoreSuggestions = moreSuggestion.filter(element => element.date === todayDate);
+        setTodayMoreSuggestions(matchingMoreSuggestions);
     }, []);
 
     return (
@@ -59,10 +115,10 @@ export default function DailySuggestionPage() {
                 (<SuggestionCard suggestion={todaySuggestion}/>) : (<p>Compliment a Stranger: Give a genuine compliment to someone you don’t know—tell a barista they made a great coffee, let a coworker know their outfit looks nice, or appreciate someone’s kindness.</p>)}
             <section id="more-suggestions" className="text-black">
                 <h1 className="md:text-4xl text-2xl text-center font-bold m-16">More Suggestions</h1>
-                <div className="flex flex-col items-center gap-y-32 md:flex-row md:gap-x-[10%] md:mx-8" >
-            <MoreSuggestionCard/>
-            <MoreSuggestionCard/>
-            <MoreSuggestionCard/>
+                <div className="flex flex-col items-center gap-y-32 md:flex-row md:gap-x-[10%] md:mx-8 justify-center" >
+                    {todayMoreSuggestions.map((element, index) => (
+                        <MoreSuggestionCard key={index} moreSuggestion={element} />
+                    ))}
                 </div>
             </section>
         </>

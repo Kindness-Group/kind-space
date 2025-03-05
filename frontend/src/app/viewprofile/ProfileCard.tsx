@@ -1,7 +1,7 @@
 // src/ProfileCard.tsx
 
 import React from 'react';
-import {DailyActCard} from "@/app/viewprofile/DailyActCard";
+import {CommitmentCard} from "@/app/viewprofile/CommitmentCard";
 import {Profile} from "@/app/viewprofile/page";
 
 type ProfileProps = {
@@ -17,7 +17,7 @@ export function ProfileCard(prop: ProfileProps) {
 	}
 	return (
 		<>
-			<div className="w-full border flex flex-col pt-14 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded bg-white">
+			<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded bg-white">
 				{/* Header */}
 
 				<header className="flex items-center justify-center space-x-2 mb-6">
@@ -25,8 +25,6 @@ export function ProfileCard(prop: ProfileProps) {
 						<img src="/heart-icon.png" className="w-12"/>
 						<h1 className="md:text-2xl text-xl text-center font-bold">Hi {name}!</h1>
 					</div>
-					{/*<span className="text-xl">❤️</span>*/}
-					{/*<span className="text-lg font-medium">Hi {name}!</span>*/}
 
 				</header>
 
@@ -40,7 +38,7 @@ export function ProfileCard(prop: ProfileProps) {
 				</section>
 
 				{/* Daily Kindness Section */}
-				<DailyActCard act={action}/>
+				<CommitmentCard act={action}/>
 			</div>
 		</>
 	)

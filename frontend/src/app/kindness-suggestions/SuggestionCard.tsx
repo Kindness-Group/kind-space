@@ -24,7 +24,7 @@ export function SuggestionCard(props: SuggestionCardProps) {
                 </div>
                 <div className="relative z-10 flex flex-col items-center justify-center text-center w-full">
                     <h1 className="md:text-4xl text-2xl font-bold">Today's Act of Kindness</h1>
-                    <p className="text-xl p-10 m-2 md:m-20 md:p-10">{content}</p>
+                    <p className="text-xl py-10 m-2 md:m-20 md:p-12">{content}</p>
                     <div className="flex items-center justify-center gap-x-[10%] mt:4 whitespace-nowrap">
                         <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
                         <Button color={"light"} className="font-bold bg-white group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Plan to do it!</Button>
@@ -37,7 +37,7 @@ export function SuggestionCard(props: SuggestionCardProps) {
                     </div>
                 </div>
                 </div>
-                <div className='relative flex md:items-end md:justify-end justify-center mt-auto mr-8 md:text-xl'>
+                <div className='relative flex md:items-end md:justify-end justify-center md:mt-auto mt-4 mr-8 md:text-xl'>
                     <img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
                     <p>### People plan to do this!</p>
                 </div>

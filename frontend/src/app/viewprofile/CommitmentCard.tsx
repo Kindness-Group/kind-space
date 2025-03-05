@@ -5,7 +5,8 @@ import {Button} from "flowbite-react";
 type Prop = {
 	act: DailyAct
 }
-export function DailyActCard(prop: Prop) {
+
+export function CommitmentCard(prop: Prop) {
 	let {act: {description, count}} = prop
 	return (
 
@@ -21,12 +22,7 @@ export function DailyActCard(prop: Prop) {
 					<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
 						<Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
 					</div>
-					{/*<button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">*/}
-					{/*	Remind Me*/}
-					{/*</button>*/}
-					{/*<button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">*/}
-					{/*	Done!*/}
-					{/*</button>*/}
+
 				</div>
 			</div>
 			<div className="relative flex md:mt-auto mb-4 px-8">
