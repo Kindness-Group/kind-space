@@ -1,25 +1,27 @@
 import React from "react";
-import {KindnessPostProps} from "@/app/kindness-feed/page";
-
+import {Act} from "@/app/kindness-feed/page";
+import {Profile} from "@/app/viewprofile/page";
 
 type Props = {
-	kindPgProps: KindnessPostProps;
+	act: Act;
+	profile: Profile;
 }
 
 export function ActCard (props: Props) {
-	let {kindPgProps: {username, location, date, description, likes, comments, proImage, postImage}} = props;
+	let {act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actLat, actLng, actAddress}, profile: {profilePictureUrl, profileUsername}} = props;
 
 	return (
 		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
 			<header className="p-4">
-				<img src={proImage} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
-				<h3 className="text-lg font-bold">{username}</h3>
-				<p className="text-sm text-gray-600">{location} - {date}</p>
+				<img src={profilePictureUrl} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
+				<h3 className="text-lg font-bold">{profileUsername}</h3>
+				<p className="text-sm text-gray-600">{actAddress} - {actDateTime}</p>
 			</header>
 
 			<section>
-				<img src={postImage} alt="kind image" className="w-[95%] mx-auto"/>
-				<p className="bg-gray-100 mx-auto text-base text-gray-900 w-[95%] p-4 my-4">{description}</p>
+				{actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}
+
+				<p className="bg-gray-100 mx-auto text-base text-gray-900 w-[95%] p-4 my-4">{actContent}</p>
 			</section>
 
 			<footer className="px-6 pb-6 flex justify-between">

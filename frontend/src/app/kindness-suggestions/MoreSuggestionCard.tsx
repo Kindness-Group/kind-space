@@ -13,7 +13,8 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
     let date = moreSuggestion.date;
 
     return (
-        <section className="relative md:w-[45vh] md:h-[45vh] w-[62vh] h-[62vh]">
+        <section>
+            <div className="relative md:w-[45vh] md:h-[45vh] w-[62vh] h-[62vh] mb-16">
         <div className="text-gray-900 p-16 flex flex-col items-center justify-center h-full">
             <div className="absolute inset-0 bg-cover bg-center w-full h-full"
                  style={{backgroundImage: "url('/giving-flower.png')"}}>
@@ -25,6 +26,7 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
                 <p className="text-lg p-4">{content}</p>
             </div>
         </div>
+            </div>
 
         <div id="below-image" className="position:relative flex flex-col items-center justify-center w-full mt-[2vh] mb-[12vh]">
             <div className="flex items-center justify-center my-4">
@@ -42,6 +44,7 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
 
             </div>
         </div>
+
         </section>
     )
 }

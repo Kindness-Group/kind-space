@@ -23,9 +23,9 @@ export default function RootLayout(props : RootLayoutProps) {
         <body>
         <Navigation/>
         {children}
-        {/*<div className="bg-gray-900 text-white p-6 text-center">*/}
-        {/*    <p>placeholder footer</p>*/}
-        {/*</div>*/}
+        <div className="bg-gray-900 text-white p-6 text-center">
+            <p>placeholder footer</p>
+        </div>
         </body>
         </html>
     )

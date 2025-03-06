@@ -7,11 +7,17 @@ import {KindnessPostProps} from "@/app/kindness-feed/page";
 
 
 export type Profile = {
-	name: string,
-	username: string,
-	bio: string,
-	profilePic: string
+	profileId: string,
+		profileActivationToken: string,
+		profileBio: string,
+		profileEmail: string,
+		profileHash: string,
+		profileJoinDate: string,
+		profileName: string,
+		profilePictureUrl: string,
+		profileUsername: string,
 }
+
 export type DailyAct = {
 	description: string,
 	count: number,
@@ -25,46 +31,45 @@ export default function () {
 			" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
 		profilePic: "https://imageplaceholder.net/200"
 	}
-	const sampleData: Array<KindnessPostProps> = [
+	const acts: Array<KindnessPostProps> = [
 		{
-			username: "jbond31",
-			location: "New York, USA",
-			date: "2025-03-01",
-			description: "Exploring the city!",
-			likes: 120,
-			comments: 15,
-			proImage: "https://example.com/profiles/john_doe.jpg",
-			postImage: "https://example.com/posts/city_view.jpg"
+			actId: '01956880-ef3d-7a51-8064-68da52150696',
+			actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+			actContent: 'Placeholder act content',
+			actDateTime: '03/03/2025',
+			actImageUrl: 'https://placecats.com/neo_2/300/200',
+			actLat: '-30.94784',
+			actLng: '19.36249',
+			actAddress: '2301 Zero St, Abq, NM',
 		},
 		{
-			username: "jbond31",
-			location: "London, UK",
-			date: "2025-03-02",
-			description: "A beautiful day in the park.",
-			likes: 200,
-			comments: 30,
-			proImage: "https://example.com/profiles/jane_smith.jpg",
-			postImage: "https://example.com/posts/park.jpg"
+			actId: '01956880-ef3d-7a51-8064-68da52150724',
+			actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+			actContent: 'Placeholder content number 2',
+			actDateTime: '03/05/2025',
+			actImageUrl: 'https://placecats.com/neo_banana/300/200',
+			actLat: '-30.94794',
+			actLng: '19.36949',
+			actAddress: '2344 Blahblah St, Abq, NM',
 		},
 		{
-			username: "jbond31",
-			location: "Tokyo, Japan",
-			date: "2025-03-03",
-			description: "Delicious sushi dinner!",
-			likes: 300,
-			comments: 45,
-			proImage: "https://example.com/profiles/alex_92.jpg",
-			postImage: "https://example.com/posts/sushi.jpg"
+			actId: '01956880-ef3d-7a51-8064-68da78150724',
+			actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+			actContent: 'Placeholder content number 3',
+			actDateTime: '03/04/2025',
+			actImageUrl: 'https://placecats.com/bella/300/200',
+			actLat: '-30.94714',
+			actLng: '19.32949',
+			actAddress: '1234 Example St, Abq, NM',
 		}
 	];
 	return (
 		<>
-			<Banner />
 			<div className="bg-gray-300 mx-auto md:max-w-[44rem] lg:max-w-[55rem] min-h-screen">
 				<ProfileCard pro={profile} />
 				{/* Continue Here */}
-				{sampleData.map((post, index) => (
-					<ActCard kindPgProps={post} key={index} />
+				{acts.map((act, index) => (
+					<ActCard act={act} profile={profile} key={index} />
 				))}
 			</div>
 		</>
