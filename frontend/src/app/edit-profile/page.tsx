@@ -110,9 +110,9 @@ export default function EditProfile({}: EditProfileProps) {
                 </div>
 
                 <div className="flex justify-center mt-8">
-                    <Button color="dark" className="px-12">
-                        Save
-                    </Button>
+                    <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Save</Button>
+                    </div>
                 </div>
             </div>
         </div>
