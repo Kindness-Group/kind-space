@@ -1,6 +1,9 @@
+
 import {Button} from "flowbite-react";
+import {KindnessMap} from "@/app/kindness-map/kindnes-map";
 
 export default function () {
+
     return (
         <>
             <section id="replace-banner" className="text-black m-16 flex items-center justify-center">
@@ -31,13 +34,10 @@ export default function () {
                 </div>
             </section>
 
-            <section id="map-placeholder">
-                    <div className="py-64 my-4 bg-gray-500 text-white">
-                        <div className="container mx-auto max-md:max-w-md">
-                            <p className="text-center md:py-24 container mx-auto">Kindness Map Placeholder</p>
-                        </div>
-                    </div>
+            <section id="map" className="container mx-auto flex items-center justify-center my-4">
+               <KindnessMap/>
             </section>
+
         </>
     )
 }

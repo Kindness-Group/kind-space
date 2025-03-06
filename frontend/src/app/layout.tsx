@@ -3,7 +3,7 @@ import './globals.css'
 import {Navigation} from "@/app/layout-components/Navigation";
 import React from "react";
 import {Footer} from "flowbite-react";
-
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 
 
