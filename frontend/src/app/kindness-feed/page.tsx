@@ -1,98 +1,96 @@
 "use client";
 
 import React from 'react';
+import {Button} from "flowbite-react";
+import {ActCard} from "@/app/layout-components/ActCard";
+import {Banner} from "@/app/layout-components/Banner";
+import {Profile} from "@/app/viewprofile/page";
 
-export default function KindnessFeedPage() {
-    return <KindnessFeed/>;
+
+export type Act = {
+    actId: string,
+    actProfileId:string,
+    actContent:string,
+    actDateTime: string,
+    actImageUrl:string,
+    actLat: string,
+    actLng: string,
+    actAddress: string,
 }
 
-
-import {Banner, Button, Card} from 'flowbite-react';
-import { LuHeart, LuMessageSquare } from 'react-icons/lu';
-
-interface KindnessPostProps {
-    username: string;
-    location: string;
-    date: string;
-    description: string;
-}
-
-const KindnessPost = ({ username, location, date, description }: KindnessPostProps) => {
-    return (
-        <Card className="mb-4">
-            <div className="flex items-center mb-2">
-                <div className="w-10 h-10 rounded-full bg-gray-200 mr-3"></div>
-                <div>
-                    <p className="font-medium">{username}</p>
-                    <p className="text-sm text-gray-500">{location} - {date}</p>
-                </div>
-            </div>
-            <div className="bg-gray-200 p-4 mb-3">
-                <p className="text-center">{description}</p>
-            </div>
-            <div className="flex">
-                <Button color="white" className="mr-2 flex items-center">
-                    <LuHeart className="mr-2" size={20} />
-                    Like
-                </Button>
-                <Button color="white" className="flex items-center">
-                    <LuMessageSquare className="mr-2" size={20} />
-                    Comments
-                </Button>
-            </div>
-        </Card>
-    );
-};
-
-export function KindnessFeed() {
+export default function KindnessFeed() {
     // Sample data - in a real app, you would fetch this from an API
-    const posts = [
+
+    let profile: any = {
+        profileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+        profileActivationToken: 'dnfiawhiuefbnwai',
+        profileBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+        profileEmail: 'email@example.com',
+        profileHash: 'asdfghjkl,mnbvfdrtyujnhbgvfcdsderftgyhujikjhgfdsfgthy',
+        profileJoinDate: '03/03/2025',
+        profileName: "James Bond",
+        profilePictureUrl: 'https://placecats.com/millie/300/150',
+        profileUsername: "jbond31",
+    }
+
+    const acts: Act[] = [
         {
-            username: "Username",
-            location: "Location",
-            date: "Date",
-            description: "Kind act description goes here..."
+            actId: '01956880-ef3d-7a51-8064-68da52150696',
+            actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+            actContent: 'Placeholder act content',
+            actDateTime: '03/03/2025',
+            actImageUrl: 'https://placecats.com/neo_2/300/200',
+            actLat: '-30.94784',
+            actLng: '19.36249',
+            actAddress: '2301 Zero St, Abq, NM',
+            },
+
+        {
+            actId: '01956880-ef3d-7a51-8064-68da52150724',
+            actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+            actContent: 'Placeholder content number 2',
+            actDateTime: '03/05/2025',
+            actImageUrl: 'https://placecats.com/neo_banana/300/200',
+            actLat: '-30.94794',
+            actLng: '19.36949',
+            actAddress: '2344 Blahblah St, Abq, NM',
         },
         {
-            username: "Username",
-            location: "Location",
-            date: "Date",
-            description: "Kind act description goes here..."
-        },
-        {
-            username: "Username",
-            location: "Location",
-            date: "Date",
-            description: "Kind act description goes here..."
+            actId: '01956880-ef3d-7a51-8064-68da78150724',
+            actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+            actContent: 'Placeholder content number 3',
+            actDateTime: '03/04/2025',
+            actImageUrl: 'https://placecats.com/bella/300/200',
+            actLat: '-30.94714',
+            actLng: '19.32949',
+            actAddress: '1234 Example St, Abq, NM',
         }
     ];
+
+    let likes = [
+        {likeProfileId: 'placeholder',
+        likeActId: 'placeholder',
+        likeDateTime: 'placeholder',}
+    ]
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="text-center mb-8">
-                <section id="banner" className="text-black m-16 flex items-center justify-center">
-                    <img src="/heart-icon.png" className="w-12"/>
-                    <h1 className="md:text-2xl text-xl text-center font-bold">Kindness Feed</h1>
-                </section>
+                <Banner/>
                 <p className="text-xl">Spreading Kindness One Post at Time</p>
             </div>
 
             <div className="flex justify-center mb-8">
-                <Button color="dark" className="px-4">
-                    "Share New Kind Act"
-                </Button>
+                <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                    <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Share New Kind Act</Button>
+                </div>
+
             </div>
 
             <div className="max-w-2xl mx-auto">
-                {posts.map((post, index) => (
-                    <KindnessPost
-                        key={index}
-                        username={post.username}
-                        location={post.location}
-                        date={post.date}
-                        description={post.description}
-                    />
-                ))}
+                {/*{acts.map((post, index) => (*/}
+                {/*    <ActCard kindPgProps={post} key={index} />*/}
+                {/*))}*/}
             </div>
         </div>
     );
