@@ -1,7 +1,6 @@
 
 import React from 'react';
 import {ProfileCard} from './ProfileCard';
-import {Banner} from "@/app/layout-components/Banner";
 import {ActCard} from "@/app/layout-components/ActCard";
 import {KindnessPostProps} from "@/app/kindness-feed/page";
 
@@ -24,12 +23,12 @@ export type DailyAct = {
 }
 export default function () {
 	let profile: Profile = {
-		name: "James Bond",
-		username: "jbond31",
-		bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do." +
+		profileName: "James Bond",
+		profileUsername: "jbond31",
+		profileBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do." +
 			" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do." +
 			" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-		profilePic: "https://imageplaceholder.net/200"
+		profilePictureUrl: "https://imageplaceholder.net/200"
 	}
 	const acts: Array<KindnessPostProps> = [
 		{

@@ -9,8 +9,8 @@ type MoreSuggestionProps = {
 export function MoreSuggestionCard(props: MoreSuggestionProps) {
 
     let {moreSuggestion} = props;
-    let content = moreSuggestion.content;
-    let date = moreSuggestion.date;
+    let content = moreSuggestion.suggestionContent;
+    let date = moreSuggestion.suggestionDate;
 
     return (
         <section>
@@ -23,7 +23,7 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
             </div>
             <div className="relative z-10 flex flex-col items-center justify-center text-center w-full">
                 <h1 className="md:text-4xl text-2xl font-bold">Act of Kindness</h1>
-                <p className="text-lg p-4">{content}</p>
+                <p className="text-lg md:text-xl p-4">{content}</p>
             </div>
         </div>
             </div>

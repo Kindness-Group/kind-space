@@ -34,13 +34,13 @@ export function ActCard (props: Props) {
 					<div className="flex">
 						<a href="#" className="self-end mr-3"><img
 							src="/comment_message_communication_icon.png" alt="chat bubble" className="w-9"/></a>
-						<a href="#" className="uppercase font-bold self-center text-sm text-gray-600 hover:underline">Comments ({comments})</a>
+						{/*<a href="#" className="uppercase font-bold self-center text-sm text-gray-600 hover:underline">Comments ({comments})</a>*/}
 					</div>
 				</div>
 				<div className="flex space-x-3 items-center">
 					<img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
 					<p className="text-sm text-gray-900">
-						<span className="font-bold">{likes}</span> People loved this Post!
+						{/*<span className="font-bold">{likes}</span> People loved this Post!*/}
 					</p>
 				</div>
 			</footer>

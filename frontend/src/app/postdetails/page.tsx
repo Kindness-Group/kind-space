@@ -1,7 +1,6 @@
 import {Comment} from "@/app/postdetails/Comment";
 import {ActCard} from "@/app/layout-components/ActCard";
 import {KindnessPostProps} from "@/app/kindness-feed/page";
-import {Banner} from "@/app/layout-components/Banner";
 
 export type Content = {
 	name: string,
@@ -30,7 +29,6 @@ export default function () {
 	}
 	return (
 		<>
-			<Banner/>
 			<ActCard kindPgProps={post}/>
 			{/* Comments Section */}
 			<section className="bg-gray-100 py-8 mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md">

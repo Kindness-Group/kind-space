@@ -3,7 +3,6 @@
 import React from 'react';
 import {Button} from "flowbite-react";
 import {ActCard} from "@/app/layout-components/ActCard";
-import {Banner} from "@/app/layout-components/Banner";
 import {Profile} from "@/app/viewprofile/page";
 
 
@@ -76,7 +75,10 @@ export default function KindnessFeed() {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="text-center mb-8">
-                <Banner/>
+                <section id="banner" className="text-black mt-16 mb-4 flex items-center justify-center">
+                    <img src="/heart-icon.png" className="w-12"/>
+                    <h1 className="md:text-2xl text-xl text-center font-bold">Kindness Feed</h1>
+                </section>
                 <p className="text-xl">Spreading Kindness One Post at Time</p>
             </div>
 

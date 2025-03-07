@@ -1,8 +1,12 @@
 
 import {Button} from "flowbite-react";
 import {KindnessMap} from "@/app/kindness-map/kindnes-map";
+import {Act} from "@/app/kindness-feed/page";
 
 export default function () {
+
+	let searchLocation
+	let acts: Act[]
 
 	return (
 		<>
@@ -28,7 +32,6 @@ export default function () {
                         <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Go</Button>
                     </div>
 
-                    {/*<Button color={"light"} className="bg-gray-50 border border-gray-900 focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700 text-gray-900 text-sm ml-1">Go</Button>*/}
                 </div>
 
 				<div id="filter" className="flex h-full items-center">
@@ -41,7 +44,7 @@ export default function () {
 
 			<section id="map-placeholder">
 				<section id="map" className="container mx-auto flex items-center justify-center my-4">
-					<KindnessMap/>
+					<KindnessMap acts={acts} searchLocation={searchLocation}/>
 				</section>
 			</section>
 		</>
