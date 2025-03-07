@@ -40,9 +40,9 @@ export default function Home() {
                         <p className="p-8 text-center text-lg">Today's act of kindness suggestion:</p>
                         <div className="container mx-auto">
                             <a href="/kindness-suggestions">
-                            <SuggestionCard
+                            <SuggestionCard suggestion = {{suggestionContent:"Compliment a colleague or stranger on something you genuinely appreciate about them. Whether it’s their smile, their work ethic, or their outfit, a sincere compliment can lift someone's spirits. We often forget how much a little praise can help someone feel valued and appreciated.", suggestionDate:"03/06/2025"}}
                                 // suggestion={todaySuggestion ? todaySuggestion : "Compliment a colleague or stranger on something you genuinely appreciate about them. Whether it’s their smile, their work ethic, or their outfit, a sincere compliment can lift someone's spirits. We often forget how much a little praise can help someone feel valued and appreciated."}
-                                suggestion={"Compliment a colleague or stranger on something you genuinely appreciate about them. Whether it’s their smile, their work ethic, or their outfit, a sincere compliment can lift someone's spirits. We often forget how much a little praise can help someone feel valued and appreciated."}
+                                // suggestionContent={"Compliment a colleague or stranger on something you genuinely appreciate about them. Whether it’s their smile, their work ethic, or their outfit, a sincere compliment can lift someone's spirits. We often forget how much a little praise can help someone feel valued and appreciated."} suggestionDate={}}
                             />
                             </a>
                         </div>

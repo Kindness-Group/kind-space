@@ -6,14 +6,18 @@ import {Act} from "@/app/kindness-feed/page"
 // If using with mapbox-gl v1:
 // import Map from 'react-map-gl/mapbox-legacy';
 
+
 type MapCardProps = {
-    acts: Act[];
+    acts: Act;
     searchLocation?: string
 }
 
+
 export function KindnessMap(props: MapCardProps) {
 
-    // let {acts, searchLocation} = props;
+    let {acts, searchLocation} = props;
+	let {acts: {actLat, actLng, actAddress}} = props;
+
 
     return (
         <Map
@@ -27,4 +31,5 @@ export function KindnessMap(props: MapCardProps) {
             mapStyle="mapbox://styles/mapbox/streets-v9"
         />
     );
+
 }

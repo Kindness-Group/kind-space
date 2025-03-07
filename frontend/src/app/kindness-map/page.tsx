@@ -6,33 +6,44 @@ import {Act} from "@/app/kindness-feed/page";
 export default function () {
 
 	let searchLocation
-	let acts: Act[]
+	let acts = {
+		actId: '01956880-ef3d-7a51-8064-68da52150696',
+		actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
+		actContent: 'Placeholder act content',
+		actDateTime: new Date(2025, 2, 5, 9, 0, 0),
+		actImageUrl: 'https://placecats.com/neo_2/300/200',
+		actLat: '-30.94784',
+		actLng: '19.36249',
+		actAddress: '2301 Zero St, Abq, NM',
+		actProfileUsername: 'janedoe456',
+		actProfilePicUrl: null,
+		actLikeLikes: 5,
+		actCommentComments: 3
+	}
 
 	return (
 		<>
 			<section id="replace-banner" className="text-black m-16 flex items-center justify-center">
-				<img src="/heart-icon.png" className="w-12"/>
+				<img src="/heart-icon.png" className="w-12" alt="heart-icon" />
 				<h1 className="md:text-2xl text-xl text-center font-bold">Kindness Map</h1>
 			</section>
 
-            <section className="flex justify-center items-center gap-x-[2%]">
-                <div id="search" className="flex items-center justify-center">
-                  <div className="relative w-full">
-                      <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                           height="24" fill="none" viewBox="0 0 24 24">
-                          <path stroke="currentColor" strokeLinecap="round" strokeWidth="2"
-                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                      </svg>
-                      <input type="text"
-                           className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700 p-2.5 pl-10"
-                           placeholder= "Search for Location"/>
-                  </div>
+			<section className="flex justify-center items-center gap-x-[2%]">
+				<div id="search" className="flex items-center justify-center">
+					<div className="relative w-full">
+						<svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+							<path stroke="currentColor" strokeLinecap="round" strokeWidth="2"
+									  d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+						</svg>
+						<input type="text" className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700 p-2.5 pl-10" placeholder= "Search for Location"/>
+					</div>
 
-                    <div className="ml-1 bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Go</Button>
-                    </div>
 
-                </div>
+					<div className="ml-1 bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+						<Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Go</Button>
+					</div>
+				</div>
+
 
 				<div id="filter" className="flex h-full items-center">
 					<svg className="w-6 h-6 text-gray-900 focus:ring-4 focus:ring-purple-700 hover:ring-4 hover:ring-purple-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -42,13 +53,10 @@ export default function () {
 				</div>
 			</section>
 
-			<section id="map-placeholder">
 				<section id="map" className="container mx-auto flex items-center justify-center my-4">
-					<KindnessMap acts={acts} searchLocation={searchLocation}/>
-				</section>
+					<KindnessMap acts={acts}/>
 			</section>
 		</>
 	)
-
 }
 
