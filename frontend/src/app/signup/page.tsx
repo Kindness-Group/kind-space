@@ -141,8 +141,8 @@ const SignupPage: React.FC = () => {
                     </div>
 
                     {/* Image Section */}
-                    <div className="w-1/2 bg-gray-100 flex items-center justify-center p-8">
-                        <div className="w-full h-full">
+                    <div className="w-1/2 bg-gray-100 flex object-center items-center justify-center p-8">
+                        <div className="w-full flex items-center h-full">
                             <img src="/helping-hands2.jpg" alt="holding hands"/>
                         </div>
                     </div>

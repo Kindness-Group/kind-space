@@ -95,7 +95,7 @@ export default function Home() {
                     </div>
                         <a href="/kindness-map">
                         <div className="container mx-auto">
-                        <img src="/scrn-shot-map.png" alt="map page preview"/>
+                        <img src="/scrn-shot-map-gs.png" alt="map page preview"/>
                     </div>
                         </a>
                 </div>
