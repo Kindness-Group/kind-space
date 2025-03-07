@@ -1,13 +1,15 @@
 "use client";
 
 import {Button, Card, Checkbox, Label} from "flowbite-react";
+import React from "react";
 
 export default function () {
 	return (
 		<>
-			<div className="text-2xl font-semibold text-center mt-20 max-sm:px-1.5">
-				<h1>Share Your Most Recent Kindness Act or Experience with Us!</h1>
-			</div>
+			<section id="banner" className="text-black m-16 flex items-center justify-center">
+				<img src="/heart-icon.png" className="w-12" alt="heart-icon" />
+				<h1 className="md:text-2xl text-xl text-center font-bold">Share Your Most Recent Act Kindness to our Kindness Feed</h1>
+			</section>
 			<Card className="max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mx-auto my-20">
 				<div className="flex items-center justify-center space-x-5">
 					<div className="h-16 w-16 overflow-hidden rounded-full ring-2 ring-gray-700 dark:ring-gray-100">
@@ -29,15 +31,19 @@ export default function () {
 								 placeholder="Where did this happen?"/>
 					</div>
 					<div className="flex items-center justify-between">
-						<Button type="button" className="basis1/5 md:basis-1/6">Add Media</Button>
-						<div className="flex items-center gap-2 justify-end">
-							<Checkbox id="remember"/>
-							<Label htmlFor="remember">Pin on Map</Label>
+						<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+							<a href="./kindactpost">
+								<Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Add Media</Button>
+							</a>
 						</div>
-					</div>
+						</div>
 					<hr className="border-gray-300" />
 					<div className="flex justify-end">
-						<Button type="submit" className="basis-1/6">Create</Button>
+						<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+							<a href="./kindactpost">
+								<Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Create Post</Button>
+							</a>
+						</div>
 					</div>
 				</form>
 			</Card>

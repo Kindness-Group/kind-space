@@ -81,7 +81,9 @@ export default function KindnessFeed() {
 
             <div className="flex justify-center mb-8">
                 <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                    <a href="./kindactpost">
                     <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Share New Kind Act</Button>
+                    </a>
                 </div>
             </div>
 

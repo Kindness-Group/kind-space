@@ -29,7 +29,7 @@ export function ActCard (props: ActProps) {
 						<a href="#" className="uppercase font-bold text-sm text-gray-600 hover:underline">Love</a>
 					</div>
 					<div className="flex">
-						<a href="#" className="self-end mr-3"><img src="/comment_message_communication_icon.png" alt="chat bubble" className="w-9"/></a>
+						<a href="/postdetails" className="self-end mr-3"><img src="/comment_message_communication_icon.png" alt="chat bubble" className="w-9"/></a>
 						<a href="/postdetails" className="uppercase font-bold self-center text-sm text-gray-600 hover:underline">Comments ({actCommentComments})</a>
 					</div>
 				</div>
