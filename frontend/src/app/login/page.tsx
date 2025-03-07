@@ -108,11 +108,6 @@ export default function () {
                     </div>
                 </div>
             </div>
-
-            {/* Footer */}
-            <footer className="bg-gray-700 text-white p-6 text-center">
-                <p>Footer</p>
-            </footer>
         </div>
     );
 };
