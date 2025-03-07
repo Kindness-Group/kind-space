@@ -88,9 +88,9 @@ export default function KindnessFeed() {
             </div>
 
             <div className="max-w-2xl mx-auto">
-                {acts.map((post, index) => (
-                    <ActCard kindPgProps={post} key={index} />
-                ))}
+                {/*{acts.map((post, index) => (*/}
+                {/*    <ActCard kindPgProps={post} key={index} />*/}
+                {/*))}*/}
             </div>
         </div>
     );
