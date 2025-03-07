@@ -8,7 +8,8 @@ const SignupPage: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
-        password: ''
+        password: '',
+        username: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +27,7 @@ const SignupPage: React.FC = () => {
     };
 
     return (
+
         <div className="flex flex-col min-h-screen">
 
 
@@ -70,6 +72,20 @@ const SignupPage: React.FC = () => {
 
                             <div>
                                 <div className="mb-2 block">
+                                    <Label htmlFor="username" value="USER NAME" className="text-xs text-gray-500" />
+                                </div>
+                                <TextInput
+                                    id="user name"
+                                    type="user name"
+                                    placeholder="johndoe@email.com"
+                                    value={formData.username}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <div className="mb-2 block">
                                     <Label htmlFor="password" value="PASSWORD" className="text-xs text-gray-500" />
                                 </div>
                                 <div className="relative">
@@ -89,8 +105,27 @@ const SignupPage: React.FC = () => {
                                         {showPassword ? <HiEyeOff className="text-gray-500" /> : <HiEye className="text-gray-500" />}
                                     </button>
                                 </div>
+                               <div className="mb-2 block">
+                                    <Label htmlFor="confirmpassword" value="CONFIRM PASSWORD" className="text-xs text-gray-500" />
+                               </div>
+                               <div className="relative">
+                                    <TextInput
+                                         id="password"
+                                         type={showPassword ? "text" : "password"}
+                                         placeholder="••••••••••••••••"
+                                         value={formData.password}
+                                         onChange={handleChange}
+                                         required
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <HiEyeOff className="text-gray-500" /> : <HiEye className="text-gray-500" />}
+                                    </button>
+                               </div>
                             </div>
-
                             <Button type="submit" className="w-full bg-gray-800 hover:bg-gray-900">
                                 SIGN UP
                             </Button>
@@ -113,13 +148,10 @@ const SignupPage: React.FC = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Footer */}
-            <footer className="bg-gray-700 text-white p-6 text-center">
-                <p>Footer</p>
-            </footer>
         </div>
     );
+
 };
+
 
 export default SignupPage;
