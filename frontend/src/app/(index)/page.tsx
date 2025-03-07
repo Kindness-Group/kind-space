@@ -101,21 +101,6 @@ export default function Home() {
                 </div>
                 </div>
             </section>
-
-            <section id="feed-preview">
-                <div className=" relative p-1 bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400  text-gray-900">
-                    <div className="py-16 bg-white border-black border-4">
-                    <div className="container mx-auto max-md:max-w-md">
-                    <h1 className="md:text-4xl text-2xl text-center font-bold">Kindness Feed</h1>
-                    <p className="p-8 text-center text-lg">See what acts of kindness other users are posting about!</p>
-                        <a href="/kindness-feed">
-                        <p className="text-center md:py-24"> Kindness Feed Preview Placeholder</p>
-                        </a>
-                    </div>
-                </div>
-                </div>
-            </section>
-
         </>
     )
 }
