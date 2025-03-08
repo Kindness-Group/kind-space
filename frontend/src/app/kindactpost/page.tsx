@@ -8,7 +8,7 @@ export default function () {
 		<>
 			<section id="banner" className="text-black m-16 flex items-center justify-center">
 				<img src="/heart-icon.png" className="w-12" alt="heart-icon" />
-				<h1 className="md:text-2xl text-xl text-center font-bold">Share Your Most Recent Act Kindness to our Kindness Feed</h1>
+				<h1 className="md:text-2xl text-xl text-center font-bold">Share Your Most Recent Act of Kindness to our Kindness Feed</h1>
 			</section>
 			<Card className="max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mx-auto my-20">
 				<div className="flex items-center justify-center space-x-5">
