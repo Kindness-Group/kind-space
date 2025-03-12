@@ -6,68 +6,68 @@ drop table if exists suggestion;
 drop table if exists profile;
 
 create table if not exists profile(
-  profileId uuid not null,
-  profileActivationToken char (32),
-  profileBio varchar (500),
-  profileEmail varchar (128) not null unique,
-  profileHash char (97) not null,
-  profileJoinDate timestamp with time zone,
-  profileName varchar (32) not null,
-  profilePictureUrl varchar (128),
-  profileUserName varchar (32) not null unique,
-  primary key (profileId)
+  profile_id uuid not null,
+  profile_activation_token char (32),
+  profile_bio varchar (500),
+  profile_email varchar (128) not null unique,
+  profile_hash char (97) not null,
+  profile_join_date timestamp with time zone,
+  profile_name varchar (32) not null,
+  profile_picture_url varchar (128),
+  profile_username varchar (32) not null unique,
+  primary key (profile_id)
 );
 
 create table if not exists suggestion(
-  suggestionId uuid not null,
-  suggestionContent varchar (500),
-  suggestionDate timestamp with time zone,
-  primary key (suggestionId)
+  suggestion_id uuid not null,
+  suggestion_content varchar (500),
+  suggestion_date timestamp with time zone,
+  primary key (suggestion_id)
 );
 
 create table if not exists act (
-  actId uuid not null,
-  actProfileId uuid,
-  actAddress varchar (128),
-  actContent varchar (500) not null,
-  actDateTime timestamp with time zone,
-  actImageUrl varchar (128),
-  actLat float,
-  actLng float,
-  primary key (actId),
-  foreign key (actProfileId) references profile(profileId)
+  act_id uuid not null,
+  act_profile_id uuid,
+  act_address varchar (128),
+  act_content varchar (500) not null,
+  act_date_time timestamp with time zone,
+  act_image_url varchar (128),
+  act_lat float,
+  act_lng float,
+  primary key (act_id),
+  foreign key (act_profile_id) references profile(profile_id)
 );
-create index on act(actProfileId);
+create index on act(act_profile_id);
 
 create table if not exists comment (
-  commentId uuid not null,
-  commentActId uuid,
-  commentProfileId uuid,
-  commentContent varchar (500) not null,
-  commentDateTime timestamp with time zone not null,
-  primary key (commentId),
-  foreign key (commentActId) references act(actId)
+  comment_id uuid not null,
+  comment_act_id uuid,
+  comment_profile_id uuid,
+  comment_content varchar (500) not null,
+  comment_date_time timestamp with time zone not null,
+  primary key (comment_id),
+  foreign key (comment_act_id) references act(act_id)
 );
-create index on comment(commentActId);
+create index on comment(comment_act_id);
 
 create table if not exists commitment (
-  commitmentSuggestionId uuid,
-  commitmentProfileId uuid,
-  commitmentCompleted boolean,
-  commitmentDateTime timestamp with time zone not null,
-  foreign key (commitmentSuggestionId) references suggestion (suggestionId),
-  foreign key (commitmentProfileId) references profile (profileId)
+  commitment_suggestion_id uuid,
+  commitment_profile_id uuid,
+  commitment_completed boolean,
+  commitment_date_time timestamp with time zone not null,
+  foreign key (commitment_suggestion_id) references suggestion (suggestion_id),
+  foreign key (commitment_profile_id) references profile (profile_id)
 );
-create index on commitment(commitmentSuggestionId);
-create index on commitment(commitmentProfileId);
+create index on commitment(commitment_suggestion_id);
+create index on commitment(commitment_profile_id);
 
 create table if not exists "like"(
-  likeActId uuid,
-  likeProfileId uuid,
-  likeDateTime timestamp with time zone not null,
-  primary key (likeActId, likeProfileId),
-  foreign key (likeActId) references act (actId),
-  foreign key (likeProfileId) references profile (profileId)
+  like_act_id uuid,
+  like_profile_id uuid,
+  like_date_time timestamp with time zone not null,
+  primary key (like_act_id, like_profile_id),
+  foreign key (like_act_id) references act (act_id),
+  foreign key (like_profile_id) references profile (profile_id)
 );
-create index on "like"(likeActId);
-create index on "like"(likeProfileId);
+create index on "like"(like_act_id);
+create index on "like"(like_profile_id);
