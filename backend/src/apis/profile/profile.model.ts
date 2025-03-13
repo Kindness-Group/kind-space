@@ -2,7 +2,6 @@ import { z } from "zod"
 import {PrivateProfileSchema, PublicProfileSchema} from "./profile.validator"
 import { sql } from '../../utils/database.utils'
 
-
 /**
  * The shape of the private profile that is only used by express. it must never be returned to the controller.
  * @property profileId {string} the primary key
@@ -16,6 +15,19 @@ import { sql } from '../../utils/database.utils'
  * @property profileUsername {string} the profile's username
  **/
 export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
+
+/**
+ * The shape of the public profile that can shared with Next.js
+ * @property profileId {string} the primary key
+ * @property profileBio {string} the profile's bit
+ * @property profileEmail {string|null} the profile's email
+ * @property profilePictureUrl {string|null} the profile's image url
+ * @property profileName {string} the profile's name
+ * @property profileUsername {string} the profile's username
+ **/
+export type PublicProfile = z.infer<typeof PublicProfileSchema>
+
+
 
 /**
  * insert a new profile into the profile table
@@ -67,6 +79,22 @@ export async function selectPrivateProfileByProfileEmail(profileEmail: string): 
 	return result?.length === 1 ? result[0] : null
 }
 
+/**
+ * selects the publicProfile from the profile table by profileId
+ * @param profileId the profile's id to search for in the profile table
+ * @returns Profile or null if no profile was found
+ **/
+export async function selectPublicProfileByProfileId (profileId: string): Promise<PublicProfile | null> {
+
+	// create a prepared statement that selects the profile by profileId and execute the statement
+	const rowList = await sql`SELECT profile_id, profile_bio, profile_picture_url, profile_name, profile_username FROM profile WHERE profile_id = ${profileId}`
+
+	// enforce that the result is an array of one profile, or nul
+	const result = PublicProfileSchema.array().max(1).parse(rowList)
+
+	// retuen the profile or nnull if no profile was found
+	return result?.length === 1 ? result[0] : null
+}
 
 
 
