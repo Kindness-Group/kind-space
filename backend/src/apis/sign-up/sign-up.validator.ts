@@ -7,15 +7,15 @@ import {PrivateProfileSchema} from '../profile/profile.validator'
  * @property profilePassword {string} the password
  */
 export const SignUpProfileSchema = PrivateProfileSchema
-    .omit({  profileHash: true, profileActivationToken: true, profilePictureUrl: true, profileBio: true, profileJoinDate: true })
-    .extend({
-        profilePasswordConfirm: z.string()
-            .min(8, { message: 'please provide a valid password (min 8 characters)' })
-            .max(32, { message: 'please provide a valid password (max 32 characters)' }),
-        profilePassword: z.string()
-            .min(8, { message: 'please provide a valid password (min 8 characters)' })
-            .max(32, { message: 'please provide a valid password (max 32 characters)' })
-    })
-    .refine(data => data.profilePassword === data.profilePasswordConfirm, {
-        message: 'passwords do not match'
-    })
+	.omit({  profileHash: true, profileActivationToken: true, profilePictureUrl: true, profileBio: true, profileJoinDate: true })
+	.extend({
+		profilePasswordConfirm: z.string()
+			.min(8, { message: 'please provide a valid password (min 8 characters)' })
+			.max(32, { message: 'please provide a valid password (max 32 characters)' }),
+		profilePassword: z.string()
+			.min(8, { message: 'please provide a valid password (min 8 characters)' })
+			.max(32, { message: 'please provide a valid password (max 32 characters)' })
+	})
+	.refine(data => data.profilePassword === data.profilePasswordConfirm, {
+		message: 'passwords do not match'
+	})
