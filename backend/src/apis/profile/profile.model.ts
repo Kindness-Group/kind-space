@@ -29,3 +29,43 @@ export async function insertProfile (profile: PrivateProfile): Promise<string> {
     await sql`INSERT INTO profile(profile_id, profile_activation_token, profile_bio, profile_email, profile_hash, profile_join_date, profile_name, profile_picture_url, profile_username) VALUES (${profileId}, ${profileActivationToken}, ${profileBio}, ${profileEmail}, ${profileHash}, ${profileJoinDate}, ${profileName}, ${profilePictureUrl}, ${profileUsername})`
     return `Profile Successfully Created`
 }
+
+export async function selectPrivateProfileByProfileActivationToken(profileActivationToken: string): Promise<PrivateProfile | null> {
+    const rowList = await sql`SELECT profile_id, profile_bio, profile_activation_token, profile_email, profile_hash, profile_join_date, profile_name, profile_picture_url, profile_username FROM profile WHERE profile_activation_token = ${profileActivationToken};`
+    const result = PrivateProfileSchema.array().max(1).parse(rowList)
+    return result.length === 1 ? result[0] : null
+}
+
+export async function updateProfile(profile: PrivateProfile): Promise<string> {
+    const {
+        profileId,
+        profileBio,
+        profileActivationToken,
+        profileHash,
+        profileEmail,
+        profileUsername,
+        profileName,
+        profilePictureUrl,
+        profileJoinDate
+    } = profile
+    await sql`UPDATE profile
+              SET profile_bio=${profileBio},
+                  profile_activation_token=${profileActivationToken},
+                  profile_username=${profileUsername},
+                  profile_hash=${profileHash},
+                  profile_join_date=${profileJoinDate},
+                  profile_picture_url=${profilePictureUrl},
+                  profile_name=${profileName},
+                  profile_email=${profileEmail}
+              WHERE profile_id = ${profileId}`
+    return 'Profile updated successfully'
+}
+
+
+
+
+
+
+
+
+

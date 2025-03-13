@@ -14,7 +14,7 @@ import {zodErrorResponse} from '../../utils/response.utils'
  * @param response an object modeling the response that will be sent to the client.
  * @returns response to the client indicating whether the sign-up was successful or not
  **/
-export async function signupProfileController(request: Request, response: Response): Promise<Response | undefined> {
+export async function signupProfileController(request: Request, response: Response): Promise<Response> {
     try {
         // validate the new profile data coming from the request body
         const validationResult = SignUpProfileSchema.safeParse(request.body)
@@ -43,15 +43,15 @@ export async function signupProfileController(request: Request, response: Respon
         const basePath: string = `${request.protocol}://${request.hostname}:8080${request.originalUrl}activation/${profileActivationToken}`
 
         // create a message for the activation email body
-        const message = `<h2>Welcome to Rethreads,</h2>
-            <p>In order to start posting threads of cats you must confirm your account,</p>
+        const message = `<h2>Welcome to Kind Space,</h2>
+            <p>In order to start sharing kindness, please verify your account.</p>
             <p><a href="${basePath}">${basePath}</a></p>`
 
         // create a mailgun message object
         const mailgunMessage = {
             from: `mailgun Sandbox <postmaster@${process.env.MAILGUN_DOMAIN as string}>`,
             to: profileEmail,
-            subject: `One step closer to Sticky Head -- Account Activation`,
+            subject: `One step closer to Kind Space -- Account Activation`,
             html: message
         }
         // create a new profile object
@@ -76,14 +76,14 @@ export async function signupProfileController(request: Request, response: Respon
         // create a status object to send back to the client
         const status: Status = {
             status: 200,
-            message: `Profile successfully created plaese check your email.`,
+            message: `Profile successfully created, please check your email.`,
             data: null
         }
 
         // send the status to the client
         return response.json(status)
 
-        // catch any errors that occured during the signup process
+        // catch any errors that occurred during the signup process
       } catch (error: any) {
         const status: Status = {
             status: 500,
