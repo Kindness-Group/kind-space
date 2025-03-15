@@ -92,14 +92,24 @@ export async function selectPublicProfileByProfileId (profileId: string): Promis
 	// enforce that the result is an array of one profile, or nul
 	const result = PublicProfileSchema.array().max(1).parse(rowList)
 
-	// retuen the profile or nnull if no profile was found
+	// return the profile or null if no profile was found
 	return result?.length === 1 ? result[0] : null
 }
 
+/**
+ * selects the privateProfile from the profile table by profileId
+ * @param profileId the profile's id to search for in the profile table
+ * @returns PrivateProfile or null if no profile was found
+ */
+export async function selectPrivateProfileByProfileId (profileId: string): Promise<PrivateProfile | null> {
 
+	//create a prepared statement that selects the profile by profileId and execute the statement
+	const rowList = await sql`SELECT profile_id, profile_bio, profile_activation_token, profile_email, profile_hash, profile_picture_url, profile_name, profile_username FROM profile WHERE profile_id = ${profileId}`
 
+	//enforce that the result is an array of one profile, or null
+	const result = PrivateProfileSchema.array().max(1).parse(rowList)
 
-
-
-
+	//return the profile or null if no profile was found
+	return result?.length === 1 ? result[0] : null
+}
 
