@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {
-    selectPublicProfileByProfileId, selectPrivateProfileByProfileId, PrivateProfile
+    selectPublicProfileByProfileId, selectPrivateProfileByProfileId, PrivateProfile, updateProfile
 
 } from "./profile.model";
 import {zodErrorResponse} from "../../utils/response.utils";
@@ -102,6 +102,7 @@ export async function putProfileController (request: Request, response: Response
 
 
     } catch (error: unknown) {
+        console.error(error)
         // if an error occurs, return a preformatted response to the client
         return response.json({status: 500, message: "internal server error", data: null})
     }

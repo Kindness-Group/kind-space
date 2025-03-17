@@ -36,7 +36,7 @@ export type PublicProfile = z.infer<typeof PublicProfileSchema>
  **/
 export async function insertProfile (profile: PrivateProfile): Promise<string> {
 	const { profileId, profileActivationToken, profileBio, profileEmail, profileHash, profileJoinDate, profileName, profilePictureUrl, profileUsername } = profile
-	await sql`INSERT INTO profile(profile_id, profile_activation_token, profile_bio, profile_email, profile_hash, profile_join_date, profile_name, profile_picture_url, profile_username) VALUES (${profileId}, ${profileActivationToken}, ${profileBio}, ${profileEmail}, ${profileHash}, ${profileJoinDate}, ${profileName}, ${profilePictureUrl}, ${profileUsername})`
+	await sql`INSERT INTO profile(profile_id, profile_activation_token, profile_bio, profile_email, profile_hash, profile_join_date, profile_name, profile_picture_url, profile_username) VALUES (${profileId}, ${profileActivationToken}, ${profileBio}, ${profileEmail}, ${profileHash}, now(), ${profileName}, ${profilePictureUrl}, ${profileUsername})`
 	return `Profile Successfully Created`
 }
 
@@ -58,12 +58,17 @@ export async function updateProfile(profile: PrivateProfile): Promise<string> {
 		profilePictureUrl,
 		profileJoinDate
 	} = profile
+
+	const formattedDate = profileJoinDate
+		? `${profileJoinDate.getFullYear()}-${profileJoinDate.getMonth()+1}-${profileJoinDate.getDay()} ${profileJoinDate.getHours()}:${profileJoinDate.getMinutes()}:${profileJoinDate.getSeconds()}.${profileJoinDate.getMilliseconds()}`
+		: null
+
 	await sql`UPDATE profile
 				 SET profile_bio=${profileBio},
 					  profile_activation_token=${profileActivationToken},
 					  profile_username=${profileUsername},
 					  profile_hash=${profileHash},
-					  profile_join_date=${profileJoinDate},
+					  profile_join_date=${formattedDate},
 					  profile_picture_url=${profilePictureUrl},
 					  profile_name=${profileName},
 					  profile_email=${profileEmail}
@@ -87,7 +92,7 @@ export async function selectPrivateProfileByProfileEmail(profileEmail: string): 
 export async function selectPublicProfileByProfileId (profileId: string): Promise<PublicProfile | null> {
 
 	// create a prepared statement that selects the profile by profileId and execute the statement
-	const rowList = await sql`SELECT profile_id, profile_bio, profile_picture_url, profile_name, profile_username FROM profile WHERE profile_id = ${profileId}`
+	const rowList = await sql`SELECT profile_id, profile_bio, profile_picture_url, profile_name, profile_username, profile_join_date FROM profile WHERE profile_id = ${profileId}`
 
 	// enforce that the result is an array of one profile, or nul
 	const result = PublicProfileSchema.array().max(1).parse(rowList)
@@ -104,7 +109,7 @@ export async function selectPublicProfileByProfileId (profileId: string): Promis
 export async function selectPrivateProfileByProfileId (profileId: string): Promise<PrivateProfile | null> {
 
 	//create a prepared statement that selects the profile by profileId and execute the statement
-	const rowList = await sql`SELECT profile_id, profile_bio, profile_activation_token, profile_email, profile_hash, profile_picture_url, profile_name, profile_username FROM profile WHERE profile_id = ${profileId}`
+	const rowList = await sql`SELECT profile_id, profile_bio, profile_activation_token, profile_email, profile_hash, profile_picture_url, profile_name, profile_username, profile_join_date FROM profile WHERE profile_id = ${profileId}`
 
 	//enforce that the result is an array of one profile, or null
 	const result = PrivateProfileSchema.array().max(1).parse(rowList)

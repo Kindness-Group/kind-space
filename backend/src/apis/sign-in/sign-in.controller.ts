@@ -52,6 +52,11 @@ export async function signInController (request: Request, response: Response): P
 			profileUsername
 		}, signature);
 
+		// set the session variables
+		request.session.profile = profile
+		request.session.jwt = authorization
+		request.session.signature = signature
+
 		// set the authorization header
 		response.header({
 			authorization
