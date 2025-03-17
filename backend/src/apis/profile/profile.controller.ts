@@ -1,6 +1,10 @@
 import {Request, Response} from "express";
 import {
-    selectPublicProfileByProfileId, selectPrivateProfileByProfileId, PrivateProfile, updateProfile
+    selectPublicProfileByProfileId,
+    selectPrivateProfileByProfileId,
+    PrivateProfile,
+    updateProfile,
+    selectPublicProfileByProfileUsername
 
 } from "./profile.model";
 import {zodErrorResponse} from "../../utils/response.utils";
@@ -38,6 +42,36 @@ export async function getPublicProfileByProfileIdController(request: Request, re
     } catch (error: unknown) {
         console.error(error)
         // in an error occurs, return a preformatted response to the client
+        return response.json({status: 500,message: "internal server error", data:null})
+    }
+}
+
+/**
+ * Express controller for getting the public profile by profileUsername
+ * @param request from the client to the server to get all public profile info by profileUsername
+ * @param response from the server to the client with profile with profileUsername or an error message
+ * @return {Promise<Response<Status>>} A promise containing the response for the client with the requested information,
+ * or null if the information could not be found, set to the data field
+ */
+export async function getPublicProfileByProfileUsernameController(request: Request, response: Response) : Promise<Response<Status>> {
+    try {
+        // validate the profileUsername coming from the request parameters
+        const validationResult = PublicProfileSchema.pick({profileUsername: true}).safeParse(request.params)
+
+        // if the validation is unsuccessful, return a preformatted response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // grab the profileName off of the validated request parameters
+        const {profileUsername} = validationResult.data
+
+        // grab the profile by profileUsername
+        const data = await selectPublicProfileByProfileUsername(profileUsername)
+
+        return response.json({status: 200, message: null, data})
+    } catch (error: unknown) {
+        // if an error occurs, return a preformatted response to the client
         return response.json({status: 500,message: "internal server error", data:null})
     }
 }
