@@ -25,7 +25,7 @@ export async function postActController(request: Request, response: Response): P
         //if the validation succeeds, continue on with the postActController logic below this line
 
         //get the act content, act id, and act image url from the request body
-        const {actContent, actId, actImageUrl} = validationResult.data
+        const {actContent, actId, actImageUrl, actAddress} = validationResult.data
 
         // get the profile from the session
         const profile: PublicProfile = request.session.profile as PublicProfile
@@ -37,6 +37,7 @@ export async function postActController(request: Request, response: Response): P
         const act: Act = {
             actId,
             actProfileId,
+            actAddress,
             actContent,
             actDateTime: null,
             actImageUrl,
