@@ -42,7 +42,7 @@ export async function postActController(request: Request, response: Response): P
             actDateTime: null,
             actImageUrl,
             actLat:,
-            actLng:
+            actLng:,
         }
 
         //insert the act into the database and store the result in a variable called result
