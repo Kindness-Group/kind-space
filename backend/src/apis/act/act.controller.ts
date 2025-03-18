@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import {
     Act,
-    insertAct,
+    insertAct, selectActByActId,
     selectActsByActProfileId,
     selectActsByProfileUsername,
     selectAllActs
@@ -147,6 +147,40 @@ export async function getActsByActProfileIdController (request: Request, respons
         const data = await selectActsByActProfileId(actProfileId)
 
         // return the response with the status code 200, a message, and the threads as data
+        return response.json({status: 200, message: null, data})
+
+        // if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+/**
+ * gets an act from the database by actId and returns it to the user in the response
+ * @param request from the client to the server to get an act by actId from
+ * @param response from the server to the client with an act by actId or an error message
+ */
+export async function getActByActIdController(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        // validate the incoming request actId with the uuid schema
+        const validationResult = z.string().uuid({message: 'Please provide a valid actId'}).safeParse(request.params.actId)
+
+        // if the validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // get the actId from the request parameters
+        const actId = validationResult.data
+
+        // get the thread from the database by actId and store it in a variable called data
+        const data = await selectActByActId(actId)
+
+        // return the response with the status code 200, a message, and the act as data
         return response.json({status: 200, message: null, data})
 
         // if there is an error, return the response with the status code 500, an error message, and null data

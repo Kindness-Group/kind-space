@@ -81,3 +81,19 @@ export async function selectActsByActProfileId(actProfileId: string): Promise<Ac
     // parse the threads from the database into an array of Thread objects
     return ActSchema.array().parse(rowList)
 }
+
+/**
+ * get the act from the act table in the database by actId and return it
+ * @param actId {string} the thread's id to search for in the act table
+ * @returns <Act|null> the act that has the actId or null if no act is found
+ */
+export async function selectActByActId(actId: string): Promise<Act | null> {
+    // get the act from the act table in the database by actId
+    const rowList = <Act[]>await sql`SELECT act_id, act_profile_id, act_address, act_content, act_date_time, act_image_url, act_lat, act_lng FROM act WHERE act_id = ${actId}`
+
+    // parse the thread from the database into an Act object
+    const result = ActSchema.array().max(1).parse(rowList)
+
+    // return the thread or null if no thread is found
+    return result.length === 0 ? null : result[0]
+}

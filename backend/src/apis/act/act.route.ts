@@ -3,7 +3,7 @@ import {
 	getActsByActProfileIdController,
 	getAllActs,
 	postActController,
-	getActsByActProfileUsernameController
+	getActsByActProfileUsernameController, getActByActIdController
 } from "./act.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -24,6 +24,8 @@ router.route('/actProfileId/:actProfileId')
 router.route('/profileUsername/:profileUsername')
 	.get(getActsByActProfileUsernameController)
 
+router.route('/:actId')
+	.get(getActByActIdController)
 
 // export the router with the basePath and router object
 export const actRoute = { basePath, router }
