@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import {
-    postActController
+	getAllActs,
+	postActController
 } from "./act.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -12,7 +13,8 @@ const router = Router()
 
 // define thread route for this router
 router.route('/')
-    .post(isLoggedInController, postActController)
+	.post(isLoggedInController, postActController)
+	.get(getAllActs)
 
 // export the router with the basePath and router object
 export const actRoute = { basePath, router }

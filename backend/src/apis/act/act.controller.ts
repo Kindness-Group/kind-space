@@ -1,5 +1,5 @@
 import {Request, Response} from 'express'
-import {Act, insertAct} from "./act.model";
+import {Act, insertAct, selectAllActs} from "./act.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
 import {ActSchema} from "./act.validator";
@@ -56,5 +56,30 @@ export async function postActController(request: Request, response: Response): P
     } catch (error) {
         console.log(error)
         return response.json({status: 500, message: 'Error creating act. Try again.', data: null})
+    }
+}
+
+/**
+ * gets all threads from the database and returns them to the user in the response
+ * @param request from the client to the server to get all acts
+ * @param response from the server to the client with all acts or an error message
+ */
+export async function getAllActs(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        // get the threads from the database and store it in a variable called data
+        const data = await selectAllActs()
+
+        // return the response with the status code 200, a message, and the acts as data
+        const status: Status = {status: 200, message: null, data}
+        return response.json(status)
+
+        // if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        console.log(error)
+        return response.json({
+            status: 500,
+            message: 'Error getting acts. Try again',
+            data: []
+        })
     }
 }

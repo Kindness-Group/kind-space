@@ -32,3 +32,16 @@ export async function insertAct(act: Act): Promise<string> {
     //return a message that says 'Act successfully posted'
     return 'Act successfully posted'
 }
+
+/**
+ * gets all threads from the thread table in the database and returns them to the user in the response
+ * @returns {Promise<Act[]>}
+ * @throws {Error} an error if the query fails for some reason or if there are no threads in the database
+ */
+export async function selectAllActs(): Promise<Act[]> {
+    // get all acts from the thread table in the database and return them
+    const rowList = <Act[]>await sql`SELECT act_id, act_profile_id, act_address, act_content, act_date_time, act_image_url, act_lat, act_lng FROM act ORDER BY act_date_time DESC`
+
+    // parse the threads from the database into an array of Thread objects
+    return ActSchema.array().parse(rowList)
+}
