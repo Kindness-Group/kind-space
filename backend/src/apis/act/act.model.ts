@@ -50,6 +50,7 @@ export async function selectAllActs(): Promise<Act[]> {
  * @param profileName {string} the act's profile name to search for in the act table
  * @returns <Act[]> the acts that have the profileName
  **/
+
 export async function selectActsByProfileName(profileName: string): Promise<Act[]> {
     //get all acts from the act table in the database by profileName and return them
     const rowList = <Act[]>await sql`SELECT act_id, act_profile_id, act_address, act_content, act_date_time, act_image_url, act_lat, act_lng FROM act JOIN profile ON act.act_profile_id = profile.profile_id WHERE profile.profile_name = ${profileName}`
