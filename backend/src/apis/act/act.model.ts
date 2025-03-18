@@ -52,7 +52,14 @@ export async function selectAllActs(): Promise<Act[]> {
 
 export async function selectActsByProfileUsername(profileUsername: string): Promise<Act[]> {
     //get all acts from the act table in the database by profileUsername and return them
-    const rowList = <Act[]>await sql`SELECT act_id, act_profile_id, act_address, act_content, act_date_time, act_image_url, act_lat, act_lng FROM act JOIN profile ON act.act_profile_id = profile.profile_id WHERE profile.profile_username = ${profileUsername}`
+    const rowList = <Act[]>await sql`SELECT act_id, 
+       act_profile_id, 
+       act_address, 
+       act_content, 
+       act_date_time, 
+       act_image_url, 
+       act_lat, 
+       act_lng FROM act JOIN profile ON act.act_profile_id = profile.profile_id WHERE profile.profile_username = ${profileUsername}`
 
     //parse the threads from the database into an array of Act objects
     return ActSchema.array().parse(rowList)

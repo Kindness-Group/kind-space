@@ -21,7 +21,8 @@ router.route('/')
 router.route('/actProfileId/:actProfileId')
 	.get(getActsByActProfileIdController)
 
-router.route('/profileName/:profileName').get(getActsByActProfileUsernameController)
+router.route('/profileUsername/:profileUsername')
+	.get(getActsByActProfileUsernameController)
 
 // export the router with the basePath and router object
 export const actRoute = { basePath, router }
