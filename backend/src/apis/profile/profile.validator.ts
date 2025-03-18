@@ -52,7 +52,6 @@ export const PrivateProfileSchema = z.object({
     profileUsername: z.string({
         required_error: 'profileUsername is required',
         invalid_type_error: 'profileUsername is required',
-
     })  .trim()
         .min(1, {message: 'Please provide valid profileUsername (min 1 characters)'})
         .max(32, {message: 'Please provide valid profileUsername (max 32 characters)'}),
