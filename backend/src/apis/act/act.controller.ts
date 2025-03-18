@@ -91,8 +91,8 @@ export async function getAllActs(request: Request, response: Response): Promise<
  **/
 export async function getActsByActProfileNameController(request: Request, response: Response): Promise<Response<Status>> {
     try {
-        //validate the incoming request threadProfileId with the uuid schema
-        const validationResult = z.string().uuid({message: 'Please provide a valid actProfileId'}).safeParse(request.params.threadProfileId)
+        //validate the incoming request actProfileId with the uuid schema
+        const validationResult = PublicProfileSchema.pick({profileName: true}).safeParse(request.params.profileName)
 
         //if the validation fails, return a response to the client
         if (!validationResult.success) {
@@ -100,10 +100,10 @@ export async function getActsByActProfileNameController(request: Request, respon
         }
 
         //get the act profile id from the request parameters
-        const actProfileId = validationResult.data
+        const {profileName} = validationResult.data
 
-        //get the acts from the database by act profile id and store it in a variable called data
-        const data = await selectActsByProfileName(actProfileId)
+        //get the acts from the database by act profile name and store it in a variable called data
+        const data = await selectActsByProfileName(profileName)
 
         //return the response with the status code 200, a message, and the acts as data
         return response.json({status: 200, message: null, data})
