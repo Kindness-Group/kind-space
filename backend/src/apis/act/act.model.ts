@@ -97,3 +97,16 @@ export async function selectActByActId(actId: string): Promise<Act | null> {
     // return the thread or null if no thread is found
     return result.length === 0 ? null : result[0]
 }
+
+/**
+ * deletes the act from the act table in the database by actId and returns a message that says 'Act successfully deleted'
+ * @param actId
+ * @returns 'Act successfully deleted'
+ */
+export async function deleteActByActId(actId: string): Promise<string> {
+    //delete the act from the act table in the database by actId
+    await sql`DELETE FROM act WHERE act_id = ${actId}`
+
+    //return a message that says 'Act successfully deleted'
+    return 'Act successfully deleted'
+}

@@ -1,6 +1,6 @@
 import {Request, Response} from 'express'
 import {
-    Act,
+    Act, deleteActByActId,
     insertAct, selectActByActId,
     selectActsByActProfileId,
     selectActsByProfileUsername,
@@ -185,6 +185,63 @@ export async function getActByActIdController(request: Request, response: Respon
 
         // if there is an error, return the response with the status code 500, an error message, and null data
     } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+/**
+ * deletes an act from the database by actId and returns a status to the user in the response
+ * @param request from the client to the server to delete an act by actId from the database
+ * @param response from the server to the client with a status of 200 or an error message
+ */
+export async function deleteActByActIdController(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        //validate the incoming request actId with the uuid schema
+        const validationResult = z.string().uuid({message: 'Please provide a valid actId'}).safeParse(request.params.actId)
+
+        //if the validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        //get the profile from the session
+        const profile: PublicProfile = request.session.profile as PublicProfile
+
+        //set the act profile id to the profile id from the session
+        const actProfileId: string = profile.profileId as string
+
+        //get the act id from the request parameters
+        const actId = validationResult.data
+
+        //get the act from the database by act id
+        const act = await selectActByActId(actId)
+
+        // if act is null, tell user act does not exist
+        if(act === null){
+            return response.json({status: 404, message: 'Act Not Found', data: null})
+        }
+
+        //if the act profile id does not match the act profile id from the session, return a response to the client
+        if(act.actProfileId !== actProfileId){
+            return response.json({
+                status:403,
+                message: 'You are not allowed to delete this act',
+                data: null
+            })
+        }
+        //delete the thread form the database by thread id
+        const message = await deleteActByActId(actId)
+
+        //return the response with the status code 200, a message, and the thread as data
+        return response.json({status:200, message, data: null})
+
+        //if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        console.log(error)
         return response.json({
             status: 500,
             message: '',

@@ -3,9 +3,10 @@ import {
 	getActsByActProfileIdController,
 	getAllActs,
 	postActController,
-	getActsByActProfileUsernameController, getActByActIdController
+	getActsByActProfileUsernameController, getActByActIdController, deleteActByActIdController
 } from "./act.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
+import {deleteActByActId} from "./act.model";
 
 // declare a basePath for this router
 const basePath = '/apis/act'
@@ -26,6 +27,7 @@ router.route('/profileUsername/:profileUsername')
 
 router.route('/:actId')
 	.get(getActByActIdController)
+	.delete(isLoggedInController, deleteActByActIdController)
 
 // export the router with the basePath and router object
 export const actRoute = { basePath, router }
