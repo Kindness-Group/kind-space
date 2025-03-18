@@ -1,5 +1,11 @@
 import {Request, Response} from 'express'
-import {Act, insertAct, selectActsByActProfileId, selectActsByProfileName, selectAllActs} from "./act.model";
+import {
+    Act,
+    insertAct,
+    selectActsByActProfileId,
+    selectActsByProfileUsername,
+    selectAllActs
+} from "./act.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
 import {ActSchema} from "./act.validator";
@@ -85,14 +91,14 @@ export async function getAllActs(request: Request, response: Response): Promise<
 }
 
 /**
- * gets all acts from the database by act profile id and returns them to the user in the response
- * @param request from the client to the server to get all acts by act profile id
- * @param response from the server to the client with all acts by act profile id or an error message
+ * gets all acts from the database by act profile username and returns them to the user in the response
+ * @param request from the client to the server to get all acts by act profile username
+ * @param response from the server to the client with all acts by act profile username or an error message
  **/
-export async function getActsByActProfileNameController(request: Request, response: Response): Promise<Response<Status>> {
+export async function getActsByActProfileUsernameController(request: Request, response: Response): Promise<Response<Status>> {
     try {
         //validate the incoming request actProfileId with the uuid schema
-        const validationResult = PublicProfileSchema.pick({profileName: true}).safeParse(request.params.profileName)
+        const validationResult = PublicProfileSchema.pick({profileUsername: true}).safeParse(request.params.profileUsername)
 
         //if the validation fails, return a response to the client
         if (!validationResult.success) {
@@ -100,10 +106,10 @@ export async function getActsByActProfileNameController(request: Request, respon
         }
 
         //get the act profile id from the request parameters
-        const {profileName} = validationResult.data
+        const {profileUsername} = validationResult.data
 
-        //get the acts from the database by act profile name and store it in a variable called data
-        const data = await selectActsByProfileName(profileName)
+        //get the acts from the database by act profile username and store it in a variable called data
+        const data = await selectActsByProfileUsername(profileUsername)
 
         //return the response with the status code 200, a message, and the acts as data
         return response.json({status: 200, message: null, data})
