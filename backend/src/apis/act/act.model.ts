@@ -58,3 +58,20 @@ export async function selectActsByProfileName(profileName: string): Promise<Act[
     //parse the threads from the database into an array of Act objects
     return ActSchema.array().parse(rowList)
 }
+
+export async function selectActsByActProfileId(actProfileId: string): Promise<Act[]> {
+    // get all threads from the thread table in the database by actProfileId and return the
+    const rowList = <Act[]>await sql`SELECT act_id,
+                                    act_profile_id,
+                                    act_address,
+                                    act_content,
+                                    act_date_time,
+                                    act_image_url,
+                                    act_lat,
+                                    act_lng,
+                        FROM act 
+                        WHERE act_profile_id = ${actProfileId}`
+
+    // parse the threads from the database into an array of Thread objects
+    return ActSchema.array().parse(rowList)
+}

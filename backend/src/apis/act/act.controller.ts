@@ -1,5 +1,5 @@
 import {Request, Response} from 'express'
-import {Act, insertAct, selectActsByProfileName, selectAllActs} from "./act.model";
+import {Act, insertAct, selectActsByActProfileId, selectActsByProfileName, selectAllActs} from "./act.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
 import {ActSchema} from "./act.validator";
@@ -89,7 +89,7 @@ export async function getAllActs(request: Request, response: Response): Promise<
  * @param request from the client to the server to get all acts by act profile id
  * @param response from the server to the client with all acts by act profile id or an error message
  **/
-export async function getActsByActProfileIdController(request: Request, response: Response): Promise<Response<Status>> {
+export async function getActsByActProfileNameController(request: Request, response: Response): Promise<Response<Status>> {
     try {
         //validate the incoming request threadProfileId with the uuid schema
         const validationResult = z.string().uuid({message: 'Please provide a valid actProfileId'}).safeParse(request.params.threadProfileId)
@@ -117,3 +117,38 @@ export async function getActsByActProfileIdController(request: Request, response
         })
     }
 }
+
+/**
+ * gets all acts from the database by act profile id and returns them to the user in the response
+ * @param request from the client to the server to get all acts by act profile id
+ * @param response from the server to the client with all acts by act profile id or an error message
+ */
+export async function getActsByActProfileIdController (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        // validate the incoming request actProfileId with the uuid schema
+        const validationResult = z.string().uuid({message: 'Please provide a valid actProfileId'}).safeParse(request.params.actProfileId)
+
+        // if the validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // get the act profile id from the request parameters
+        const actProfileId = validationResult.data
+
+        // get the acts from the database by act profile id and store it in a variable called data
+        const data = await selectActsByActProfileId(actProfileId)
+
+        // return the response with the status code 200, a message, and the threads as data
+        return response.json({status: 200, message: null, data})
+
+        // if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+

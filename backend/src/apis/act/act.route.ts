@@ -2,7 +2,8 @@ import { Router } from 'express'
 import {
 	getActsByActProfileIdController,
 	getAllActs,
-	postActController
+	postActController,
+	getActsByActProfileNameController
 } from "./act.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -19,6 +20,8 @@ router.route('/')
 
 router.route('/actProfileId/:threadProfileId')
 	.get(getActsByActProfileIdController)
+
+router.route('/profileName/:profileName').get(getActsByActProfileNameController)
 
 // export the router with the basePath and router object
 export const actRoute = { basePath, router }
