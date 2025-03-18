@@ -18,7 +18,7 @@ router.route('/')
 	.post(isLoggedInController, postActController)
 	.get(getAllActs)
 
-router.route('/actProfileId/:threadProfileId')
+router.route('/actProfileId/:actProfileId')
 	.get(getActsByActProfileIdController)
 
 router.route('/profileName/:profileName').get(getActsByActProfileNameController)

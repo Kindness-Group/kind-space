@@ -22,12 +22,11 @@ export type Act = z.infer<typeof ActSchema>
  * @returns 'Act successfully posted'
  */
 export async function insertAct(act: Act): Promise<string> {
-
     //deconstruct the act object
     const {actId, actProfileId, actAddress, actContent, actDateTime, actImageUrl, actLat, actLng} = act
 
     //insert the act the into the act feed
-    await sql `INSERT INTO act (act_id, act_profile_id, act_address, act_content, act_date_time, act_image_url, act_lat, act_lng) VALUES (${actId}, ${actProfileId}, ${actAddress}), ${actContent}, now(), ${actImageUrl}, ${actLat}, ${actLng})`
+    await sql `INSERT INTO act (act_id, act_profile_id, act_address, act_content, act_date_time, act_image_url, act_lat, act_lng) VALUES (${actId}, ${actProfileId}, ${actAddress}, ${actContent}, now(), ${actImageUrl}, ${actLat}, ${actLng})`
 
     //return a message that says 'Act successfully posted'
     return 'Act successfully posted'
@@ -68,7 +67,7 @@ export async function selectActsByActProfileId(actProfileId: string): Promise<Ac
                                     act_date_time,
                                     act_image_url,
                                     act_lat,
-                                    act_lng,
+                                    act_lng
                         FROM act 
                         WHERE act_profile_id = ${actProfileId}`
 
