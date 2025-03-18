@@ -98,8 +98,9 @@ export async function getAllActs(request: Request, response: Response): Promise<
 export async function getActsByActProfileUsernameController(request: Request, response: Response): Promise<Response<Status>> {
     try {
         //validate the incoming request actProfileId with the uuid schema
-        const validationResult = PublicProfileSchema.pick({profileUsername: true}).safeParse(request.params.profileUsername)
+        const validationResult = PublicProfileSchema.pick({profileUsername: true}).safeParse(request.params)
 
+        console.log(validationResult)
         //if the validation fails, return a response to the client
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
