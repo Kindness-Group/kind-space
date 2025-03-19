@@ -4,10 +4,10 @@ import {
     insertAct, selectActByActId,
     selectActsByActProfileId,
     selectActsByProfileUsername,
-    selectAllActs
+    selectAllActs, updateActByActId
 } from "./act.model";
 import {Status} from "../../utils/interfaces/Status";
-import {PublicProfile} from "../profile/profile.model";
+import {PublicProfile, selectPrivateProfileByProfileId} from "../profile/profile.model";
 import {ActSchema} from "./act.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {number, z} from "zod";
@@ -263,28 +263,45 @@ export async function putActController(request: Request, response: Response): Pr
         //validate the updated act data coming from the request body
         const validationResultForRequestBody = ActSchema.safeParse(request.body)
 
-        // if the validation of the body is usuccessful, return a preformatted respoonse to the client
-        if(!validationResultForRequestBody.success){
+        // if the validation of the body is unsuccessful, return a preformatted response to the client
+        if (!validationResultForRequestBody.success) {
             return zodErrorResponse(response, validationResultForRequestBody.error)
         }
 
-        // validate the actId coming from the request parameters
-        const validationResultForRequestParams = actSchema.pick({actId: true}).safeParse(request.params)
-
-        // if the validation of the params is unsuccessful, return a preformatted response to the client
-        if(!validationResultForRequestParams.success){
-            return zodErrorResponse(response, validationResultForRequestParams.error)
-        }
-
         //grab the actId form the session
-        const ProfileFromSession = request.session?.profile
-        const ProfileIdFromSession = profileFromSession?.profileId
+        const profileFromSession = request.session?.profile
+        const profileIdFromSession = profileFromSession?.profileId
 
-        //grab the actId off of the validated request parameters
-        const {profileId} = validationResultForRequestParams.data
+        //grab the act data off of the validated request body
+        const {actId, actAddress, actContent, actImageUrl, actLat, actLng} = validationResultForRequestBody.data
 
-        if (profileIdFromSession !== profileId) {
-            return response.json({status: 400, message: 'Profile id not match', data: null})
+        //grab the act by actId
+        const act: Act | null = await selectActByActId(actId)
+
+        //if the act does not exist, return a preformatted response to the client
+        if (act === null) {
+            return response.json({status: 400, message: 'Act does not exist', data: null})
         }
+
+        if (profileIdFromSession !== act.actProfileId) {
+            return response.json({status: 400, message: "you cannot update a profile that is not yours", data: null})
+        }
+        //update the act with the new data
+        act.actAddress = actAddress
+        act.actContent = actContent
+        act.actImageUrl = actImageUrl
+        act.actLat = actLat
+        act.actLng = actLng
+
+        //update the act in the database
+        await updateActByActId(act)
+
+        //return a response to the client with a success message
+        return response.json({status: 200, message: "act successfully updated", data: null})
+
+
+    } catch (error: unknown) {
+        // if an error occurs, return a preformatted response to the client
+        return response.json({status: 500, message: "internal server error", data: null})
     }
 }
