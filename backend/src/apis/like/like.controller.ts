@@ -60,3 +60,36 @@ export async function postLikeController(request: Request, response: Response): 
         return (response.json({status: 500, message: error.message, data: null}))
     }
 }
+
+/**
+ * Handles POST request to toggle a like on an act by inserting or deleting a like from the like table
+ * @param request object containing the like thread id
+ * @param response object containing the status of the request
+ * @returns status object indicating whether the like was inserted or deleted
+ */
+export async function toggleLikeController(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+
+        // validate the incoming request with the like schema
+        const validationResult = LikeSchema.safeParse(request.body)
+
+        // if the validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // if the validation succeeds, continue
+
+        // deconstruct the like act id from the validation result
+        const {likeActId} = validationResult.data
+
+        // deconstruct the profile form the session
+        const profile = request.session.profile
+
+        // @ts-ignore
+        // deconstruct the profile id from the profile
+        const likeProfileId = profile.profileId
+
+
+    }
+}
