@@ -196,15 +196,20 @@ export async function getActByActIdController(request: Request, response: Respon
 export async function getActsByActLatActLng(request: Request, response: Response): Promise<Response<Status>> {
     try {
         // validate the incoming request actLat and actLng with the ActSchema
-        const validationResult = ActSchema.safeParse(request.params)
+        const validationResultLat = z.coerce.number().min(-90, {message: 'Please provide a valid actLat'}).max(90, {message: 'Please provide a valid actLat'}).safeParse(request.params.actLat)
+        const validationResultLng = z.coerce.number().min(-180, {message: 'Please provide a valid actLng'}).max(180, {message: 'Please provide a valid actLng'}).safeParse(request.params.actLng)
 
+        //console.log(validationResult)
         // if validation fails, return a response to the client
-        if (!validationResult.success) {
-            return zodErrorResponse(response, validationResult.error)
+        if (!validationResultLat.success) {
+            return zodErrorResponse(response, validationResultLat.error)
+        } else if (!validationResultLng.success) {
+            return zodErrorResponse(response, validationResultLng.error)
         }
 
         // get the act Latitude and Longitude from the request parameters
-        const {actLat, actLng} = validationResult.data
+        const actLat = validationResultLat.data
+        const actLng = validationResultLng.data
 
         // get the acts from the database by actLat and actLng and store it in a variable called data
         const data = await selectActByActLatActLng(actLat, actLng)
