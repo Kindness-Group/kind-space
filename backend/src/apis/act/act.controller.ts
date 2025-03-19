@@ -250,3 +250,41 @@ export async function deleteActByActIdController(request: Request, response: Res
     }
 }
 
+/**
+ * express controller for updating a act
+ * @param request from the client to the server to update a act
+ * @param response from the server to the client with a status message to indicate whether the update was successful
+ * @return {Promise<Response<Status>>} A promise containing the response for the client with the requested information
+ **/
+
+export async function putActController(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+
+        //validate the updated act data coming from the request body
+        const validationResultForRequestBody = ActSchema.safeParse(request.body)
+
+        // if the validation of the body is usuccessful, return a preformatted respoonse to the client
+        if(!validationResultForRequestBody.success){
+            return zodErrorResponse(response, validationResultForRequestBody.error)
+        }
+
+        // validate the actId coming from the request parameters
+        const validationResultForRequestParams = actSchema.pick({actId: true}).safeParse(request.params)
+
+        // if the validation of the params is unsuccessful, return a preformatted response to the client
+        if(!validationResultForRequestParams.success){
+            return zodErrorResponse(response, validationResultForRequestParams.error)
+        }
+
+        //grab the actId form the session
+        const ProfileFromSession = request.session?.profile
+        const ProfileIdFromSession = profileFromSession?.profileId
+
+        //grab the actId off of the validated request parameters
+        const {profileId} = validationResultForRequestParams.data
+
+        if (profileIdFromSession !== profileId) {
+            return response.json({status: 400, message: 'Profile id not match', data: null})
+        }
+    }
+}

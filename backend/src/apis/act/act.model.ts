@@ -110,3 +110,14 @@ export async function deleteActByActId(actId: string): Promise<string> {
     //return a message that says 'Act successfully deleted'
     return 'Act successfully deleted'
 }
+
+/**
+ * updates an act in the act table
+ * @param act
+ * @returns {Promise<string>} 'Act successfully updated'
+ */
+export async function updateActByActId(act: Act): Promise<string> {
+    const { actId, actProfileId, actAddress, actDateTime, actContent, actImageUrl, actLat, actLng} = act
+    await sql `UPDATE act Set act_address = ${actAddress}, act_content = ${actContent}, act_image_url = ${actImageUrl}, act_lat = ${actLat}, act_lng = ${actLng} WHERE act_id = ${actId}`
+    return 'Act successfully updated'
+}
