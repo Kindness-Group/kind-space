@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import {
     Act, deleteActByActId,
-    insertAct, selectActByActId,
+    insertAct, selectActByActId, selectActByActLatActLng,
     selectActsByActProfileId,
     selectActsByProfileUsername,
     selectAllActs, updateActByActId
@@ -184,6 +184,35 @@ export async function getActByActIdController(request: Request, response: Respon
         return response.json({status: 200, message: null, data})
 
         // if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+export async function getActsByActLatActLng(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        // validate the incoming request actLat and actLng with the ActSchema
+        const validationResult = ActSchema.safeParse(request.params)
+
+        // if validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // get the act Latitude and Longitude from the request parameters
+        const {actLat, actLng} = validationResult.data
+
+        // get the acts from the database by actLat and actLng and store it in a variable called data
+        const data = await selectActByActLatActLng(actLat, actLng)
+
+        // return the response with the status code 200, a message, and the acts as data
+        return response.json({status: 200, message: null, data})
+
+        // if there is an error, return the response with the status code 500, an errormessage, and null data
     } catch (error) {
         return response.json({
             status: 500,
