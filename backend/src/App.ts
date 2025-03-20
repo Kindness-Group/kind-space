@@ -12,6 +12,7 @@ import {profileRoute} from "./apis/profile/profile.route";
 import {actRoute} from "./apis/act/act.route";
 import {likeRoute} from "./apis/like/like.route";
 import {suggestionRoute} from "./apis/suggestion/suggestion.route";
+import {commentRoute} from "./apis/comment/comment.route";
 
 // The following class creates the app and instantiates the server
 export class App {
@@ -56,6 +57,7 @@ export class App {
 		this.app.use(actRoute.basePath, actRoute.router)
 		this.app.use(likeRoute.basePath, likeRoute.router)
 		this.app.use(suggestionRoute.basePath, suggestionRoute.router)
+		this.app.use(commentRoute.basePath, commentRoute.router)
 	}
 
 	// starts the server and tells the terminal to post a message that the server is running and on what port
