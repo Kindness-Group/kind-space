@@ -12,14 +12,14 @@ export type Like = z.infer<typeof LikeSchema>
  */
 
 export async function insertLike(like: Like): Promise<string> {
-    // deconstruct the like object
-    const {likeActId, likeProfileId, likeDateTime} = like
+	// deconstruct the like object
+	const {likeActId, likeProfileId, likeDateTime} = like
 
-    //insert the like into the like table
-    await sql`INSERT INTO "like" (like_act_id, like_profile_id, like_date_time) VALUES (${likeActId}, ${likeProfileId}, now())`
+	//insert the like into the like table
+	await sql`INSERT INTO "like" (like_act_id, like_profile_id, like_date_time) VALUES (${likeActId}, ${likeProfileId}, now())`
 
-    //return a message to the user indicating success
-    return 'You Liked this Act!'
+	//return a message to the user indicating success
+	return 'You Liked this Act!'
 }
 
 /**
@@ -30,20 +30,20 @@ export async function insertLike(like: Like): Promise<string> {
  */
 export async function selectLikeByLikeId(like: Like): Promise<Like | null> {
 
-    // deconstruct the like object
-    const {likeActId, likeProfileId} = like
+	// deconstruct the like object
+	const {likeActId, likeProfileId} = like
 
-    // select the like from the like table by likeId
-    const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
-                                      FROM "like"
-                                      WHERE like_act_id = ${likeActId}
-                                        AND like_profile_id = ${likeProfileId}`
+	// select the like from the like table by likeId
+	const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
+                                     FROM "like"
+                                     WHERE like_act_id = ${likeActId}
+                                       AND like_profile_id = ${likeProfileId}`
 
-    // parse the result into an array of likes
-    const result = LikeSchema.array().max(1).parse(rowList)
+	// parse the result into an array of likes
+	const result = LikeSchema.array().max(1).parse(rowList)
 
-    // return the like that was selected
-    return result.length === 0 ? null : result[0]
+	// return the like that was selected
+	return result.length === 0 ? null : result[0]
 }
 
 /**
@@ -53,17 +53,17 @@ export async function selectLikeByLikeId(like: Like): Promise<Like | null> {
  */
 export async function deleteLike(like: Like): Promise<string> {
 
-    // deconstruct the like object
-    const {likeActId, likeProfileId} = like
+	// deconstruct the like object
+	const {likeActId, likeProfileId} = like
 
-    // delete the like form the like table
-    await sql`DELETE 
-              FROM "like"
-              WHERE like_act_id = ${likeActId}
-                AND like_profile_id = ${likeProfileId}`
+	// delete the like form the like table
+	await sql`DELETE
+             FROM "like"
+             WHERE like_act_id = ${likeActId}
+               AND like_profile_id = ${likeProfileId}`
 
-    // return a message to the user indicating success
-    return  'Like successfully deleted'
+	// return a message to the user indicating success
+	return  'Like successfully deleted'
 }
 
 /**
@@ -73,23 +73,36 @@ export async function deleteLike(like: Like): Promise<string> {
  */
 export async function selectLikesByLikeActId(likeActId: string): Promise<Like[]> {
 
-    // select the likes from the like table by likeActId
-    const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
-                                      FROM "like"
-                                      WHERE like_act_id = ${likeActId}`
+	// select the likes from the like table by likeActId
+	const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
+                                     FROM "like"
+                                     WHERE like_act_id = ${likeActId}`
 
-    // parse the result into an array of likes and return it
-    return LikeSchema.array().parse(rowList)
+	// parse the result into an array of likes and return it
+	return LikeSchema.array().parse(rowList)
 }
 
 export async function selectLikesByLikeActId(likeActId: string): Promise<Like[]> {
 
-    // select the likes from the like table by likeActId
-    const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
-                                      FROM "like"
-                                      WHERE like_act_id = ${likeActId}`
+	// select the likes from the like table by likeActId
+	const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
+                                     FROM "like"
+                                     WHERE like_act_id = ${likeActId}`
 
-    // parse the result into an array of likes and return it
-    return LikeSchema.array().parse(rowList)
+	// parse the result into an array of likes and return it
+	return LikeSchema.array().parse(rowList)
+}
+
+/**
+ * selects likes from the like table by likeProfileId and returns the likes
+ * @param likeProfileId to be selected by likeProfileId
+ * @returns the likes that were selected
+ */
+export async function selectLikesByLikeProfileId(likeProfileId: string): Promise<Like[]> {
+	// select the likes from the like table by likeProfileId
+	const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time FROM "like" WHERE like_profile_id = ${likeProfileId}`
+
+	// parse the result into an array of likes and return it
+	return LikeSchema.array().parse(rowList)
 }
 

@@ -2,7 +2,7 @@ import {Request, Response} from 'express'
 import {
     deleteLike,
     insertLike,
-    Like, selectLikeByLikeId, selectLikesByLikeActId
+    Like, selectLikeByLikeId, selectLikesByLikeActId, selectLikesByLikeProfileId
 } from "./like.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status"
@@ -153,6 +153,39 @@ export async function getLikesByLikeActIdController(request: Request, response: 
         return response.json({status:200, message:null, data})
 
         //if an error occurs, return the error to the user
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+/**
+ * Handles GET request for all likes associated with a profile
+ * @param request object containing the like profile id
+ * @param response object containing the status of the request and the likes associated with the profile
+ * @returns status object containing the status of the request and the likes associated with the profile
+ */
+export async function getLikesByLikeProfileIdController(request: Request, response: Response): Promise<Response> {
+    try {
+        // validate the likeProfileId coming from the request parameters
+        const validationResult = z.string().uuid("Please provide a valid likeProfileId").safeParse(request.params.likeProfileId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        //if validation succeeds, continue
+
+        const likProfileId = validationResult.data
+
+        // select the likes by like profile id
+        const data = await selectLikesByLikeProfileId(likProfileId)
+
+        // return the status and the likes associated with the profile
+        return response.json({status:200, message:null, data})
+
     } catch (error) {
         return response.json({
             status: 500,
