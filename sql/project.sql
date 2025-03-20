@@ -21,7 +21,7 @@ create table if not exists profile(
 create table if not exists suggestion(
   suggestion_id uuid not null,
   suggestion_content varchar (500),
-  suggestion_date timestamp with time zone,
+  suggestion_date date,
   primary key (suggestion_id)
 );
 
