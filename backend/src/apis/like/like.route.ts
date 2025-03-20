@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 import {
+    getLikesByLikeActIdController,
     postLikeController, toggleLikeController
 } from "./like.controller";
 import {post} from "axios";
@@ -20,9 +21,9 @@ router.route('/toggle')
     .post(isLoggedInController, toggleLikeController)
 
 // define like route for this router
-// router.route('/likeActId/:likeThreadId')
-//     .get(getLikesByLikeActIdController)
-//     .delete(isLoggedInController, deleteLikeController)
+router.route('/likeActId/:likeActId')
+    .get(getLikesByLikeActIdController)
+    // .delete(isLoggedInController, deleteLikeController)
 
 
 //export the router with the basePath and router object

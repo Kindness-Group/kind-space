@@ -2,7 +2,7 @@ import {Request, Response} from 'express'
 import {
     deleteLike,
     insertLike,
-    Like, selectLikeByLikeId
+    Like, selectLikeByLikeId, selectLikesByLikeActId
 } from "./like.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status"
@@ -126,8 +126,39 @@ export async function toggleLikeController(request: Request, response: Response)
 }
 
 /**
- *
+ * Handles GET request for all likes associated with an act
+ * @param request object containing the likeActId
+ * @param response object containing the status of the request and the likes associated with the act
  */
 
+export async function getLikesByLikeActIdController(request: Request, response: Response): Promise<Response> {
+    try {
+        //validate the likeActId coming from the request parameters
+        const validationResult = z.string().uuid("Please provide a valid likeActId").safeParse(request.params.likeActId)
 
+        //if the validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        //if the validation succeeds, continue
+
+        //deconstruct the likeActId from the request parameters
+        const likeActId = validationResult.data
+
+        //select the likes by the likeActId
+        const data = await selectLikesByLikeActId(likeActId)
+
+        // return the status and the likes associated with the thread
+        return response.json({status:200, message:null, data})
+
+        //if an error occurs, return the error to the user
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
 

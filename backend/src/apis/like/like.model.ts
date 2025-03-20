@@ -65,3 +65,31 @@ export async function deleteLike(like: Like): Promise<string> {
     // return a message to the user indicating success
     return  'Like successfully deleted'
 }
+
+/**
+ * selects likes from the like table by likeThreadId and returns the likes
+ * @param likeActId
+ * @returns the likes that were selected
+ */
+export async function selectLikesByLikeActId(likeActId: string): Promise<Like[]> {
+
+    // select the likes from the like table by likeActId
+    const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
+                                      FROM "like"
+                                      WHERE like_act_id = ${likeActId}`
+
+    // parse the result into an array of likes and return it
+    return LikeSchema.array().parse(rowList)
+}
+
+export async function selectLikesByLikeActId(likeActId: string): Promise<Like[]> {
+
+    // select the likes from the like table by likeActId
+    const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
+                                      FROM "like"
+                                      WHERE like_act_id = ${likeActId}`
+
+    // parse the result into an array of likes and return it
+    return LikeSchema.array().parse(rowList)
+}
+
