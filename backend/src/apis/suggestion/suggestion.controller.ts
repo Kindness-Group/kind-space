@@ -1,6 +1,7 @@
 import {Request, Response} from 'express'
 import {
-    insertSuggestion} from "./suggestion.model"
+    insertSuggestion, selectSuggestionBySuggestionId
+} from "./suggestion.model"
 import {Status} from "../../utils/interfaces/Status";
 import {SuggestionSchema} from "./suggestion.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
@@ -41,5 +42,40 @@ export async function postSuggestionController(request: Request, response: Respo
     } catch (error) {
         console.log(error)
         return response.json({status: 500, message: 'Error creating suggestion. Try again.', data: null})
+    }
+}
+
+/**
+ * gets a suggestion from the database by suggestion id and returns it to the user in the response
+ * @param request from the client to the server to get a suggestion by suggestion id from
+ * @param response from the server to the client with a suggestion by suggestion id or an error message
+ */
+
+export async function getSuggestionBySuggestionIdController (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        //validate the incoming request suggestionId with the uuid schema
+        const validationResult = z.string().uuid({message: 'Please provide a valid suggestionId'}).safeParse(request.params.suggestionId)
+
+        //if the validation fails, return a response to the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        //get the suggestionId from the request parameters
+        const suggestionId = validationResult.data
+
+        //get the suggestion from the database by suggestionId and store it in a variable called data
+        const data = await selectSuggestionBySuggestionId(suggestionId)
+
+        //return the response with the status code 200, a message, and the suggestion as data
+        return response.json({status: 200, message: null, data})
+
+        //if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
     }
 }

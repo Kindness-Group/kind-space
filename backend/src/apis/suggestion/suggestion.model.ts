@@ -22,3 +22,23 @@ export async function insertSuggestion(suggestion: Suggestion): Promise<string> 
     // return a message to the user indicating success
     return 'Suggestion successfully posted'
 }
+
+/**
+ * selects a suggestion from the suggestion table by suggestionId and returns the suggestion
+ * @param suggestionId of the suggestion to be selected
+ * @returns the suggestion that was selected
+ * @returns null if no suggestion was found
+ */
+export async function selectSuggestionBySuggestionId (suggestionId: string): Promise<Suggestion | null> {
+
+    //select the suggestion from the suggestion table by suggestionId
+    const rowList = <Suggestion[]>await sql`SELECT suggestion_id, suggestion_content, suggestion_date FROM suggestion WHERE suggestion_id = ${suggestionId}`
+
+    // parse the suggestion from the database into a suggestion object
+    const result = SuggestionSchema.array().max(1).parse(rowList)
+
+    //return the suggestion that was selected or null if no suggestion is found
+    return result.length === 0 ? null : result[0]
+}
+
+
