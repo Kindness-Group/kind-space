@@ -136,3 +136,12 @@ export async function updateActByActId(act: Act): Promise<string> {
 	await sql `UPDATE act Set act_address = ${actAddress}, act_content = ${actContent}, act_image_url = ${actImageUrl}, act_lat = ${actLat}, act_lng = ${actLng} WHERE act_id = ${actId}`
 	return 'Act successfully updated'
 }
+
+/**
+ * selects likes from the like table by likeThreadId and returns the likes
+ * @param likeActId
+ * @returns the likes that were selected
+ */
+
+
+

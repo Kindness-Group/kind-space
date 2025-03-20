@@ -21,5 +21,3 @@ export async function insertLike(like: Like): Promise<string> {
     //return a message to the user indicating success
     return 'You Liked this Act!'
 }
-
-
