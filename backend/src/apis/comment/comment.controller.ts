@@ -197,3 +197,37 @@ export async function deleteCommentByCommentIdController(request: Request, respo
 	})
 	}
 }
+
+/**
+ * gets a comment from the database by commentId and returns it to the user in the response
+ * @param request from the client to the server to get a comment by commentId from
+ * @param response from the server to the client with a comment by commentId or an error message
+ */
+export async function getCommentByCommentIdController(request: Request, response: Response): Promise<Response<Status>> {
+	try {
+		// validate the incoming request actId with the uuid schema
+		const validationResult = z.string().uuid({message: 'Please provide a valid commentId'}).safeParse(request.params.commentId)
+
+		// if the validation fails, return a response to the client
+		if (!validationResult.success) {
+			return zodErrorResponse(response, validationResult.error)
+		}
+
+		// get the actId from the request parameters
+		const commentId = validationResult.data
+
+		// get the thread from the database by actId and store it in a variable called data
+		const data = await selectCommentByCommentId(commentId)
+
+		// return the response with the status code 200, a message, and the comment as data
+		return response.json({status: 200, message: null, data})
+
+		// if there is an error, return the response with the status code 500, an error message, and null data
+	} catch (error) {
+		return response.json({
+			status: 500,
+			message: '',
+			data: []
+		})
+	}
+}
