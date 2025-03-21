@@ -22,3 +22,21 @@ export async function insertComment(comment: Comment): Promise<string> {
 	// return a message to the user indicating success
 	return 'Comment successfully posted'
 }
+
+/**
+ * updates a comment in the profile table
+ * @param comment
+ * @returns {Promise<string>} 'comment successfully updated'
+ */
+
+export async function updateCommentByCommentId (comment: Comment): Promise<string> {
+	const {commentId, commentActId, commentProfileId, commentContent, commentDateTime} = comment
+	await sql`UPDATE comment
+			  SET comment_id         = ${commentId},
+				  comment_act_id     = ${commentActId},
+				  comment_profile_id = ${commentProfileId},
+				  comment_content    = ${commentContent},
+				  comment_date_time  = ${commentDateTime}
+			  WHERE comment_id = ${commentId}`
+	return 'Comment successfully updated'
+}

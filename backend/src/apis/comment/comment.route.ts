@@ -1,5 +1,7 @@
 import {Router} from 'express'
-import {postCommentController} from "./comment.controller";
+import {postCommentController, putCommentController} from "./comment.controller";
+import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
+
 
 // declare a basePath for this router
 const basePath = '/apis/comment'
@@ -9,7 +11,12 @@ const router = Router()
 
 // define suggestion route for this router
 router.route('/')
-	.post(postCommentController)
+	.post(isLoggedInController, postCommentController)
+
+// define thread route for this router
+router.route('/:commentId')
+	.put(isLoggedInController, putCommentController)
 
 // export the router with the basePath and router object
 export const commentRoute = {basePath, router}
+
