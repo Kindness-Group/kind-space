@@ -267,7 +267,7 @@ export async function deleteActByActIdController(request: Request, response: Res
                 data: null
             })
         }
-        //delete the thread form the database by thread id
+        //delete the act form the database by act id
         const message = await deleteActByActId(actId)
 
         //return the response with the status code 200, a message, and the thread as data

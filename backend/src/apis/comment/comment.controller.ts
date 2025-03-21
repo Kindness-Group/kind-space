@@ -1,8 +1,16 @@
 import {Request, Response} from 'express'
 import {Status} from "../../utils/interfaces/Status";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {Comment, insertComment, updateCommentByCommentId} from "./comment.model";
+import {
+	Comment,
+	deleteCommentByCommentId,
+	insertComment,
+	selectCommentByCommentId,
+	updateCommentByCommentId
+} from "./comment.model";
 import {CommentSchema} from "./comment.validator";
+import {PublicProfile} from "../profile/profile.model";
+import {z} from "zod"
 
 export async function postCommentController(request: Request, response: Response): Promise<Response | undefined> {
 	try {
@@ -100,3 +108,60 @@ export async function putCommentController(request: Request, response: Response)
 	}
 }
 
+/**
+ * deletes a comment from the database by comment id and returns a status to the user in the response
+ * @param request from the client to the server to delete a comment by comment id from the database
+ * @param response from the server to the client with a status of 200 or an error message
+ */
+
+export async function deleteCommentByCommentIdController(request: Request, response: Response): Promise<Response<Status>> {
+	try {
+
+		//validate the incoming request commentId with the uuid schema
+		const validationResult = z.string().uuid({message: 'Please provide a valid commentId'}).safeParse(request.params.commentId)
+
+		//if the validation fails, return a response to the client
+		if (!validationResult.success) {
+			return zodErrorResponse(response, validationResult.error)
+		}
+
+		//get the profile from the session
+		const profile: PublicProfile = request.session.profile as PublicProfile
+
+		//set the comment profile id to the profile id from the session
+		const commentProfileId: string = profile.profileId as string
+
+		//get the act id from the request parameters
+		const commentId = validationResult.data
+
+		//get the act from the database by act id
+		const comment = await selectCommentByCommentId(commentId)
+
+		//if comment is null, tell user comment does not exist
+		if (comment === null) {
+			return response.json({status: 400, message: 'Comment not found', data: null})
+		}
+
+		//if the commentProfileId does not match the commentProfileId from the session, return a response to the client
+		if (comment.commentProfileId !== commentProfileId) {
+			return response.json({
+				status:403,
+				message: 'You are not allowed to delete this comment',
+				data: null
+		})
+	}
+		//delete the comment from the database by commendId
+		const message = await deleteCommentByCommentId(commentId)
+
+		//return the response with the status code 200, a message, and the thread as data
+		return response.json({status: 200, message, data: null})
+
+		//if there is an error, return the response with the status code 500, an error message, and null data
+} catch (error) {
+	return response.json({
+		status: 500,
+		message: '',
+		data: []
+	})
+	}
+}

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {postCommentController, putCommentController} from "./comment.controller";
+import {deleteCommentByCommentIdController, postCommentController, putCommentController} from "./comment.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
 
@@ -16,6 +16,7 @@ router.route('/')
 // define thread route for this router
 router.route('/:commentId')
 	.put(isLoggedInController, putCommentController)
+	.delete(isLoggedInController, deleteCommentByCommentIdController)
 
 // export the router with the basePath and router object
 export const commentRoute = {basePath, router}

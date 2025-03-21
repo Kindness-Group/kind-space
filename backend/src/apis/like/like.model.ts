@@ -105,4 +105,3 @@ export async function selectLikesByLikeProfileId(likeProfileId: string): Promise
 	// parse the result into an array of likes and return it
 	return LikeSchema.array().parse(rowList)
 }
-

@@ -40,3 +40,33 @@ export async function updateCommentByCommentId (comment: Comment): Promise<strin
 			  WHERE comment_id = ${commentId}`
 	return 'Comment successfully updated'
 }
+
+/**
+ * selects the private comment from the comment table by commentId
+ * @param commentId the comment's id to search for in the comment table
+ * @returns comment or null if no comment was found
+ */
+export async function selectCommentByCommentId(commentId: string): Promise<Comment | null> {
+
+	//create a prepared statement that selects the comment by commentId and execute the statement
+	const rowList = await sql`SELECT comment_id, comment_act_id, comment_profile_id, comment_content, comment_date_time FROM comment WHERE comment_id = ${commentId}`
+
+	//enforce that the result is an array of one profile, or null
+	const result = CommentSchema.array().max(1).parse(rowList)
+
+	//return the profile or null if no comment was found
+	return result?.length === 1 ? result[0] : null
+}
+
+/**
+ * deletes the comment from the comment table in the database by commentId and returns a message that says 'Comment successfully deleted'
+ * @param commentId
+ * @returns 'Comment successfully deleted'
+ */
+export async function deleteCommentByCommentId (commentId: string): Promise<string> {
+	//delete the comment from the comment table in the database by commentId
+	await sql`DELETE FROM comment WHERE comment_id = ${commentId}`
+
+	//return a message that says 'Comment successfully deleted'
+	return 'Comment successfully deleted'
+}
