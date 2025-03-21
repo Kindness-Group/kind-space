@@ -13,6 +13,6 @@ export const LikeSchema = z.object({
     likeProfileId: z.string({required_error: 'Please provide a valid likeProfileId'}).uuid({message: 'Please provide a valid uuid for likeProfileId'}),
     likeDateTime: z.coerce.date({
         required_error: 'likeDateTime is required',
-        invalid_type_error: 'Please provide a valid profileJoinDate'
+        invalid_type_error: 'Please provide a valid likeDateTime'
     }).nullable(),
 })
