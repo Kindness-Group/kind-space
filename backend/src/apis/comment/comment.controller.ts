@@ -5,7 +5,7 @@ import {
 	Comment,
 	deleteCommentByCommentId,
 	insertComment,
-	selectCommentByCommentId,
+	selectCommentByCommentId, selectCommentsByCommentActId,
 	updateCommentByCommentId
 } from "./comment.model";
 import {CommentSchema} from "./comment.validator";
@@ -105,6 +105,38 @@ export async function putCommentController(request: Request, response: Response)
 		// if an error occurs, return a preformatted response to the client
 		console.log(error)
 		return response.json({status: 500, message: "internal server error", data: null})
+	}
+}
+
+/**
+ * Handles GET request for all comments associated with an act
+ * @param request object containing the commentActId
+ * @param response object containing the status of the request and the comments associated with the act
+ * @returns status object containing the status of the request and the comments associated with the act
+ */
+export async function getCommentsByCommentActIdController(request: Request, response: Response): Promise<Response> {
+	try {
+		// validate the commentActId coming from the request params
+		const validationResult = z.string().uuid("Please provide a valid commentActId")
+			.safeParse(request.params.commentActId)
+
+		if (!validationResult.success) {
+			return zodErrorResponse(response, validationResult.error)
+		} // if validation succeeds, continue
+
+		const commentActId = validationResult.data
+
+		// select the comments by commentActId
+		const data = await selectCommentsByCommentActId(commentActId)
+
+		// return the status and the comments associated with the profile
+		return response.json({status: 200, message: null, data})
+	} catch (error) {
+		return response.json({
+			status: 500,
+			message: '',
+			data: []
+		})
 	}
 }
 

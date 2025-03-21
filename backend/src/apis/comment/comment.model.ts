@@ -59,6 +59,19 @@ export async function selectCommentByCommentId(commentId: string): Promise<Comme
 }
 
 /**
+ * selects comments from the comments table by commentActId and returns the comments
+ * @param commentActId to be selected by commentActId
+ * @returns the comments that were selected
+ */
+export async function selectCommentsByCommentActId(commentActId: string): Promise<Comment[]> {
+	// select the comments from the comment table by commentActId
+	const rowList = <Comment[]>await sql`SELECT comment_id, comment_act_id, comment_profile_id, comment_content, comment_date_time FROM comment WHERE comment_act_id = ${commentActId}`
+
+	// parse the result into an array of comments and return it
+	return CommentSchema.array().parse(rowList)
+}
+
+/**
  * deletes the comment from the comment table in the database by commentId and returns a message that says 'Comment successfully deleted'
  * @param commentId
  * @returns 'Comment successfully deleted'
