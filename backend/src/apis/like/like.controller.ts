@@ -175,8 +175,7 @@ export async function getLikesByLikeProfileIdController(request: Request, respon
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
-        }
-        //if validation succeeds, continue
+        } // if validation succeeds, continue
 
         const likProfileId = validationResult.data
 

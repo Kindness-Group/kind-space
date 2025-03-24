@@ -1,8 +1,9 @@
 import {Router} from 'express'
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 import {
-    deleteCommitmentController, getCommitmentsByCommitmentProfileIdController,
-
+    deleteCommitmentController,
+    getCommitmentsByCommitmentProfileIdController,
+    getCommitmentsByCommitmentSuggestionId,
     postCommitmentController
 } from "./commitment.controller";
 import {getLikesByLikeProfileIdController} from "../like/like.controller";
@@ -19,6 +20,7 @@ router.route('/')
 
 router.route('/commitmentSuggestionId/:commitmentSuggestionId')
     .delete(isLoggedInController, deleteCommitmentController)
+    .get(getCommitmentsByCommitmentSuggestionId)
 
 router.route('/commitmentProfileId/:commitmentProfileId')
     .get(getCommitmentsByCommitmentProfileIdController)

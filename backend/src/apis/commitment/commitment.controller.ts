@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import {
     Commitment, deleteCommitment,
-    insertCommitment, selectCommitmentsByCommitmentProfileId,
+    insertCommitment, selectCommitmentsByCommitmentProfileId, selectCommitmentsByCommitmentSuggestionId,
 } from "./commitment.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status";
@@ -139,6 +139,37 @@ export async function getCommitmentsByCommitmentProfileIdController(request: Req
         const data = await selectCommitmentsByCommitmentProfileId(commitmentProfileId)
 
         // return the status and the likes associated with the profile
+        return response.json({status:200, message:null, data})
+
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+/**
+ * Handles GET request for all commitments associated with a suggestion
+ * @param request object containing the commitmentSuggestionId
+ * @param response object containing the status of the request and the commitments associated with the suggestion
+ */
+export async function getCommitmentsByCommitmentSuggestionId(request: Request, response: Response): Promise<Response> {
+    try {
+        // validate the commitmentSuggestionId coming from the request parameters
+        const validationResult = z.string().uuid("Please provide a valid commitmentSuggestionId").safeParse(request.params.commitmentSuggestionId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        } // if validation succeeds, continue
+
+        const commitmentProfileId = validationResult.data
+
+        // select the commitments by commitmentSuggestionId
+        const data = await selectCommitmentsByCommitmentSuggestionId(commitmentProfileId)
+
+        // return the status and the commitments associated with the profile
         return response.json({status:200, message:null, data})
 
     } catch (error) {

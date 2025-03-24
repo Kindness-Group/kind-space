@@ -57,3 +57,15 @@ export async function selectCommitmentsByCommitmentProfileId(commitmentProfileId
     // parse the result into an array of commitments and return it
     return CommitmentSchema.array().parse(rowList)
 }
+
+/**
+ * selects commitments from the commitment table by commitmentSuggestionId and returns the commitments
+ * @param commitmentSuggestionId
+ * @returns the commitments that were selected
+ */
+export async function selectCommitmentsByCommitmentSuggestionId(commitmentSuggestionId: string): Promise<Commitment[]> {
+    // select the commitments from the commitment table by commitmentSuggestionId
+    const rowList = <Commitment[]>await sql`SELECT commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time FROM commitment WHERE commitment_suggestion_id = ${commitmentSuggestionId}`
+
+    return CommitmentSchema.array().parse(rowList)
+}

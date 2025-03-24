@@ -82,17 +82,6 @@ export async function selectLikesByLikeActId(likeActId: string): Promise<Like[]>
 	return LikeSchema.array().parse(rowList)
 }
 
-export async function selectLikesByLikeActId(likeActId: string): Promise<Like[]> {
-
-	// select the likes from the like table by likeActId
-	const rowList = <Like[]>await sql`SELECT like_act_id, like_profile_id, like_date_time
-                                     FROM "like"
-                                     WHERE like_act_id = ${likeActId}`
-
-	// parse the result into an array of likes and return it
-	return LikeSchema.array().parse(rowList)
-}
-
 /**
  * selects likes from the like table by likeProfileId and returns the likes
  * @param likeProfileId to be selected by likeProfileId
