@@ -1,6 +1,6 @@
 import {Request, Response} from 'express'
 import {
-    Commitment,
+    Commitment, deleteCommitment,
     insertCommitment,
 } from "./commitment.model";
 import {PublicProfile} from "../profile/profile.model";
@@ -40,7 +40,7 @@ export async function postCommitmentController(request: Request, response: Respo
             commitmentSuggestionId: commitmentSuggestionId,
             commitmentProfileId: commitmentProfileId,
             commitmentCompleted: commitmentCompleted,
-            commitmentDatetime: null
+            commitmentDateTime: null
         }
 
         //create a status object
@@ -82,7 +82,7 @@ export async function deleteCommitmentController(request: Request, response: Res
         // if the validation succeeds, continue
 
         // deconstruct the commitmentSuggestionId from the validation result
-        const {commitmentSuggestionId} = validationResult.data
+        const {commitmentSuggestionId, commitmentCompleted} = validationResult.data
 
         // deconstruct the profile from the session
         const profile = request.session.profile as PublicProfile
@@ -94,7 +94,7 @@ export async function deleteCommitmentController(request: Request, response: Res
         const commitment: Commitment = {
             commitmentSuggestionId,
             commitmentProfileId,
-            commitmentContent,
+            commitmentCompleted,
             commitmentDateTime: null
         }
 

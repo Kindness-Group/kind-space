@@ -5,7 +5,7 @@ import {
 	getLikesByLikeActIdController, getLikesByLikeProfileIdController,
 	postLikeController, toggleLikeController
 } from "./like.controller";
-import {post} from "axios";
+
 
 //declare a basePath for this router
 const basePath = '/apis/like'

@@ -13,7 +13,7 @@ export type Commitment = z.infer<typeof CommitmentSchema>
 export async function insertCommitment(commitment: Commitment): Promise<string> {
 
     // deconstruct the commitment object
-    const {commitmentSuggestionId, commitmentProfileId, commitmentCompleted, commitmentDatetime} = commitment
+    const {commitmentSuggestionId, commitmentProfileId, commitmentCompleted, commitmentDateTime} = commitment
 
     // insert the like into the like table
     await sql`INSERT INTO commitment (commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time)
@@ -34,8 +34,7 @@ export async function insertCommitment(commitment: Commitment): Promise<string> 
 export async function deleteCommitment(commitment: Commitment): Promise<string> {
 
     // deconstruct the commitment object
-    const {commitmentSuggestionId, commitmentProfileId, commitmentContent, commitmentDateTime} = commitment
-
+    const {commitmentSuggestionId, commitmentProfileId, commitmentCompleted, commitmentDateTime} = commitment
     // delete the like form the like table
     await sql`DELETE
              FROM commitment
