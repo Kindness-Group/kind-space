@@ -22,3 +22,26 @@ export async function insertCommitment(commitment: Commitment): Promise<string> 
     // return a message to the user indicating success
     return 'Commitment successfully posted'
 }
+
+/**
+ * Commitment
+ */
+/**
+ * deletes a commitment from the commitment table and returns a message
+ * @param commitment to be deleted
+ * @returns 'Commitment successfully deleted'
+ */
+export async function deleteCommitment(commitment: Commitment): Promise<string> {
+
+    // deconstruct the commitment object
+    const {commitmentSuggestionId, commitmentProfileId, commitmentContent, commitmentDateTime} = commitment
+
+    // delete the like form the like table
+    await sql`DELETE
+             FROM commitment
+             WHERE commitment_suggestion_id = ${commitmentSuggestionId}
+               AND commitment_profile_id = ${commitmentProfileId}`
+
+    // return a message to the user indicating success
+    return  'Commitment successfully deleted'
+}
