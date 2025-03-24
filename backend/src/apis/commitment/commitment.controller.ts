@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import {
     Commitment, deleteCommitment,
-    insertCommitment,
+    insertCommitment, selectCommitmentsByCommitmentProfileId,
 } from "./commitment.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status";
@@ -114,5 +114,38 @@ export async function deleteCommitmentController(request: Request, response: Res
         // if an error occurs, return the error to the user
     } catch (error: any) {
         return (response.json({status: 500, data: null, message: error.message}))
+    }
+}
+
+/**
+ * Handles GET request for all commitments associated with a profile
+ * @param request object containing the commitment profile id
+ * @param response object containing the status of the request and the commitments associated with the profile
+ * @returns status object containing the status of the request and the commitments associated with the profile
+ **/
+export async function getCommitmentsByCommitmentProfileIdController(request: Request, response: Response): Promise<Response> {
+    try {
+        // validate the commitmentProfileId coming from the request parameters
+        const validationResult = z.string().uuid("Please provide a valid commitmentProfileId").safeParse(request.params.commitmentProfileId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        //if validation succeeds, continue
+
+        const commitmentProfileId = validationResult.data
+
+        // select the commitments by commitment profile id
+        const data = await selectCommitmentsByCommitmentProfileId(commitmentProfileId)
+
+        // return the status and the likes associated with the profile
+        return response.json({status:200, message:null, data})
+
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
     }
 }

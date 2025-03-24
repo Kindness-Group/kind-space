@@ -1,9 +1,11 @@
 import {Router} from 'express'
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 import {
-    deleteCommitmentController,
+    deleteCommitmentController, getCommitmentsByCommitmentProfileIdController,
+
     postCommitmentController
 } from "./commitment.controller";
+import {getLikesByLikeProfileIdController} from "../like/like.controller";
 
 //declare a basePath for this router
 const basePath = '/apis/commitment'
@@ -17,6 +19,9 @@ router.route('/')
 
 router.route('/commitmentSuggestionId/:commitmentSuggestionId')
     .delete(isLoggedInController, deleteCommitmentController)
+
+router.route('/commitmentProfileId/:commitmentProfileId')
+    .get(getCommitmentsByCommitmentProfileIdController)
 
 //export the router with the basePath and router object
 export const commitmentRoute = {basePath, router}

@@ -44,3 +44,16 @@ export async function deleteCommitment(commitment: Commitment): Promise<string> 
     // return a message to the user indicating success
     return  'Commitment successfully deleted'
 }
+
+/**
+ * selects commitments from the commitment table by commitmentProfileId and returns te commitments
+ * @param commitmentProfileId to be selected by commitmentProfileId
+ * @returns the likes that were selected
+ **/
+export async function selectCommitmentsByCommitmentProfileId(commitmentProfileId: string): Promise<Commitment[]> {
+    // select the commitments from the commitment table by commitmentProfileId
+    const rowList = <Commitment[]>await sql`SELECT commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time FROM commitment WHERE commitment_profile_id = ${commitmentProfileId}`
+
+    // parse the result into an array of commitments and return it
+    return CommitmentSchema.array().parse(rowList)
+}

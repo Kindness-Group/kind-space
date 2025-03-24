@@ -167,7 +167,7 @@ export async function getLikesByLikeActIdController(request: Request, response: 
  * @param request object containing the like profile id
  * @param response object containing the status of the request and the likes associated with the profile
  * @returns status object containing the status of the request and the likes associated with the profile
- */
+ **/
 export async function getLikesByLikeProfileIdController(request: Request, response: Response): Promise<Response> {
     try {
         // validate the likeProfileId coming from the request parameters
