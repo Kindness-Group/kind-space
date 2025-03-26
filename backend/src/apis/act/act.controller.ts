@@ -271,7 +271,7 @@ export async function deleteActByActIdController(request: Request, response: Res
         const message = await deleteActByActId(actId)
 
         //return the response with the status code 200, a message, and the thread as data
-        return response.json({status:200, message, data: null})
+        return response.json({status:200, message: "act successfully deleted", data: null})
 
         //if there is an error, return the response with the status code 500, an error message, and null data
     } catch (error) {

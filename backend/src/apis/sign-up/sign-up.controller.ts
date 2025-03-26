@@ -83,7 +83,7 @@ export async function signupProfileController(request: Request, response: Respon
         // send the status to the client
         return response.json(status)
 
-        // catch any errors that occurred during the signup process
+        // catch any errors that occurred during the sign-up process
       } catch (error: any) {
         const status: Status = {
             status: 500,
