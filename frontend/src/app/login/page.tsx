@@ -51,50 +51,7 @@ export default function () {
                             <span className="flex-shrink mx-4 text-gray-500 text-sm">Use Email</span>
                             <div className="flex-grow border-t border-gray-200"></div>
                         </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="email" value="EMAIL" className="text-xs text-gray-500" />
-                                </div>
-                                <TextInput
-                                    id="email"
-                                    type="email"
-                                    placeholder="johndoe@email.com"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="password" value="PASSWORD" className="text-xs text-gray-500" />
-                                </div>
-                                <div className="relative">
-                                    <TextInput
-                                        id="password"
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="••••••••••••••••"
-                                        value={formData.password}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <button
-                                        type="button"
-                                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                    >
-                                        {showPassword ? <HiEyeOff className="text-gray-500" /> : <HiEye className="text-gray-500" />}
-                                    </button>
-                                </div>
-                            </div>
-
-                            <Button type="submit" className="w-full bg-gray-800 hover:bg-gray-900">
-                                CONTINUE
-                            </Button>
-                        </form>
-
+                        /* INSERT LOGIN-FORM COMPONENT HERE */
                         <p className="text-center text-gray-500 text-sm mt-6">
                             Are you a Newbie? <Link href="/signup" className="font-bold text-gray-800">GET STARTED - IT'S FREE</Link>
                         </p>
