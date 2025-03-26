@@ -7,7 +7,7 @@ const basePath = '/apis/sign-in'
 // instantiate a new router object
 const router = Router();
 
-// define signup route for this router
+// define sign-up route for this router
 router.route('/').post(signInController)
 
 // export the router with the basePath and router object
