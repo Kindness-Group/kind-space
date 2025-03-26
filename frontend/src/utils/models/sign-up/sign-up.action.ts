@@ -2,43 +2,23 @@
 
 import {SignUp} from './sign-up.model'
 import { Status } from '@/utils/interfaces/Status'
-import { cookies } from 'next/headers'
+import { setHeaders } from "@/utils/set-headers.utils"
 
 export async function postSignUp(signUp: SignUp): Promise<Status> {
-    const response = await fetch(`${process.env.PUBLIC_API_URL}/apis/sign-up`, {
+    console.log(signUp)
+    return fetch (`${process.env.PUBLIC_API_URL}/apis/sign-up`,
+        {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: await setHeaders(),
         body: JSON.stringify(signUp)
-    })
-
-    const serverCookies = response.headers.getSetCookie()
-
-    const cookieJar = await cookies()
-
-    const parseCookie = (str: string): Record<string, string> =>
-        str.split(';')
-            .map(cookie => cookie.split('='))
-            .filter(pair => pair.length === 2)
-            .reduce((acc: Record<string, string>, [key, value]) => {
-                acc[decodeURIComponent(key.trim())] = decodeURIComponent(value.trim());
-                return acc;
-            }, {});
-
-    if (serverCookies[0]) {
-        const sessionCookie = parseCookie(serverCookies[0])
-        cookieJar.set('connect.sid', sessionCookie['connect.sid'], {path: sessionCookie.path, sameSite: 'lax', httpOnly: true})
     }
-
-return response.json().then((response) => {
-
-    return response
-}).catch((error) => {
+    ).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response failed')
+            }
+            return response.json()
+        }).catch(error => {
     console.error(error)
     throw error
 })
 }
-
-
-
