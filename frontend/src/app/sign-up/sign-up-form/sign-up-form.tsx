@@ -10,8 +10,6 @@ import {DisplayStatus} from "@/components/display-status";
 import { Status } from '@/utils/interfaces/Status'
 import {postSignUp} from "@/utils/models/sign-up/sign-up.action";
 
-
-
 export function signUpForm() {
 
     const [status, setStatus] = useState<Status|null>(null)

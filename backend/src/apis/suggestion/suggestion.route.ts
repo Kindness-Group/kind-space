@@ -13,10 +13,6 @@ const basePath = '/apis/suggestion'
 // instantiate a new router object
 const router = Router()
 
-// define suggestion route for this router
-router.route('/')
-    .post(postSuggestionController)
-
 router.route ('/suggestionId/:suggestionId')
     .get(getSuggestionBySuggestionIdController)
 
