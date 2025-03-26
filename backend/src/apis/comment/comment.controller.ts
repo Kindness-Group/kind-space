@@ -47,7 +47,7 @@ export async function postCommentController(request: Request, response: Response
 		// if there is an error, return the response with the status code 500, an error message, and null data
 	} catch (error) {
 		console.log(error)
-		return response.json({status: 500, message: 'Error creating suggestion. Try again.', data: null})
+		return response.json({status: 500, message: 'Error creating comment. Try again.', data: null})
 	}
 }
 
@@ -85,7 +85,7 @@ export async function putCommentController(request: Request, response: Response)
 			return response.json({status: 400, message: 'Comment does not exist', data: null})
 		}
 
-		if (profileIdFromSession !== comment.commentId) {
+		if (profileIdFromSession !== comment.commentProfileId) {
 			return response.json({status: 400, message: "you cannot update a comment that is not yours", data: null})
 		}
 		//update the comment with the new data

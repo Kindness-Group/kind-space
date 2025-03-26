@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import {
-	deleteCommentByCommentIdController,
+	deleteCommentByCommentIdController, getCommentByCommentIdController,
 	getCommentsByCommentActIdController,
 	postCommentController,
 	putCommentController
@@ -20,6 +20,7 @@ router.route('/')
 
 // define thread route for this router
 router.route('/:commentId')
+	.get(getCommentByCommentIdController)
 	.put(isLoggedInController, putCommentController)
 	.delete(isLoggedInController, deleteCommentByCommentIdController)
 
