@@ -1,34 +1,11 @@
 "use client"
-import React, { useState } from 'react';
-import { Button, Label, TextInput, Card } from 'flowbite-react';
-import { HiEye, HiEyeOff } from 'react-icons/hi';
+
 import Link from "next/link";
+import {LogInForm} from "@/app/log-in/login-form";
 
 export default function () {
-    const [showPassword, setShowPassword] = useState(false);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [id]: value
-        }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Login submitted:', formData);
-        // Add authentication logic here
-    };
-
     return (
         <div className="flex flex-col min-h-screen">
-
-
             {/* Main Content */}
             <div className="flex-grow flex justify-center items-center p-6">
                 <div className="flex w-full max-w-6xl bg-white rounded-lg overflow-hidden shadow-lg">
@@ -51,9 +28,9 @@ export default function () {
                             <span className="flex-shrink mx-4 text-gray-500 text-sm">Use Email</span>
                             <div className="flex-grow border-t border-gray-200"></div>
                         </div>
-                        /* INSERT LOGIN-FORM COMPONENT HERE */
+                        <LogInForm />
                         <p className="text-center text-gray-500 text-sm mt-6">
-                            Are you a Newbie? <Link href="/signup" className="font-bold text-gray-800">GET STARTED - IT'S FREE</Link>
+                            Are you a Newbie? <Link href="/sign-up" className="font-bold text-gray-800">GET STARTED - IT'S FREE</Link>
                         </p>
                     </div>
 

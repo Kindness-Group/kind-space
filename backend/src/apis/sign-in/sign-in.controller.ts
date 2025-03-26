@@ -4,12 +4,12 @@ import {Request, Response} from "express";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {v4 as uuid} from "uuid";
 import {Status} from "../../utils/interfaces/Status";
-import {signInProfileSchema} from "./sign-in.validator";
+import {SignInProfileSchema} from "./sign-in.validator";
 
 export async function signInController (request: Request, response: Response): Promise<Response> {
 	try {
 		// validate the new profile data coming from the request body
-		const validationResult = signInProfileSchema.safeParse(request.body);
+		const validationResult = SignInProfileSchema.safeParse(request.body);
 
 		// if the validation is unsuccessful, return a preformatted response to the client
 		if (!validationResult.success) {
