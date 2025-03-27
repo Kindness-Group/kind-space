@@ -2,6 +2,7 @@
 
 import {Button, Card, Checkbox, Label} from "flowbite-react";
 import React from "react";
+import {ActForm} from "@/app/kind-act-post/act-form";
 
 export default function () {
 	return (
@@ -19,7 +20,7 @@ export default function () {
 						<h2 className="leading-relaxed">Jane Doe</h2>
 					</div>
 				</div>
-			{/*	act form goes here*/}
+			<ActForm/>
 			</Card>
 		</>
 	)

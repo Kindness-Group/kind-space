@@ -19,13 +19,13 @@ export function ActForm(){
         actProfileId: '',
         actAddress: '',
         actContent: '',
-        actDateTime: '',
+        actDateTime: null,
         actImageUrl: '',
-        actLat: '',
-        actLng: '',
+        actLat: null,
+        actLng: null
     }
 
-    // get access to return vaules from react hook form and provide validation
+    // get access to return values from react hook form and provide validation
     const {register, handleSubmit, reset, formState:{errors}} = useForm<Act>({
         resolver: zodResolver(ActSchema),
         defaultValues,
@@ -42,6 +42,7 @@ export function ActForm(){
         try {
             // call to the postSignIn server action
             const response = await postAct(data)
+            console.log(response)
             if (response.status === 200) {
                 // if status object returned from express is 200 resetForm
                 reset()
