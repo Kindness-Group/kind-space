@@ -7,6 +7,7 @@ import {postLogIn} from "@/utils/models/log-in/log-in.action";
 import {LogIn, LogInProfileSchema} from "@/utils/models/log-in/log-in.model";
 import {DisplayError} from "@/components/display-error";
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+import {zodResolver} from "@hookform/resolvers/zod";
 
 
 export function LogInForm() {

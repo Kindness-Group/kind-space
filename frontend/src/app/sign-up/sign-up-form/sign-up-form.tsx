@@ -11,7 +11,7 @@ import { Status } from '@/utils/interfaces/Status'
 import {postSignUp} from "@/utils/models/sign-up/sign-up.action";
 
 export function signUpForm() {
-
+    const [showPassword, setShowPassword] = useState(false);
     const [status, setStatus] = useState<Status|null>(null)
 
     const defaultValues : SignUp = {

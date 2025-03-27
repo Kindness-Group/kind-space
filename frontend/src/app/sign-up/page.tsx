@@ -1,36 +1,32 @@
 'use client'
-import React, { useState } from 'react';
-import { Button, Label, TextInput, Card } from 'flowbite-react';
-import { HiEye, HiEyeOff } from 'react-icons/hi';
+
 import Link from "next/link";
+import React from "react";
 
 const SignupPage: React.FC = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        username: ''
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [id]: value
-        }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Signup submitted:', formData);
-        // Add registration logic here
-    };
+    /* THIS CODE MAY NOT BE NEEDED */
+    // const [formData, setFormData] = useState({
+    //     email: '',
+    //     password: '',
+    //     username: ''
+    // });
+    //
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { id, value } = e.target;
+    //     setFormData(prev => ({
+    //         ...prev,
+    //         [id]: value
+    //     }));
+    // };
+    //
+    // const handleSubmit = (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     console.log('Signup submitted:', formData);
+    //     // Add registration logic here
+    // };
 
     return (
-
         <div className="flex flex-col min-h-screen">
-
-
             {/* Main Content */}
             <div className="flex-grow flex justify-center items-center p-6">
                 <div className="flex w-full max-w-6xl bg-white rounded-lg overflow-hidden shadow-lg">
@@ -62,7 +58,7 @@ const SignupPage: React.FC = () => {
                         </p>
 
                         <p className="text-center text-gray-500 text-sm mt-6">
-                            Already a Member? <Link href="/login" className="font-bold text-gray-800">LOG IN</Link>
+                            Already a Member? <Link href="/log-in" className="font-bold text-gray-800">LOG IN</Link>
                         </p>
                     </div>
 
