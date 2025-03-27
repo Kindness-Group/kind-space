@@ -2,24 +2,37 @@
 
 import React, { useState } from 'react';
 import { Button, Label, TextInput, Textarea } from 'flowbite-react';
+import {getSession} from "@/utils/auth.utils";
+import {redirect} from "next/navigation";
+import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
 
 interface EditProfileProps {
     // You can add props here if needed
 }
 
-export default function EditProfile({}: EditProfileProps) {
+export default async function EditProfile({}: EditProfileProps) {
     const [profileImage, setProfileImage] = useState<string | null>(null);
 
+    const session = await getSession()
+
+    if (!session) {
+        redirect(`/log-in`);
+    }
+
+    const profile = await fetchProfileByProfileId(session.profile.profileId)
+
+    console.log(profile)
+
     // Handle image upload
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                setProfileImage(event.target?.result as string);
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        }
-    };
+    // const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     if (e.target.files && e.target.files[0]) {
+    //         const reader = new FileReader();
+    //         reader.onload = (event) => {
+    //             setProfileImage(event.target?.result as string);
+    //         };
+    //         reader.readAsDataURL(e.target.files[0]);
+    //     }
+    // };
 
     return (
         <div className="container mx-auto px-4 py-8 max-w-3xl">
@@ -54,60 +67,13 @@ export default function EditProfile({}: EditProfileProps) {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={handleImageUpload}
+                    // onChange={handleImageUpload}
                 />
             </div>
 
             <div className="space-y-6">
-                <div className="flex items-center">
-                    <Label htmlFor="name" className="w-32 text-lg font-medium">Name:</Label>
-                    <TextInput
-                        id="name"
-                        placeholder="Enter Full Name"
-                        className="flex-1"
-                        type="text"
-                    />
-                </div>
 
-                <div className="flex items-center">
-                    <Label htmlFor="username" className="w-32 text-lg font-medium">Username:</Label>
-                    <TextInput
-                        id="username"
-                        placeholder="Enter Username"
-                        className="flex-1"
-                        type="text"
-                    />
-                </div>
-
-                <div className="flex items-center">
-                    <Label htmlFor="email" className="w-32 text-lg font-medium">Email:</Label>
-                    <TextInput
-                        id="email"
-                        placeholder="Enter Email"
-                        className="flex-1"
-                        type="email"
-                    />
-                </div>
-
-                <div className="flex items-center">
-                    <Label htmlFor="password" className="w-32 text-lg font-medium">Password:</Label>
-                    <TextInput
-                        id="password"
-                        placeholder="Enter Password"
-                        className="flex-1"
-                        type="password"
-                    />
-                </div>
-
-                <div className="flex">
-                    <Label htmlFor="bio" className="w-32 text-lg font-medium">Bio:</Label>
-                    <Textarea
-                        id="bio"
-                        placeholder="Tell us a little about you!"
-                        className="flex-1"
-                        rows={6}
-                    />
-                </div>
+                //edit profile form here
 
                 <div className="flex justify-center mt-8">
                     <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
@@ -115,6 +81,7 @@ export default function EditProfile({}: EditProfileProps) {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }
