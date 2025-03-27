@@ -1,16 +1,16 @@
-'use-server'
+'use server'
 
 import {SignUp} from './sign-up.model'
 import { Status } from '@/utils/interfaces/Status'
 import { setHeaders } from "@/utils/set-headers.utils"
 
 export async function postSignUp(signUp: SignUp): Promise<Status> {
-    console.log(signUp)
+    const data = {...signUp, profileName: null}
     return fetch (`${process.env.PUBLIC_API_URL}/apis/sign-up`,
         {
         method: 'POST',
         headers: await setHeaders(),
-        body: JSON.stringify(signUp)
+        body: JSON.stringify(data)
     }
     ).then(response => {
             if (!response.ok) {

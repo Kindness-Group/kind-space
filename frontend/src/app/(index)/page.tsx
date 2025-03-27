@@ -61,7 +61,7 @@ export default function Home() {
                     <p className="text-left leading-loose drop-shadow-lg tracking-wide md:text-2xl py-8">By fostering a culture of positivity and connection, Kind-Space hopes to transform everyday moments into a collective movement of compassion!</p>
                     </div>
                     <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-5 rounded-xl" >
-                    <a href="/signup">
+                    <a href="/sign-up">
                     <Button color={"light"} className="m-auto md:mt-8 bg-white text-gray-900 focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4"><strong>Sign Up to Share Kindness</strong></Button>
                     </a>
                     </div>

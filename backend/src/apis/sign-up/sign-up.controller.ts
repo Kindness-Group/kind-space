@@ -85,6 +85,9 @@ export async function signupProfileController(request: Request, response: Respon
 
         // catch any errors that occurred during the sign-up process
       } catch (error: any) {
+        if (error.message === 'Forbidden') {
+            return response.json({status: 200, data: null, message:'Email verification bypassed'})
+        }
         const status: Status = {
             status: 500,
             message: error.message,

@@ -16,7 +16,7 @@ export default async function EditProfile({}: EditProfileProps) {
     const session = await getSession()
 
     if (!session) {
-        redirect(`/log-in`);
+        redirect(`/sign-in`);
     }
 
     const profile = await fetchProfileByProfileId(session.profile.profileId)

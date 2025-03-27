@@ -43,7 +43,8 @@ export const PrivateProfileSchema = z.object({
     })
         .trim()
         .min(1, {message: 'Please provide valid profileName (min 1 characters)'})
-        .max(32, {message: 'Please provide valid profileName (max 32 characters)'}),
+        .max(32, {message: 'Please provide valid profileName (max 32 characters)'})
+        .nullable(),
     profileJoinDate: z.coerce.date({
         required_error: 'profileCreationDate is required',
         invalid_type_error: 'Please provide a valid profileJoinDate'

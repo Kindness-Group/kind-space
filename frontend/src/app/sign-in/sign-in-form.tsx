@@ -3,8 +3,8 @@ import {Button, Label, TextInput} from "flowbite-react";
 import {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Status} from '@/utils/interfaces/Status'
-import {postSignIn} from "@/utils/models/log-in/sign-in.action";
-import {SignIn, SignInProfileSchema} from "@/utils/models/log-in/sign-in.model";
+import {postSignIn} from "@/utils/models/sign-in/sign-in.action";
+import {SignIn, SignInProfileSchema} from "@/utils/models/sign-in/sign-in.model";
 import {DisplayError} from "@/components/display-error";
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import {zodResolver} from "@hookform/resolvers/zod";

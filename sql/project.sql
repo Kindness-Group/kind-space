@@ -12,7 +12,7 @@ create table if not exists profile(
   profile_email varchar (128) not null unique,
   profile_hash char (97) not null,
   profile_join_date timestamp with time zone,
-  profile_name varchar (32) not null,
+  profile_name varchar (32),
   profile_picture_url varchar (128),
   profile_username varchar (32) not null unique,
   primary key (profile_id)

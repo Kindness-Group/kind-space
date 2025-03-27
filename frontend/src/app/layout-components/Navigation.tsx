@@ -23,10 +23,10 @@ export function Navigation() {
                 <NavbarCollapse className="max-md:hidden">
                     <Dropdown label="Account" inline={true} className="ml-auto">
                             <DropdownItem>
-                <NavbarLink as={Link} href="/login">Login</NavbarLink>
+                <NavbarLink as={Link} href="/sign-in">Login</NavbarLink>
                         </DropdownItem>
                         <DropdownItem>
-                <NavbarLink as={Link} href="/signup">Sign-Up</NavbarLink>
+                <NavbarLink as={Link} href="/sign-up">Sign-Up</NavbarLink>
                         </DropdownItem>
                         <DropdownItem>
                 <NavbarLink as={Link} href="/viewprofile">Profile</NavbarLink>
@@ -41,8 +41,8 @@ export function Navigation() {
                     <NavbarLink as={Link} href="/kindness-feed" active>Kindness Feed</NavbarLink>
                     <NavbarLink as={Link} href="/kindness-map">Kindness Map</NavbarLink>
                     <NavbarLink as={Link} href="/kindness-suggestions">Daily Suggestion</NavbarLink>
-                    <NavbarLink as={Link} href="/login">Login</NavbarLink>
-                    <NavbarLink as={Link} href="/signup">Sign-Up</NavbarLink>
+                    <NavbarLink as={Link} href="/sign-in">Login</NavbarLink>
+                    <NavbarLink as={Link} href="/sign-up">Sign-Up</NavbarLink>
                     <NavbarLink as={Link} href="/viewprofile">Profile</NavbarLink>
                     <NavbarLink as={Link} href="/edit-profile">Edit Profile</NavbarLink>
             </NavbarCollapse>

@@ -32,8 +32,5 @@ export const SignUpProfileSchema =
         .min(8, {message: 'please provide a valid password (min 8 characters)'})
         .max(32, {message: 'please provide a valid password (max 32 characters)'})
 })
-    .refine(data => data.profilePassword === data.profilePasswordConfirm, {
-        message: 'passwords do not match'
-})
 
 export type SignUp = z.infer<typeof SignUpProfileSchema>;

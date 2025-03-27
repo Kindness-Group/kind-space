@@ -9,29 +9,40 @@ import {DisplayError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
 import { Status } from '@/utils/interfaces/Status'
 import {postSignUp} from "@/utils/models/sign-up/sign-up.action";
+import {v7 as uuid} from "uuid";
+import {z} from "zod";
 
-export function signUpForm() {
+export function SignUpForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [status, setStatus] = useState<Status|null>(null)
 
-    const defaultValues : SignUp = {
-        profileId: '',
+    const defaultValues : FormSchema = {
         profileEmail: '',
         profilePassword: '',
         profilePasswordConfirm: '',
         profileUsername: ''
     }
 
-    const {register, handleSubmit, reset, formState:{errors}} = useForm<SignUp>({
-        resolver: zodResolver(SignUpProfileSchema),
+    const formSchema = SignUpProfileSchema.omit({profileId: true}).refine(data => data.profilePassword === data.profilePasswordConfirm, {
+        message: 'passwords do not match'
+    })
+
+    type FormSchema = z.infer<typeof formSchema>
+
+    const {register, handleSubmit, reset, formState:{errors}} = useForm<FormSchema>({
+        resolver: zodResolver(formSchema),
         defaultValues,
         mode: 'onBlur'
     });
 
-    const fireServerAction = async (data: SignUp) => {
+    console.log(errors)
+
+    const fireServerAction = async (data: FormSchema) => {
         try {
+            const signUp = {...data, profileId: uuid()}
             //call to the postSignUp server action
-            const response = await postSignUp(data)
+            const response = await postSignUp(signUp)
+            console.log(response)
             if (response.status === 200) {
                 reset ()
             }

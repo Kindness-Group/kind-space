@@ -1,7 +1,7 @@
 'use server'
 
 import {cookies} from "next/headers";
-import {SignIn} from "@/utils/models/log-in/sign-in.model";
+import {SignIn} from "@/utils/models/sign-in/sign-in.model";
 import {Status} from "@/utils/interfaces/Status";
 
 export async function postSignIn(signIn: SignIn): Promise<Status> {

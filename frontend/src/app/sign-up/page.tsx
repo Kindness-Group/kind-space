@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
+import {SignUpForm} from "@/app/sign-up/sign-up-form/sign-up-form";
 
 const SignupPage: React.FC = () => {
     /* THIS CODE MAY NOT BE NEEDED */
@@ -43,7 +44,6 @@ const SignupPage: React.FC = () => {
 
                         <h3 className="text-2xl font-semibold text-gray-800">Sign Up for Free</h3>
                         <p className="text-xl text-gray-700 mb-1">Gain Access Instantly.</p>
-                        <p className="text-sm text-gray-500 mb-6">NO CREDIT CARD REQUIRED!</p>
 
                         <div className="relative flex py-5 items-center">
                             <div className="flex-grow border-t border-gray-200"></div>
@@ -51,14 +51,14 @@ const SignupPage: React.FC = () => {
                             <div className="flex-grow border-t border-gray-200"></div>
                         </div>
 
-                        //sign up form goes here
+                        <SignUpForm />
 
                         <p className="text-xs text-gray-500 mt-4 text-center">
                             By Signing up to Kind Space, means you agree to our Privacy Policy and Terms of Service
                         </p>
 
                         <p className="text-center text-gray-500 text-sm mt-6">
-                            Already a Member? <Link href="/log-in" className="font-bold text-gray-800">LOG IN</Link>
+                            Already a Member? <Link href="/sign-in" className="font-bold text-gray-800">LOG IN</Link>
                         </p>
                     </div>
 
