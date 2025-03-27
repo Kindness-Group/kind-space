@@ -3,35 +3,36 @@ import {Button, Label, TextInput} from "flowbite-react";
 import {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Status} from '@/utils/interfaces/Status'
-import {postLogIn} from "@/utils/models/log-in/log-in.action";
-import {LogIn, LogInProfileSchema} from "@/utils/models/log-in/log-in.model";
+import {postSignIn} from "@/utils/models/log-in/sign-in.action";
+import {SignIn, SignInProfileSchema} from "@/utils/models/log-in/sign-in.model";
 import {DisplayError} from "@/components/display-error";
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import {zodResolver} from "@hookform/resolvers/zod";
+import {DisplayStatus} from "@/components/display-status";
 
 
-export function LogInForm() {
+export function SignInForm() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [status, setStatus] = useState<Status|null>(null)
 
 	// define my default values
-	const defaultValues: LogIn = {
+	const defaultValues: SignIn = {
 		profileEmail: '',
 		profilePassword: ''
 	}
 
 	// get access to return values from React hook form and provide validation
-	const {register, handleSubmit, reset, formState: {errors}} = useForm<LogIn>({
-		resolver: zodResolver(LogInProfileSchema),
+	const {register, handleSubmit, reset, formState: {errors}} = useForm<SignIn>({
+		resolver: zodResolver(SignInProfileSchema),
 		defaultValues,
 		mode:'onBlur'
 	})
 
 	// define what happens onSubmit
-	const fireServerAction = async (data: LogIn) => {
+	const fireServerAction = async (data: SignIn) => {
 		try {
 			// call to the postSignIn server action
-			const response = await postLogIn(data)
+			const response = await postSignIn(data)
 			if (response.status === 200) {
 				// if status object returned from express is 200 resetForm
 				reset()
@@ -55,6 +56,7 @@ export function LogInForm() {
 						autoComplete="email"
 						{...register('profileEmail')}
 						id="email"
+						name="profileEmail"
 						type="email"
 						placeholder="Enter Email here"
 						aria-invalid={errors.profileEmail? 'true' : 'false'}
@@ -72,11 +74,13 @@ export function LogInForm() {
 							autoComplete="current-password"
 							{...register('profilePassword')}
 							id="password"
-							type="password"
+							name="profilePassword"
+							type={showPassword ? "text" : "password"}
 							placeholder="••••••••••••••••"
 							aria-invalid={errors.profilePassword? 'true' : 'false'}
 							required
 						/>
+						<DisplayError error={errors?.profilePassword?.message} />
 						<button
 							type="button"
 							className="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -91,6 +95,7 @@ export function LogInForm() {
 					CONTINUE
 				</Button>
 			</form>
+			<DisplayStatus status={status} />
 		</>
 	)
 }

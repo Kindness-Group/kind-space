@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import {LogInForm} from "@/app/log-in/login-form";
+import {SignInForm} from "@/app/sign-in/sign-in-form";
 
 export default function () {
     return (
@@ -28,7 +28,8 @@ export default function () {
                             <span className="flex-shrink mx-4 text-gray-500 text-sm">Use Email</span>
                             <div className="flex-grow border-t border-gray-200"></div>
                         </div>
-                        <LogInForm />
+                        {/* Form */}
+                        <SignInForm />
                         <p className="text-center text-gray-500 text-sm mt-6">
                             Are you a Newbie? <Link href="/sign-up" className="font-bold text-gray-800">GET STARTED - IT'S FREE</Link>
                         </p>

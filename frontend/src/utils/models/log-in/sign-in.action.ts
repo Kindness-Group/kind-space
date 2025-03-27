@@ -1,16 +1,16 @@
 'use server'
 
 import {cookies} from "next/headers";
-import {LogIn} from "@/utils/models/log-in/log-in.model";
+import {SignIn} from "@/utils/models/log-in/sign-in.model";
 import {Status} from "@/utils/interfaces/Status";
 
-export async function postLogIn(logIn: LogIn): Promise<Status> {
-	const response = await fetch(`${process.env.PUBLIC_API_URL}/apis/logIn`, {
+export async function postSignIn(signIn: SignIn): Promise<Status> {
+	const response = await fetch(`${process.env.PUBLIC_API_URL}/apis/sign-in`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(logIn)
+		body: JSON.stringify(signIn)
 	})
 
 	// grab the authorization header from the response
