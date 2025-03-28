@@ -48,7 +48,7 @@ export function SignUpForm() {
             }
             setStatus(response)
         } catch (error) {
-            setStatus ({status: 500, message: 'sign in request failed, please try again', data:undefined})
+            setStatus ({status: 500, message: 'sign up request failed, please try again', data:undefined})
         }
     }
 

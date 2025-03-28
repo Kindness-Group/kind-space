@@ -1,10 +1,14 @@
-"use client";
+'use server'
 
 import {Button, Card, Checkbox, Label} from "flowbite-react";
 import React from "react";
 import {ActForm} from "@/app/kind-act-post/act-form";
+import {getSession} from "@/utils/auth.utils";
 
-export default function () {
+export default async function () {
+	const session = await getSession()
+	const actProfileId = session?.profile.profileId
+
 	return (
 		<>
 			<section id="banner" className="text-black m-16 flex items-center justify-center">
@@ -20,7 +24,10 @@ export default function () {
 						<h2 className="leading-relaxed">Jane Doe</h2>
 					</div>
 				</div>
-			<ActForm/>
+				{actProfileId &&
+
+			<ActForm actProfileId={actProfileId}/>
+				}
 			</Card>
 		</>
 	)

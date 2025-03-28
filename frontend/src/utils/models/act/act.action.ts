@@ -24,7 +24,7 @@ export async function fetchAllActs() : Promise<Act[]> {
 }
 
 export async function postAct(act: Act) : Promise<Status> {
-    console.log(act)
+    console.log(act, 'something')
     return fetch(
         `${process.env.PUBLIC_API_URL}/apis/act/`,
         {

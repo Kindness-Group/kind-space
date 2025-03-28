@@ -38,18 +38,19 @@ export async function signInController (request: Request, response: Response): P
 
 		// if sign in was successful, create a new session for the client and return a response to the client
 		// deconstruct the profileId, profileBio, profilePictureUrl, profileName and profileUsername from the profile
-		const {profileId, profileBio, profilePictureUrl, profileName, profileUsername} = profile;
+		const {profileId, profileBio, profilePictureUrl, profileName, profileUsername, profileJoinDate} = profile;
 
 		// generate a new signature for the session
 		const signature: string = uuid()
 
-		// generate a new jwt for the session using the profileId, profileBio, profilePictureUrl, profileName, profileUsername and signature
+		// generate a new jwt for the session using the profileId, profileBio, profilePictureUrl, profileName, profileUsername, and signature
 		const authorization: string = generateJwt({
 			profileId,
 			profileBio,
 			profilePictureUrl,
 			profileName,
-			profileUsername
+			profileUsername,
+			profileJoinDate,
 		}, signature);
 
 		// set the session variables

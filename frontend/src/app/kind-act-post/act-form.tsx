@@ -9,28 +9,39 @@ import { Status } from '@/utils/interfaces/Status'
 import {postAct} from "@/utils/models/act/act.action";
 import {DisplayError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
+import {v7 as uuid} from "uuid";
+import {z} from "zod";
 
-export function ActForm(){
+type Props = {actProfileId: string};
+
+export function ActForm(props: Props ) {
+    const {actProfileId} = props;
     const [status, setStatus] = useState<Status|null>(null)
 
     // define my default values
     const defaultValues : Act = {
         actId: '',
-        actProfileId: '',
+        actProfileId: actProfileId,
         actAddress: '',
         actContent: '',
         actDateTime: null,
-        actImageUrl: '',
+        actImageUrl: null,
         actLat: null,
         actLng: null
     }
 
+    const actSchema = ActSchema.omit({actId: true})
+
+    type ActSchema = z.infer<typeof actSchema>
+
     // get access to return values from react hook form and provide validation
-    const {register, handleSubmit, reset, formState:{errors}} = useForm<Act>({
-        resolver: zodResolver(ActSchema),
+    const {register, handleSubmit, reset, formState:{errors}} = useForm<ActSchema>({
+        resolver: zodResolver(actSchema),
         defaultValues,
         mode:'onBlur'
     })
+
+    console.log(errors)
 
     // register form fields with react hook form
     // create a place to display errors
@@ -38,10 +49,12 @@ export function ActForm(){
 
 
     // define what happens onSubmit
-    const fireServerAction = async (data: Act) => {
+    const fireServerAction = async (data: ActSchema) => {
+        console.log('fireServerAction', data);
         try {
+            const act = {...data, actId: uuid()}
             // call to the postSignIn server action
-            const response = await postAct(data)
+            const response = await postAct(act)
             console.log(response)
             if (response.status === 200) {
                 // if status object returned from express is 200 resetForm
@@ -83,17 +96,17 @@ export function ActForm(){
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                        <a href="./kindactpost">
+
                             <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Add Media</Button>
-                        </a>
+
                     </div>
                 </div>
                 <hr className="border-gray-300" />
                 <div className="flex justify-end">
                     <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                        <a href="./kindactpost">
+
                             <Button type="submit" color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Create Post</Button>
-                        </a>
+
                     </div>
                 </div>
             </form>
