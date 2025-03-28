@@ -90,7 +90,7 @@ export function SignUpForm() {
                         required
                         aria-invalid={errors.profileUsername ? 'true' : 'false'}
                     />
-                    <DisplayError error={errors?.profilePassword?.message} />
+                    <DisplayError error={errors?.profileUsername?.message} />
                 </div>
 
                 <div>
