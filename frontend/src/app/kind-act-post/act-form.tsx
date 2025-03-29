@@ -11,6 +11,9 @@ import {DisplayError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
 import {v7 as uuid} from "uuid";
 import {z} from "zod";
+import {router} from "next/client";
+import {postImage} from "@/utils/models/act/image.action";
+import {ImageUploadDropZone} from "@/components/image-upload-dropzone";
 
 type Props = {actProfileId: string};
 
@@ -30,12 +33,17 @@ export function ActForm(props: Props ) {
         actLng: null
     }
 
-    const actSchema = ActSchema.omit({actId: true})
+    const actSchema = ActSchema.omit({actId: true}).extend(
+        {
+            actImageUrl: z.preprocess((val) => (val === "" ? null : val), z.any().optional())
+        }
+    )
 
     type ActSchema = z.infer<typeof actSchema>
 
+
     // get access to return values from react hook form and provide validation
-    const {register, handleSubmit, reset, formState:{errors}} = useForm<ActSchema>({
+    const {register, handleSubmit, reset, control, setError, clearErrors, formState:{errors}} = useForm<ActSchema>({
         resolver: zodResolver(actSchema),
         defaultValues,
         mode:'onBlur'
@@ -43,30 +51,43 @@ export function ActForm(props: Props ) {
 
     console.log(errors)
 
+    const [selectedImage, setSelectedImage] = React.useState<null | string>(null)
+
+    const fireServerAction = async (data: ActSchema) => {
+        try {
+            if(errors?.actImageUrl) {
+                setStatus({status:500, message: 'Select a new image', data: undefined})
+                return
+            }
+            console.log(data)
+            let actImageUrl = null
+            if(data.actImageUrl) {
+
+                const response = await postImage(data.actImageUrl)
+                if (response.status === 200) {
+                    actImageUrl = response.message
+                } else {
+                    setStatus({status: 500, message: 'Image failed to upload', data: undefined})
+                    return
+                }
+            }
+            const finalResponse = await postAct({...data, actImageUrl, actId: uuid()});
+            setStatus(finalResponse)
+            if (finalResponse.status === 200) {
+                setSelectedImage(null)
+                reset ()
+            }
+        } catch (error) {
+            setStatus({status:500, message: 'Internal Server Error, try again later', data: undefined})
+        }
+    }
+
     // register form fields with react hook form
     // create a place to display errors
     // create a place to display status
 
 
     // define what happens onSubmit
-    const fireServerAction = async (data: ActSchema) => {
-        console.log('fireServerAction', data);
-        try {
-            const act = {...data, actId: uuid()}
-            // call to the postSignIn server action
-            const response = await postAct(act)
-            console.log(response)
-            if (response.status === 200) {
-                // if status object returned from express is 200 resetForm
-                reset()
-            }
-            // use setStatus to display status from express
-            setStatus(response)
-        } catch (error) {
-            // if an error occurs let user know to try later
-            setStatus({status: 500, message: ' post act request failed try again', data:undefined})
-        }
-    }
 
 
     return (
@@ -94,13 +115,19 @@ export function ActForm(props: Props ) {
                            placeholder="Where did this happen?"/>
                     <DisplayError error={errors?.actAddress?.message}></DisplayError>
                 </div>
-                <div className="flex items-center justify-between">
-                    <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                {/*<div className="flex items-center justify-between">*/}
 
-                            <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Add Media</Button>
 
-                    </div>
-                </div>
+                   < ImageUploadDropZone control={control} fieldValue={'actImageUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors} />
+                    <DisplayError error={errors?.actImageUrl?.message?.message as any}/>
+
+                    {/*<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >*/}
+
+                    {/*        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Add Media</Button>*/}
+
+                    {/*</div>*/}
+                {/*</div>*/}
+                {selectedImage ? <img src={selectedImage} alt='image to upload'></img>: <></>}
                 <hr className="border-gray-300" />
                 <div className="flex justify-end">
                     <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >

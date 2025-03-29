@@ -31,7 +31,7 @@ create table if not exists act (
   act_address varchar (128),
   act_content varchar (500) not null,
   act_date_time timestamp with time zone,
-  act_image_url varchar (128),
+  act_image_url varchar (255),
   act_lat float,
   act_lng float,
   primary key (act_id),

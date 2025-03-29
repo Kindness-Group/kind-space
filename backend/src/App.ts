@@ -15,6 +15,7 @@ import {suggestionRoute} from "./apis/suggestion/suggestion.route";
 import {commentRoute} from "./apis/comment/comment.route";
 import {commitmentRoute} from "./apis/commitment/commitment.route";
 import helmet from "helmet";
+import {imageRoute} from "./apis/image/image.route";
 
 // The following class creates the app and instantiates the server
 export class App {
@@ -62,6 +63,7 @@ export class App {
 		this.app.use(suggestionRoute.basePath, suggestionRoute.router)
 		this.app.use(commentRoute.basePath, commentRoute.router)
 		this.app.use(commitmentRoute.basePath, commitmentRoute.router)
+		this.app.use(imageRoute.basePath, imageRoute.router)
 	}
 
 	// starts the server and tells the terminal to post a message that the server is running and on what port

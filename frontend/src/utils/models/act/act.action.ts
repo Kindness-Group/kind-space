@@ -24,8 +24,7 @@ export async function fetchAllActs() : Promise<Act[]> {
 }
 
 export async function postAct(act: Act) : Promise<Status> {
-    console.log(act, 'something')
-    return fetch(
+    const result = await fetch(
         `${process.env.PUBLIC_API_URL}/apis/act/`,
         {
             method: 'post',
@@ -41,4 +40,6 @@ export async function postAct(act: Act) : Promise<Status> {
         console.error(error)
         throw error
     })
+    console.log(result)
+    return result
 }
