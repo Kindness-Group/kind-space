@@ -12,6 +12,7 @@ import {ActSchema} from "./act.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {number, z} from "zod";
 import {PublicProfileSchema} from "../profile/profile.validator";
+import {Geocod, LocationResponse} from "./geocod";
 
 /**
  * Posts a new act to the database and returns a status. If successful, the status will contain the message "Act created successfully." If unsuccessful, the status will contain the message "Error creating Act. Try again."
@@ -31,13 +32,27 @@ export async function postActController(request: Request, response: Response): P
         //if the validation succeeds, continue on with the postActController logic below this line
 
         //get the act content, act id, and act image url from the request body
-        const {actContent, actId, actImageUrl, actAddress, actLat, actLng} = validationResult.data
+        const {actContent, actId, actImageUrl, actAddress} = validationResult.data
 
         // get the profile from the session
         const profile: PublicProfile = request.session.profile as PublicProfile
 
         //set the act profile id to the profile id from the session
         const actProfileId: string = profile.profileId as string
+
+        let actLat=null
+        let actLng=null
+
+console.log(actAddress)
+
+        if (actAddress) {
+            const geoLocation:LocationResponse = await Geocod(actAddress)
+
+            console.log(geoLocation)
+
+            actLat=geoLocation.lat
+            actLng=geoLocation.lng
+        }
 
         //create a new act object with the actProfileId, actContent, and actImageUrl
         const act: Act = {

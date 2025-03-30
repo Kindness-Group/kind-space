@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Map from 'react-map-gl/mapbox';
 import {Act} from "@/app/kindness-feed/page"
+import {Marker} from 'react-map-gl'
 
 // If using with mapbox-gl v1:
 // import Map from 'react-map-gl/mapbox-legacy';
@@ -20,6 +21,7 @@ export function KindnessMap(props: MapCardProps) {
 
 
     return (
+        <>
         <Map
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             initialViewState={{
@@ -29,7 +31,14 @@ export function KindnessMap(props: MapCardProps) {
             }}
             style={{width: "100vw", height: "80vh"}}
             mapStyle="mapbox://styles/mapbox/streets-v9"
+
         />
-    );
+
+    const[marker, setMarker] = useState({
+            longitude:actLng,
+            latitude:actLat
+        })
+        </>
+        );
 
 }
