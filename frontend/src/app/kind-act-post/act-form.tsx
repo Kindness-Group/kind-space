@@ -12,7 +12,7 @@ import {DisplayStatus} from "@/components/display-status";
 import {v7 as uuid} from "uuid";
 import {z} from "zod";
 import {router} from "next/client";
-import {postImage} from "@/utils/models/act/image.action";
+import {postImage} from "@/utils/models/image/image.action";
 import {ImageUploadDropZone} from "@/components/image-upload-dropzone";
 
 type Props = {actProfileId: string};
@@ -52,7 +52,11 @@ export function ActForm(props: Props ) {
     console.log(errors)
 
     const [selectedImage, setSelectedImage] = React.useState<null | string>(null)
+    // register form fields with react hook form
+    // create a place to display errors
+    // create a place to display status
 
+    // define what happens onSubmit
     const fireServerAction = async (data: ActSchema) => {
         try {
             if(errors?.actImageUrl) {
@@ -82,14 +86,6 @@ export function ActForm(props: Props ) {
         }
     }
 
-    // register form fields with react hook form
-    // create a place to display errors
-    // create a place to display status
-
-
-    // define what happens onSubmit
-
-
     return (
         <>
             <form onSubmit={handleSubmit(fireServerAction)} className="flex flex-col gap-4">
@@ -115,18 +111,14 @@ export function ActForm(props: Props ) {
                            placeholder="Where did this happen?"/>
                     <DisplayError error={errors?.actAddress?.message}></DisplayError>
                 </div>
-                {/*<div className="flex items-center justify-between">*/}
-
-
-                   < ImageUploadDropZone control={control} fieldValue={'actImageUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors} />
-                    <DisplayError error={errors?.actImageUrl?.message?.message as any}/>
+                <ImageUploadDropZone control={control} fieldValue={'actImageUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors} />
+                <DisplayError error={errors?.actImageUrl?.message?.message as any}/>
 
                     {/*<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >*/}
 
                     {/*        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Add Media</Button>*/}
 
                     {/*</div>*/}
-                {/*</div>*/}
                 {selectedImage ? <img src={selectedImage} alt='image to upload'></img>: <></>}
                 <hr className="border-gray-300" />
                 <div className="flex justify-end">

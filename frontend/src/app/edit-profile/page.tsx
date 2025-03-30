@@ -1,18 +1,15 @@
-"use client";
+"use server";
 
-import React, { useState } from 'react';
-import { Button, Label, TextInput, Textarea } from 'flowbite-react';
 import {getSession} from "@/utils/auth.utils";
 import {redirect} from "next/navigation";
 import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
+import {EditProfileForm} from "@/app/edit-profile/edit-profile-form";
 
 interface EditProfileProps {
     // You can add props here if needed
 }
 
 export default async function EditProfile({}: EditProfileProps) {
-    const [profileImage, setProfileImage] = useState<string | null>(null);
-
     const session = await getSession()
 
     if (!session) {
@@ -48,38 +45,8 @@ export default async function EditProfile({}: EditProfileProps) {
                 </section>
             </div>
 
-            <div className="flex flex-col items-center mb-8">
-                <div
-                    className="w-64 h-64 bg-gray-200 flex items-center justify-center mb-4 cursor-pointer"
-                    onClick={() => document.getElementById('profile-upload')?.click()}
-                >
-                    {profileImage ? (
-                        <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
-                    ) : (
-                        <div className="text-center text-gray-500">
-                            <p>Add Profile Picture</p>
-                            <p>Here</p>
-                        </div>
-                    )}
-                </div>
-                <input
-                    id="profile-upload"
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    // onChange={handleImageUpload}
-                />
-            </div>
-
             <div className="space-y-6">
-
-                //edit profile form here
-
-                <div className="flex justify-center mt-8">
-                    <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Save</Button>
-                    </div>
-                </div>
+                <EditProfileForm profile={profile} />
             </div>
 
         </div>

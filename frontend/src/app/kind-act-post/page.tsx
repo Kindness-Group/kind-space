@@ -24,10 +24,7 @@ export default async function () {
 						<h2 className="leading-relaxed">Jane Doe</h2>
 					</div>
 				</div>
-				{actProfileId &&
-
-			<ActForm actProfileId={actProfileId}/>
-				}
+				{actProfileId && <ActForm actProfileId={actProfileId}/>}
 			</Card>
 		</>
 	)
