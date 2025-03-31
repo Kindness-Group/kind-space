@@ -1,8 +1,8 @@
 'use server'
 
-import {CommentCard} from "@/app/postdetails/CommentCard";
+import {CommentCard} from "@/app/postdetails/[actId]/CommentCard";
 import {ActCard} from "@/app/layout-components/ActCard";
-import {CommentForm} from "@/app/postdetails/comment-form";
+import {CommentForm} from "@/app/postdetails/[actId]/comment-form";
 import {getSession} from "@/utils/auth.utils";
 import {PageProps} from "@/utils/interfaces/NextComponent";
 import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
