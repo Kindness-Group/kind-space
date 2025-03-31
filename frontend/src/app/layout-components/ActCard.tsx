@@ -1,18 +1,20 @@
 import React from "react";
-import {Act} from "@/app/kindness-feed/page";
+import {Act} from "@/utils/models/act/act.model";
+import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
+
 
 type ActProps = {
 	act: Act;
 }
 
-export function ActCard (props: ActProps) {
-	let {act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actLat, actLng, actAddress, actProfileUsername, actProfilePicUrl, actLikeLikes, actCommentComments}} = props;
-
+export async function ActCard (props: ActProps) {
+	let {act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actLat, actLng, actAddress}} = props;
+const profile=await fetchProfileByProfileId(actProfileId)
 	return (
 		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
 			<header className="p-4">
-				<img src={actProfilePicUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
-				<h3 className="text-lg font-bold">{actProfileUsername}</h3>
+				<img src={actImageUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
+				<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
 				<p className="text-sm text-gray-600">{actAddress} - {actDateTime.toDateString()}</p>
 			</header>
 

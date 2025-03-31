@@ -43,3 +43,17 @@ export async function postAct(act: Act) : Promise<Status> {
     console.log(result)
     return result
 }
+
+export async function fetchActByActId(actId: string): Promise<Act | null> {
+    const headers = await setHeaders()
+    const {data} = await fetch(`${process.env.REST_API_URL}/apis/act/${actId}`, {
+        method: "GET",
+        headers
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok')
+        }
+        return response.json()
+    })
+    return ActSchema.nullable().parse(data)
+}
