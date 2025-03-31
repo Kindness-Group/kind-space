@@ -10,7 +10,7 @@ import {fetchActByActId} from "@/utils/models/act/act.action";
 
 
 export default async function (props: PageProps<{actId:string}>) {
-	const commentActId = props.params.actId;
+	const commentActId = await props.params.actId;
 	const session= await getSession()
 	const commentProfileId = session?.profile.profileId
 	console.log(commentActId);

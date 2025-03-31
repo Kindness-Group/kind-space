@@ -32,11 +32,8 @@ export async function postComment(comment: Comment) : Promise<Status> {
         return response.json()
     }).catch(error => {
         console.error(error)
-        throw error
+        // throw error
     })
     console.log(result)
     return result
 }
-
-
-
