@@ -1,26 +1,21 @@
 'use server'
+
 import {CommentCard} from "@/app/postdetails/CommentCard";
 import {ActCard} from "@/app/layout-components/ActCard";
-
 import {CommentForm} from "@/app/postdetails/comment-form";
 import {getSession} from "@/utils/auth.utils";
 import {PageProps} from "@/utils/interfaces/NextComponent";
+import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
+import {fetchActByActId} from "@/utils/models/act/act.action";
 
-
-export type Comment = {
-	commentId: string,
-	commentActId: string,
-	commentProfileId: string,
-	commentContent: string,
-	commentDateTime: Date,
-	commentProfileUserName: string,
-}
 
 export default async function (props: PageProps<{actId:string}>) {
-	const actId = props.params.actId;
+	const commentActId = props.params.actId;
 	const session= await getSession()
 	const commentProfileId = session?.profile.profileId
-
+	console.log(commentActId);
+	const comments = await fetchCommentsByCommentActId(commentActId);
+	const act = await fetchActByActId(commentActId);
 
 	return (
 		<>
@@ -28,7 +23,7 @@ export default async function (props: PageProps<{actId:string}>) {
 				<img src="/heart-icon.png" className="w-12"/>
 				<h1 className="md:text-2xl text-xl text-center font-bold">View Comments</h1>
 			</section>
-			<ActCard act={post} key={index}/>
+			<ActCard act={act} />
 			{/* Comments Section */}
 			<section className="bg-gray-100 py-8 mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md">
 				<div className="container mx-auto px-4">

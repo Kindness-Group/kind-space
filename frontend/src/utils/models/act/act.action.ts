@@ -44,7 +44,7 @@ export async function postAct(act: Act) : Promise<Status> {
     return result
 }
 
-export async function fetchActByActId(actId: string): Promise<Act | null> {
+export async function fetchActByActId(actId: string): Promise<Act> {
     const headers = await setHeaders()
     const {data} = await fetch(`${process.env.REST_API_URL}/apis/act/${actId}`, {
         method: "GET",

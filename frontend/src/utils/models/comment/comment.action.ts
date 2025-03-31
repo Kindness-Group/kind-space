@@ -1,8 +1,21 @@
 'use server'
 
-import {Comment} from "@/utils/models/comment/comment.model";
+import {Comment, CommentSchema} from "@/utils/models/comment/comment.model";
 import {Status} from "@/utils/interfaces/Status";
 import {setHeaders} from "@/utils/set-headers.utils";
+
+export async function fetchCommentsByCommentActId(commentActId: string): Promise<Comment[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/comment/commentActId/${commentActId}`, {
+        method: 'GET',
+        headers: await setHeaders()
+    }).then(response => {
+        if(!response.ok) {
+            throw new Error('Request failed')
+        }
+        return response.json()
+    })
+    return CommentSchema.array().parse(data)
+}
 
 export async function postComment(comment: Comment) : Promise<Status> {
     const result = await fetch(
@@ -24,5 +37,6 @@ export async function postComment(comment: Comment) : Promise<Status> {
     console.log(result)
     return result
 }
+
 
 

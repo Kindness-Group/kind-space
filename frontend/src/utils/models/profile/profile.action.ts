@@ -8,9 +8,7 @@ export async function fetchProfileByProfileId(profileId: string): Promise<Profil
     const {data} = await fetch (`${process.env.PUBLIC_API_URL}/apis/profile/${profileId}`,
         {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: await setHeaders()
         }).then (response => {
             if(!response.ok) {
                 throw new Error('Request failed')

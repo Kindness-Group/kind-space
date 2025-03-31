@@ -1,6 +1,10 @@
+'use server'
+
 import React from "react";
 import {Act} from "@/utils/models/act/act.model";
 import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
+import {fetchLikesByLikeActId} from "@/utils/models/like/like.action";
+import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
 
 
 type ActProps = {
@@ -9,13 +13,18 @@ type ActProps = {
 
 export async function ActCard (props: ActProps) {
 	let {act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actLat, actLng, actAddress}} = props;
-const profile=await fetchProfileByProfileId(actProfileId)
+	const profile = await fetchProfileByProfileId(actProfileId)
+	const likes = await fetchLikesByLikeActId(actId)
+	const numberOfLikes = likes?.length
+	const comments = await fetchCommentsByCommentActId(actId)
+	const numberOfComments = comments?.length
+
 	return (
 		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
 			<header className="p-4">
 				<img src={actImageUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
 				<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
-				<p className="text-sm text-gray-600">{actAddress} - {actDateTime.toDateString()}</p>
+				<p className="text-sm text-gray-600">{actAddress} - {actDateTime?.toDateString()}</p>
 			</header>
 
 			<section>
@@ -31,13 +40,13 @@ const profile=await fetchProfileByProfileId(actProfileId)
 						<a href="#" className="uppercase font-bold text-sm text-gray-600 hover:underline">Love</a>
 					</div>
 					<div className="flex">
-						<a href="/postdetails" className="self-end mr-3"><img src="/comment_message_communication_icon.png" alt="chat bubble" className="w-9"/></a>
-						<a href="/postdetails" className="uppercase font-bold self-center text-sm text-gray-600 hover:underline">Comments ({actCommentComments})</a>
+						<a href={`/postdetails/${actId}`} className="self-end mr-3"><img src="/comment_message_communication_icon.png" alt="chat bubble" className="w-9"/></a>
+						<a href={`/postdetails/${actId}`} className="uppercase font-bold self-center text-sm text-gray-600 hover:underline">Comments ({numberOfComments})</a>
 					</div>
 				</div>
 				<div className="flex space-x-3 items-center">
 					<img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
-					<p className="text-sm text-gray-900"><span className="font-bold"> {actLikeLikes} </span> People loved this Post!</p>
+					<p className="text-sm text-gray-900"><span className="font-bold"> {numberOfLikes} </span> People loved this Post!</p>
 				</div>
 			</footer>
 		</section>

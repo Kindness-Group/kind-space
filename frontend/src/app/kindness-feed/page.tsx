@@ -5,23 +5,6 @@ import {Button} from "flowbite-react";
 import {ActCard} from "@/app/layout-components/ActCard";
 import {fetchAllActs} from "@/utils/models/act/act.action";
 
-
-
-export type Act = {
-    actId: string,
-    actProfileId: string,
-    actContent: string,
-    actDateTime: Date,
-    actImageUrl: string,
-    actLat: string,
-    actLng: string,
-    actAddress: string,
-    actProfileUsername: string,
-    actProfilePicUrl: string | null,
-    actLikeLikes: number,
-    actCommentComments: number,
-}
-
 export default async function KindnessFeed() {
     // Sample data - in a real app, you would fetch this from an API
     const acts = await fetchAllActs()
