@@ -9,11 +9,13 @@ import {DisplayError} from "@/components/display-error";
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import {zodResolver} from "@hookform/resolvers/zod";
 import {DisplayStatus} from "@/components/display-status";
+import {useRouter} from "next/navigation";
 
 
 export function SignInForm() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [status, setStatus] = useState<Status|null>(null)
+	const router = useRouter();
 
 	// define my default values
 	const defaultValues: SignIn = {
@@ -36,6 +38,7 @@ export function SignInForm() {
 			if (response.status === 200) {
 				// if status object returned from express is 200 resetForm
 				reset()
+				router.push('/kindness-feed');
 			}
 			// use setStatus to display status from express
 			setStatus(response)

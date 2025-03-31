@@ -11,11 +11,8 @@ import {fetchActByActId} from "@/utils/models/act/act.action";
 
 export default async function (props: PageProps<{actId:string}>) {
 	const commentActId = await props.params.actId;
-	const session= await getSession()
+	const [session, comments, act ]= await Promise.all([getSession(), fetchCommentsByCommentActId(commentActId), fetchActByActId(commentActId)]);
 	const commentProfileId = session?.profile.profileId
-	console.log(commentActId);
-	const comments = await fetchCommentsByCommentActId(commentActId);
-	const act = await fetchActByActId(commentActId);
 
 	return (
 		<>

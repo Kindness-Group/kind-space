@@ -12,14 +12,15 @@ import {postComment} from "@/utils/models/comment/comment.action";
 import {Label, Textarea} from "flowbite-react";
 import {DisplayError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
+import {useRouter} from "next/navigation";
 
 type Props = {commentActId: string, commentProfileId: string};
-
-
 
 export function CommentForm(props: Props ) {
 
     const {commentActId, commentProfileId} = props;
+
+    const router = useRouter();
 
     const[status, setStatus] = useState<Status|null>(null)
 
@@ -47,6 +48,7 @@ export function CommentForm(props: Props ) {
             const response=await postComment(addComment)
             if (response.status === 200) {
                 reset()
+                router.refresh()
             }
             setStatus(response)
         } catch (error) {

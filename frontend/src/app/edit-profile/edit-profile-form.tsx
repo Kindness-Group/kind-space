@@ -99,21 +99,6 @@ export function EditProfileForm(props: {profile: Profile}) {
                     <DisplayError error={errors?.profileName?.message} />
                 </div>
 
-                <div className="flex items-center">
-                    <Label htmlFor="username" className="w-32 text-lg font-medium">Username:</Label>
-                    <TextInput
-                        autoComplete='username'
-                        {...register('profileUsername')}
-                        id="username"
-                        name="profileUsername"
-                        placeholder="Enter Username"
-                        className="flex-1"
-                        type="text"
-                        aria-invalid={errors.profileUsername? 'true' : 'false'}
-                    />
-                    <DisplayError error={errors?.profileUsername?.message} />
-                </div>
-
                 <div className="flex">
                     <Label htmlFor="bio" className="w-32 text-lg font-medium">Bio:</Label>
                     <Textarea
