@@ -1,22 +1,22 @@
 'use client'
 import * as React from 'react';
-import Map from 'react-map-gl/mapbox';
+import Map, {Marker} from 'react-map-gl/mapbox';
 import {Act} from "@/app/kindness-feed/page"
+
 
 // If using with mapbox-gl v1:
 // import Map from 'react-map-gl/mapbox-legacy';
 
 
 type MapCardProps = {
-    acts: Act;
+    acts: Act[];
     searchLocation?: string
 }
 
 
 export function KindnessMap(props: MapCardProps) {
 
-    let {acts, searchLocation} = props;
-	let {acts: {actLat, actLng, actAddress}} = props;
+    const {acts} = props
 
 
     return (
@@ -29,7 +29,18 @@ export function KindnessMap(props: MapCardProps) {
             }}
             style={{width: "100vw", height: "80vh"}}
             mapStyle="mapbox://styles/mapbox/streets-v9"
-        />
+        >
+            {acts.map((act, index) => (
+                <Marker
+                key={index}
+                longitude={Number(act.actLng)}
+                latitude={Number(act.actLat)}
+                >
+                    <div style={{fontSize: "25px"}}>❤️</div>
+                    </Marker>
+            ))}
+
+        </Map>
     );
 
 }
