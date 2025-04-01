@@ -6,7 +6,7 @@ import {Profile} from "@/utils/models/profile/profile.model";
 // import ProfileBanner from "@/app/viewprofile/ProfileBanner";
 import {getSession} from "@/utils/auth.utils";
 import {ProfileBanner} from "@/app/viewprofile/ProfileBanner";
-import {fetchSuggestionBySuggestiontId} from "@/utils/models/suggestion/suggestion.action";
+import {fetchCommitmentsByCommitmentProfileId} from "@/utils/models/commitment/commitment.action";
 
 type Props = {
 	profile: Profile;
@@ -15,7 +15,9 @@ type Props = {
 export async function ProfileCard(props: Props) {
 	const profile = props.profile
 	// here we want to get the suggestion based off of the commitmentSuggestionId
-	// to know what suggestionIds to use, we must get the commitments based on the commitmentProfileId
+	// to know what suggestionIds to use, we must get the commitments based on the commitmentProfileId --> get
+	// commitments
+	const commitments = await fetchCommitmentsByCommitmentProfileId(profile.profileId)
 	/*
 	get individual commitments to display with CommitmentCard component
 	pass commitments with .map and let them render on CommitmentCard.tsx
@@ -34,9 +36,10 @@ export async function ProfileCard(props: Props) {
 						<span className="font-semibold">Bio:</span> {profile?.profileBio}
 					</p>
 				</section>
-
 				{/* Daily Kindness Section */}
-				{/*<CommitmentCard act={action}/>*/}
+				{commitments.map((commitment, index) => (
+					<CommitmentCard commitment={commitment} key={index} />
+				))}
 			</div>
 		</>
 	)

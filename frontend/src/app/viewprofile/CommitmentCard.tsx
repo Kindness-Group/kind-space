@@ -1,15 +1,19 @@
+'use server'
+
 import React from "react";
 import {Button} from "flowbite-react";
 import {Commitment} from "@/utils/models/commitment/commitment.model";
+import {fetchSuggestionBySuggestionId} from "@/utils/models/suggestion/suggestion.action";
 
 
 type Props = {
  commitment: Commitment
 }
 
-export function CommitmentCard(props: Props) {
+export async function CommitmentCard(props: Props) {
 	let {commitment: {commitmentSuggestionId}} = props
 	// now get the suggestion using commitmentSuggestionId
+	const suggestion = await fetchSuggestionBySuggestionId(commitmentSuggestionId);
 
 	return (
 
@@ -19,10 +23,12 @@ export function CommitmentCard(props: Props) {
 
 				<h3 className="text-lg font-semibold mb-4">Your Daily Act of Kindness</h3>
 				<p className="text-sm leading-7 text-gray-900 mb-5">
-					{suggestionContent}
+					{suggestion.suggestionContent}
 				</p>
 				<div className="flex space-x-8 mb-1">
 					<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+						{/* TO-DO: make button work with backend to have commitmentCompleted be true when button is
+						 clicked */}
 						<Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
 					</div>
 

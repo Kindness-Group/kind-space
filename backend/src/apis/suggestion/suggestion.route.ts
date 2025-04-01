@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 import {
-	getSuggestionBySuggestionDateController,
+	getSuggestionsBySuggestionDateController,
 	getSuggestionBySuggestionIdController,
 	postSuggestionController
 } from "./suggestion.controller";
@@ -17,7 +17,7 @@ router.route ('/suggestionId/:suggestionId')
     .get(getSuggestionBySuggestionIdController)
 
 router.route('/suggestionDate/:suggestionDate')
-	.get(getSuggestionBySuggestionDateController)
+	.get(getSuggestionsBySuggestionDateController)
 
 // export the router with the basePath and router object
 export const suggestionRoute = {basePath, router}

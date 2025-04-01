@@ -1,5 +1,5 @@
 import {Button} from "flowbite-react";
-import {Suggestion} from "@/app/kindness-suggestions/SuggestionCard";
+import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 
 type MoreSuggestionProps = {
     moreSuggestion: Suggestion
@@ -10,7 +10,6 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
 
     let {moreSuggestion} = props;
     let content = moreSuggestion.suggestionContent;
-    let date = moreSuggestion.suggestionDate;
 
     return (
         <section>

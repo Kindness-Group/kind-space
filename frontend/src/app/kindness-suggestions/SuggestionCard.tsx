@@ -1,18 +1,14 @@
 import {Button} from "flowbite-react";
+import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 
 type SuggestionCardProps = {
     suggestion: Suggestion
 }
 
-export type Suggestion = {
-    suggestionContent: string,
-    suggestionDate: string
-}
-
 export function SuggestionCard(props: SuggestionCardProps) {
     let {suggestion} = props;
     let content = suggestion.suggestionContent;
-    let date = suggestion.suggestionDate;
+
     return (
         <>
             <section className="text-gray-900 p-16 flex flex-col relative w-full md:h-[65vh] h-[75vh]">

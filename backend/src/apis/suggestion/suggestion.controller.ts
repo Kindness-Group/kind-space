@@ -1,6 +1,6 @@
 import {Request, Response} from 'express'
 import {
-    insertSuggestion, selectSuggestionBySuggestionDate, selectSuggestionBySuggestionId
+    insertSuggestion, selectSuggestionsBySuggestionDate, selectSuggestionBySuggestionId
 } from "./suggestion.model"
 import {Status} from "../../utils/interfaces/Status";
 import {SuggestionSchema} from "./suggestion.validator";
@@ -85,7 +85,7 @@ export async function getSuggestionBySuggestionIdController (request: Request, r
  * @param request from the client to the server to get a suggestion by suggestionDate from
  * @param response from the server to the client with a suggestion by suggestionDate or an error message
  */
-export async function getSuggestionBySuggestionDateController (request: Request, response: Response): Promise<Response<Status>> {
+export async function getSuggestionsBySuggestionDateController (request: Request, response: Response): Promise<Response<Status>> {
     try {
         const validationResult = z.coerce.date().safeParse(request.params.suggestionDate)
 
@@ -96,7 +96,7 @@ export async function getSuggestionBySuggestionDateController (request: Request,
         const suggestionDate = validationResult.data
 
         // get the suggestion from the database by suggestionDate and store it in a variable called data
-        const data = await selectSuggestionBySuggestionDate(suggestionDate)
+        const data = await selectSuggestionsBySuggestionDate(suggestionDate)
 
         // return the response with the status code 200, a message, and the suggestion as data
         return response.json({status: 200, message: null, data})
