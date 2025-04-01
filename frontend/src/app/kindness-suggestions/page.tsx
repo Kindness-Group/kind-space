@@ -4,29 +4,33 @@ import {SuggestionCard} from "@/app/kindness-suggestions/SuggestionCard";
 import {MoreSuggestionCard} from "@/app/kindness-suggestions/MoreSuggestionCard";
 import {fetchSuggestionsBySuggestionDate} from "@/utils/models/suggestion/suggestion.action";
 import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
+import {getSession} from "@/utils/auth.utils";
 
 export default async function DailySuggestionPage() {
 
-    const todayDate = new Date().toLocaleDateString('en-US', {year:'numeric', month: '2-digit', day: '2-digit' })
-    const newTodayDate = todayDate.split('/').join('-')
-    console.log(newTodayDate)
-    const suggestions = await fetchSuggestionsBySuggestionDate(new Date(newTodayDate))
+    const session = await getSession();
+    const profile = session?.profile
+
+    const today = new Date();
+    const todayDate = today.toISOString().split("T")[0];
+    console.log(todayDate)
+    const suggestions = await fetchSuggestionsBySuggestionDate(new Date(todayDate))
     console.log(suggestions)
     const todaySuggestion = suggestions.shift();
 
     return (
         <>
             <section id="banner" className="text-black m-16 flex items-center justify-center">
-                <img src="/heart-icon.png" className="w-12"/>
+                <img src="/heart-icon.png" className="w-12" alt="heart-icon" />
                 <h1 className="md:text-2xl text-xl text-center font-bold">Your Daily Act of Kindness Suggestion</h1>
             </section>
             {todaySuggestion ?
-                (<SuggestionCard suggestion={todaySuggestion}/>) : (<p>Compliment a Stranger: Give a genuine compliment to someone you don’t know—tell a barista they made a great coffee, let a coworker know their outfit looks nice, or appreciate someone’s kindness.</p>)}
+                (<SuggestionCard profile= {profile} suggestion={todaySuggestion}/>) : (<p>Compliment a Stranger: Give a genuine compliment to someone you don’t know—tell a barista they made a great coffee, let a coworker know their outfit looks nice, or appreciate someone’s kindness.</p>)}
             <section id="more-suggestions" className="text-black">
                 <h1 className="md:text-4xl text-2xl text-center font-bold m-16">More Suggestions</h1>
                 <div className="flex flex-col items-center gap-y-32 md:flex-row md:gap-x-[10%] md:mx-8 justify-center" >
                     {suggestions.map((element, index) => (
-                        <MoreSuggestionCard key={index} moreSuggestion={element} />
+                        <MoreSuggestionCard key={index} profile={profile} suggestion={element} />
                     ))}
                 </div>
             </section>

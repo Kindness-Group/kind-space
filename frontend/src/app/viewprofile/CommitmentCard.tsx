@@ -37,7 +37,7 @@ export async function CommitmentCard(props: Props) {
 			<div className="relative flex md:mt-auto mb-4 px-8">
 				<img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
 				<p className="text-sm text-gray-900">
-					You’ve Completed {count} Daily Acts of Kindness!
+					You’ve Completed ### Daily Acts of Kindness!
 				</p>
 
 			</div>

@@ -1,12 +1,15 @@
 import {Button} from "flowbite-react";
 import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
+import {Profile} from "@/utils/models/profile/profile.model";
+import {CreateCommitment} from "@/app/kindness-suggestions/CreateCommitment";
 
 type SuggestionCardProps = {
     suggestion: Suggestion
+    profile: Profile
 }
 
 export function SuggestionCard(props: SuggestionCardProps) {
-    let {suggestion} = props;
+    let {suggestion, profile} = props;
     let content = suggestion.suggestionContent;
 
     return (
@@ -25,9 +28,7 @@ export function SuggestionCard(props: SuggestionCardProps) {
                     <h1 className="md:text-4xl text-2xl font-bold">Today's Act of Kindness</h1>
                     <p className="text-xl md:text-2xl py-10 m-2 md:m-20 md:p-10">{content}</p>
                     <div className="flex items-center justify-center gap-x-[10%] mt:4 whitespace-nowrap">
-                        <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                        <Button color={"light"} className="font-bold bg-white group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Plan to do it!</Button>
-                        </div>
+                        {profile && <CreateCommitment profile={profile} suggestionId={suggestion.suggestionId} />}
                         <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
                         <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
                         </div>

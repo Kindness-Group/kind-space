@@ -2,6 +2,8 @@
 
 import {setHeaders} from "@/utils/set-headers.utils";
 import {Commitment, CommitmentSchema} from "@/utils/models/commitment/commitment.model";
+import {Status} from "@/utils/interfaces/Status";
+import {ActSchema} from "@/utils/models/act/act.model";
 
 
 export async function fetchCommitmentsByCommitmentSuggestionId(commitmentSuggestionId: string) : Promise<Commitment[]> {
@@ -29,3 +31,36 @@ export async function fetchCommitmentsByCommitmentProfileId(commitmentProfileId:
 	})
 	return CommitmentSchema.array().parse(data)
 }
+
+export async function postCommitment(commitment: Commitment) : Promise<Status> {
+	const result = await fetch(
+		`${process.env.PUBLIC_API_URL}/apis/commitment/`,
+		{
+			method: 'POST',
+			headers: await setHeaders(),
+			body: JSON.stringify(commitment)
+		}
+	).then(response => {
+		if( !response.ok ) {
+			throw new Error('Network response failed')
+		}
+		return response.json()
+	}).catch(error => {
+		console.error(error)
+		throw error
+	})
+	console.log(result)
+	return result
+}
+
+
+
+
+
+
+
+
+
+
+
+
