@@ -1,14 +1,15 @@
 import React from "react";
 import {Button} from "flowbite-react";
+import {Commitment} from "@/utils/models/commitment/commitment.model";
 
 
 type Props = {
- suggestion: Suggestion
+ commitment: Commitment
 }
 
 export function CommitmentCard(props: Props) {
-	let {suggestion: {suggestionContent}} = props
-
+	let {commitment: {commitmentSuggestionId}} = props
+	// now get the suggestion using commitmentSuggestionId
 
 	return (
 
