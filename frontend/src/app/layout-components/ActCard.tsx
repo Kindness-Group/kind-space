@@ -24,7 +24,7 @@ export async function ActCard (props: ActProps) {
 	return (
 		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
 			<header className="p-4">
-				<img src={actImageUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
+				<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
 				<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
 				<p className="text-sm text-gray-600">{actAddress} - {actDateTime?.toDateString()}</p>
 			</header>
