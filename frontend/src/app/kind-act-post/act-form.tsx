@@ -113,19 +113,11 @@ export function ActForm(props: Props ) {
                 </div>
                 <ImageUploadDropZone control={control} fieldValue={'actImageUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors} />
                 <DisplayError error={errors?.actImageUrl?.message?.message as any}/>
-
-                    {/*<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >*/}
-
-                    {/*        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Add Media</Button>*/}
-
-                    {/*</div>*/}
                 {selectedImage ? <img src={selectedImage} alt='image to upload'></img>: <></>}
                 <hr className="border-gray-300" />
                 <div className="flex justify-end">
                     <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-
-                            <Button type="submit" color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Create Post</Button>
-
+                        <Button type="submit" color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Create Post</Button>
                     </div>
                 </div>
             </form>

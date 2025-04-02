@@ -17,7 +17,7 @@ export async function insertComment(comment: Comment): Promise<string> {
 
 	// insert the comment into the comment table
 	await sql`INSERT INTO comment (comment_id, comment_act_id, comment_profile_id, comment_content, comment_date_time)
-              VALUES (${commentId}, ${commentActId}, ${commentProfileId}, ${commentContent}, ${commentDateTime})`
+              VALUES (${commentId}, ${commentActId}, ${commentProfileId}, ${commentContent}, now())`
 
 	// return a message to the user indicating success
 	return 'Comment successfully posted'

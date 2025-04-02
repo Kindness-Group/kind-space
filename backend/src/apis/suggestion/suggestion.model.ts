@@ -47,10 +47,8 @@ export async function selectSuggestionBySuggestionId (suggestionId: string): Pro
  * @returns the suggestion that was selected
  * @returns null if no suggestion was found
  */
-export async function selectSuggestionBySuggestionDate(suggestionDate: Date): Promise<Suggestion | null> {
+export async function selectSuggestionsBySuggestionDate(suggestionDate: Date): Promise<Suggestion[]> {
     const rowList = <Suggestion[]>await sql`SELECT suggestion_id, suggestion_content, suggestion_date FROM suggestion WHERE suggestion_date = ${suggestionDate}`
 
-    const result = SuggestionSchema.array().max(1).parse(rowList)
-
-    return result.length === 0 ? null : result[0]
+    return SuggestionSchema.array().parse(rowList)
 }

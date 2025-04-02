@@ -4,6 +4,7 @@ import { Act, ActSchema } from '@/utils/models/act/act.model'
 import {Status} from "@/utils/interfaces/Status";
 import {error} from "next/dist/build/output/log";
 import {setHeaders} from "@/utils/set-headers.utils";
+import {Comment, CommentSchema} from "@/utils/models/comment/comment.model";
 
 export async function fetchAllActs() : Promise<Act[]> {
     const {data} = await fetch(
@@ -42,4 +43,31 @@ export async function postAct(act: Act) : Promise<Status> {
     })
     console.log(result)
     return result
+}
+
+export async function fetchActByActId(actId: string): Promise<Act> {
+    const headers = await setHeaders()
+    const {data} = await fetch(`${process.env.REST_API_URL}/apis/act/${actId}`, {
+        method: "GET",
+        headers
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok')
+        }
+        return response.json()
+    })
+    return ActSchema.parse(data)
+}
+
+export async function fetchActsByActProfileId(actProfileId: string) : Promise<Act[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/act/actProfileId/${actProfileId}`, {
+        method: 'GET',
+        headers: await setHeaders()
+    }).then(response => {
+        if(!response.ok) {
+            throw new Error('Request failed')
+        }
+        return response.json()
+    })
+    return ActSchema.array().parse(data)
 }

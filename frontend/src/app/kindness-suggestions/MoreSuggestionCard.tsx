@@ -1,16 +1,17 @@
 import {Button} from "flowbite-react";
-import {Suggestion} from "@/app/kindness-suggestions/SuggestionCard";
+import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
+import {Profile} from "@/utils/models/profile/profile.model";
+import {CreateCommitment} from "@/app/kindness-suggestions/CreateCommitment";
 
 type MoreSuggestionProps = {
-    moreSuggestion: Suggestion
+    suggestion: Suggestion
+    profile: Profile
 }
 
 
 export function MoreSuggestionCard(props: MoreSuggestionProps) {
 
-    let {moreSuggestion} = props;
-    let content = moreSuggestion.suggestionContent;
-    let date = moreSuggestion.suggestionDate;
+    let {suggestion, profile} = props;
 
     return (
         <section>
@@ -23,7 +24,7 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
             </div>
             <div className="relative z-10 flex flex-col items-center justify-center text-center w-full">
                 <h1 className="md:text-4xl text-2xl font-bold">Act of Kindness</h1>
-                <p className="text-lg md:text-xl p-4">{content}</p>
+                <p className="text-lg md:text-xl p-4">{suggestion.suggestionContent}</p>
             </div>
         </div>
             </div>
@@ -35,7 +36,8 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
             </div>
             <div className="flex items-center justify-center gap-x-[10%] whitespace-nowrap mb-16">
                 <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                    <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Plan to do it!</Button>
+                    {profile &&
+                    <CreateCommitment profile={profile} suggestionId={suggestion.suggestionId}/>}
                 </div>
 
                 <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >

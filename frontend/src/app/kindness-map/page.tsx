@@ -2,25 +2,12 @@
 import {Button} from "flowbite-react";
 import {KindnessMap} from "@/app/kindness-map/kindnes-map";
 import {Act} from "@/app/kindness-feed/page";
+import {fetchAllActs} from "@/utils/models/act/act.action";
 
-export default function () {
+export default async function () {
 
-	let searchLocation
-	let acts = {
-		actId: '01956880-ef3d-7a51-8064-68da52150696',
-		actProfileId: '0195687b-bead-76eb-9385-0a2111533b1c',
-		actContent: 'Placeholder act content',
-		actDateTime: new Date(2025, 2, 5, 9, 0, 0),
-		actImageUrl: 'https://placecats.com/neo_2/300/200',
-		actLat: '-30.94784',
-		actLng: '19.36249',
-		actAddress: '2301 Zero St, Abq, NM',
-		actProfileUsername: 'janedoe456',
-		actProfilePicUrl: null,
-		actLikeLikes: 5,
-		actCommentComments: 3
-	}
-
+	let acts = (await fetchAllActs()).filter(act => act.actLat)
+console.log(acts)
 	return (
 		<>
 			<section id="replace-banner" className="text-black m-16 flex items-center justify-center">
