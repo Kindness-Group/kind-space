@@ -1,23 +1,25 @@
 'use server'
 
-import React from "react";
 import {Act} from "@/utils/models/act/act.model";
 import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
-import {fetchLikesByLikeActId} from "@/utils/models/like/like.action";
+import {fetchLikesByLikeActId, postLike} from "@/utils/models/like/like.action";
 import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
+import {CreateLike} from "@/app/layout-components/CreateLike";
 
 
 type ActProps = {
 	act: Act;
+	isLiked?: boolean;
 }
 
 export async function ActCard (props: ActProps) {
-	let {act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actLat, actLng, actAddress}} = props;
+	let {act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actAddress}} = props;
 	const profile = await fetchProfileByProfileId(actProfileId)
 	const likes = await fetchLikesByLikeActId(actId)
 	const numberOfLikes = likes?.length
 	const comments = await fetchCommentsByCommentActId(actId)
 	const numberOfComments = comments?.length
+
 
 	return (
 		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
@@ -32,13 +34,11 @@ export async function ActCard (props: ActProps) {
 				<p className="bg-gray-100 mx-auto text-base text-gray-900 w-[95%] p-4 my-4">{actContent}</p>
 			</section>
 
+
+
 			<footer className="px-6 pb-6 flex justify-between">
 				<div className="flex gap-10">
-					<div className="flex items-center">
-						<a href="#" className="mr-3"><img
-							src="https://img.icons8.com/flat_round/30/000000/hearts.png" alt="heart image"/></a>
-						<a href="#" className="uppercase font-bold text-sm text-gray-600 hover:underline">Love</a>
-					</div>
+					<CreateLike actId={actId} profileId={actProfileId}/>
 					<div className="flex">
 						<a href={`/postdetails/${actId}`} className="self-end mr-3"><img src="/comment_message_communication_icon.png" alt="chat bubble" className="w-9"/></a>
 						<a href={`/postdetails/${actId}`} className="uppercase font-bold self-center text-sm text-gray-600 hover:underline">Comments ({numberOfComments})</a>

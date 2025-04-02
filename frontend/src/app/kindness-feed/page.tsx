@@ -4,10 +4,22 @@ import React from 'react';
 import {Button} from "flowbite-react";
 import {ActCard} from "@/app/layout-components/ActCard";
 import {fetchAllActs} from "@/utils/models/act/act.action";
+import {fetchLikesByLikeProfileId} from "@/utils/models/like/like.action";
+import {getSession} from "@/utils/auth.utils";
+import {Act} from "@/utils/models/act/act.model";
+import {Like} from "@/utils/models/like/like.model";
 
 export default async function KindnessFeed() {
     // Sample data - in a real app, you would fetch this from an API
     const acts = await fetchAllActs()
+    const session=await getSession()
+    const profileId =session?.profile.profileId
+    let likedActs: {[key:string]:Like}= {}
+
+
+    if (profileId){
+        likedActs=await fetchLikesByLikeProfileId(profileId);
+    }
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -29,7 +41,9 @@ export default async function KindnessFeed() {
 
             <div className="max-w-2xl mx-auto">
                 {acts.map((post, index) => (
-                    <ActCard act={post} key={index} />
+                    <ActCard act={post} key={index}
+                     isLiked={likedActs[post.actId] !==undefined}/>
+
                 ))}
             </div>
         </div>
