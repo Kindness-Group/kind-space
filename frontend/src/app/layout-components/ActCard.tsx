@@ -5,6 +5,8 @@ import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
 import {fetchLikesByLikeActId, postLike} from "@/utils/models/like/like.action";
 import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
 import {CreateLike} from "@/app/layout-components/CreateLike";
+import {DeleteAct} from "@/utils/models/act/act.action";
+import {DeleteButton} from "@/components/delete-button";
 
 
 type ActProps = {
@@ -20,14 +22,20 @@ export async function ActCard (props: ActProps) {
 	const comments = await fetchCommentsByCommentActId(actId)
 	const numberOfComments = comments?.length
 
-
 	return (
+		<>
 		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
 			<header className="p-4">
 				<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
-				<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
+				<div className="flex space-x-3">
+					<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
+					<a href={`../kind-act-post/${actId}`}>edit post</a>
+					<DeleteButton actId={actId} />
+				</div>
 				<p className="text-sm text-gray-600">{actAddress} - {actDateTime?.toDateString()}</p>
+
 			</header>
+
 
 			<section>
 				{actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}
@@ -50,5 +58,6 @@ export async function ActCard (props: ActProps) {
 				</div>
 			</footer>
 		</section>
+		</>
 	)
 }

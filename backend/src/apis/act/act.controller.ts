@@ -335,14 +335,22 @@ export async function putActController(request: Request, response: Response): Pr
         if (profileIdFromSession !== act.actProfileId) {
             return response.json({status: 400, message: "you cannot update a profile that is not yours", data: null})
         }
+
         //update the act with the new data
         act.actAddress = actAddress
         act.actContent = actContent
         act.actImageUrl = actImageUrl
-        act.actLat = actLat
-        act.actLng = actLng
+        act.actLat = null
+        act.actLng = null
 
-        //update the act in the database
+        if (actAddress) {
+            const geoLocation: LocationResponse = await Geocod(actAddress)
+
+            act.actLat = geoLocation.lat
+            act.actLng = geoLocation.lng
+
+        }
+            //update the act in the database
         await updateActByActId(act)
 
         //return a response to the client with a success message
@@ -353,4 +361,5 @@ export async function putActController(request: Request, response: Response): Pr
         // if an error occurs, return a preformatted response to the client
         return response.json({status: 500, message: "internal server error", data: null})
     }
+
 }

@@ -71,3 +71,42 @@ export async function fetchActsByActProfileId(actProfileId: string) : Promise<Ac
     })
     return ActSchema.array().parse(data)
 }
+
+
+export async function editAct(act: Act) : Promise<Status> {
+    const result = await fetch(
+        `${process.env.PUBLIC_API_URL}/apis/act/${act.actId}`,
+        {
+            method: 'PUT',
+            headers:await setHeaders(),
+            body: JSON.stringify(act)
+        }
+    ).then(response => {
+        if( !response.ok ) {
+            throw new Error('Network response failed')
+        }
+        return response.json()
+    }).catch(error => {
+        console.error(error)
+        throw error
+    })
+    console.log(result)
+    return result
+}
+
+export async function DeleteAct(actId: string) : Promise<Status> {
+    const result = await fetch(`${process.env.PUBLIC_API_URL}/apis/act/${actId}`, {
+        method: 'DELETE',
+        headers: await setHeaders()
+    }).then(response => {
+        if( !response.ok ) {
+            throw new Error('Network response failed')
+        }
+        return response.json()
+    }).catch(error => {
+        console.error(error)
+        throw error
+    })
+    console.log(result)
+    return result
+}
