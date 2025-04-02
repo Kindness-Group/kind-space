@@ -29,7 +29,7 @@ export async function ActCard (props: ActProps) {
 				<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
 				<div className="flex space-x-3">
 					<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
-					<a href={`../kind-act-post/${actId}`}>edit post</a>
+					<a href={`/postdetails/${actId}`}>edit post</a>
 					<DeleteButton actId={actId} />
 				</div>
 				<p className="text-sm text-gray-600">{actAddress} - {actDateTime?.toDateString()}</p>

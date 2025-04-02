@@ -9,9 +9,7 @@ import { Status } from '@/utils/interfaces/Status'
 import {editAct, postAct} from "@/utils/models/act/act.action";
 import {DisplayError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
-import {v7 as uuid} from "uuid";
 import {z} from "zod";
-import {router} from "next/client";
 import {postImage} from "@/utils/models/image/image.action";
 import {ImageUploadDropZone} from "@/components/image-upload-dropzone";
 import {redirect, useRouter} from "next/navigation";

@@ -8,7 +8,7 @@ type CommentProps = {
 }
 
 export async function CommentCard (prop: CommentProps) {
-	let {content: {commentContent, commentDateTime}} = prop
+	let {content: {commentContent, commentDateTime, commentId}} = prop
 	const session = await getSession()
 	const profileUserName = session?.profile.profileUsername
 	return (
@@ -20,6 +20,7 @@ export async function CommentCard (prop: CommentProps) {
 					<div>
 						<h3 className="font-semibold">{profileUserName}</h3>
 						<p className="text-sm text-gray-500">{`Posted on ${commentDateTime?.toDateString()}`}</p>
+						{/*<a href={`../edit-comment/${commentId}`}>edit post</a>*/}
 					</div>
 				</div>
 				<p className="text-gray-700">{commentContent}</p>

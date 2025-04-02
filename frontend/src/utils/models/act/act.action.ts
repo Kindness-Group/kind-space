@@ -2,9 +2,8 @@
 
 import { Act, ActSchema } from '@/utils/models/act/act.model'
 import {Status} from "@/utils/interfaces/Status";
-import {error} from "next/dist/build/output/log";
 import {setHeaders} from "@/utils/set-headers.utils";
-import {Comment, CommentSchema} from "@/utils/models/comment/comment.model";
+
 
 export async function fetchAllActs() : Promise<Act[]> {
     const {data} = await fetch(
