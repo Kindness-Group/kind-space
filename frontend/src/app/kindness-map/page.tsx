@@ -1,6 +1,6 @@
 
 import {Button} from "flowbite-react";
-import {KindnessMap} from "@/app/kindness-map/kindnes-map";
+import {KindnessMap} from "@/app/kindness-map/kindness-map";
 import {Act} from "@/app/kindness-feed/page";
 import {fetchAllActs} from "@/utils/models/act/act.action";
 
