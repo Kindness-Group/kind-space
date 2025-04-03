@@ -2,13 +2,15 @@
 
 import {Comment} from '@/utils/models/comment/comment.model'
 import {getSession} from "@/utils/auth.utils";
+import {CommentForm} from "@/app/postdetails/[actId]/comment-form";
+import {EditCommentForm} from "@/app/postdetails/[actId]/edit-comment-form";
 
 type CommentProps = {
-	content: Comment
+	comment: Comment
 }
 
 export async function CommentCard (prop: CommentProps) {
-	let {content: {commentContent, commentDateTime, commentId}} = prop
+	let {comment} = prop
 	const session = await getSession()
 	const profileUserName = session?.profile.profileUsername
 	return (
@@ -17,13 +19,15 @@ export async function CommentCard (prop: CommentProps) {
 				<div className="flex items-center mb-2">
 					<img src="https://imageplaceholder.net/200" alt="User Avatar"
 						  className="w-10 h-10 rounded-full mr-3"/>
-					<div>
-						<h3 className="font-semibold">{profileUserName}</h3>
-						<p className="text-sm text-gray-500">{`Posted on ${commentDateTime?.toDateString()}`}</p>
-						{/*<a href={`../[commentId]/${commentId}`}>edit post</a>*/}
+					<div className="flex w-full justify-between">
+						<div>
+							<h3 className="font-semibold">{profileUserName}</h3>
+							<p className="text-sm text-gray-500">{`Posted on ${comment.commentDateTime?.toDateString()}`}</p>
+						</div>
+						<EditCommentForm comment={comment} />
 					</div>
 				</div>
-				<p className="text-gray-700">{commentContent}</p>
+				<p className="text-gray-700">{comment.commentContent}</p>
 			</div>
 		</>
 	)

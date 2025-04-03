@@ -28,10 +28,7 @@ export default async function (props: PageProps<{actId:string}>) {
 					<h2 className="text-2xl font-bold mb-4">Comments</h2>
 					<div className="space-y-4">
 						{comments.map((comment, index) => (
-							<div key={index}>
-								<CommentCard content={comment} />
-								<EditCommentForm comment={comment} />
-							</div>
+							<CommentCard comment={comment} key={index} />
 						))}
 					</div>
 					{(commentProfileId && commentActId) && <CommentForm commentActId={commentActId} commentProfileId={commentProfileId}/>}

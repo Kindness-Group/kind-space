@@ -7,7 +7,7 @@ import {Comment, CommentSchema} from "@/utils/models/comment/comment.model";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {editComment, postComment} from "@/utils/models/comment/comment.action";
 import {Label, Textarea} from "flowbite-react";
 import {DisplayError} from "@/components/display-error";
@@ -17,6 +17,7 @@ import {useRouter} from "next/navigation";
 type Props = {comment:Comment};
 
 export function EditCommentForm(props: Props) {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const {comment:{commentId, commentProfileId, commentContent, commentDateTime, commentActId}} = props;
 
 	const router = useRouter();
@@ -59,11 +60,11 @@ export function EditCommentForm(props: Props) {
 
 	return (
 		<>
-			<Button onClick={() => setOpenModal(true)}>Edit Comment</Button>
+			<Button onClick={() => setOpenModal(true)} size="xs" color="blue" className="text-justify">Edit Comment</Button>
 			<Modal dismissible show={openModal} size="lg" onClose={onCloseModal}>
 				<ModalHeader/>
 				<ModalBody>
-					<form onSubmit={handleSubmit(fireServerAction)} className="mt-8 bg-white p-4 rounded-lg shadow">
+					<form onSubmit={handleSubmit(fireServerAction)} id="form" className="mt-8 bg-white p-4 rounded-lg shadow">
 						<h3 className="text-lg font-semibold mb-4">Edit Comment</h3>
 						<div className="mb-4">
 							<Label htmlFor="comment" className="block text-gray-700 font-medium mb-2">Comment</Label>
