@@ -55,7 +55,7 @@ export function KindnessMap(props: MapCardProps) {
 							{selectedAct.actContent}
 							<a href={`../postdetails/${selectedAct.actId}`}>Click To See Post</a>
 						</div>
-						{selectedAct.actImageUrl && (<img width="60%" alt="kind image" src={selectedAct.actImageUrl}/>)}
+						{selectedAct.actImageUrl && (<img width="75%" alt="kind image" src={selectedAct.actImageUrl}/>)}
 					</Popup>
 				)}
 			</Map>
