@@ -21,7 +21,7 @@ export function EditCommentForm(props: Props) {
 
 	const router = useRouter();
 	const[status, setStatus] = useState<Status|null>(null)
-	const [openModal, setOpenModal] = useState(true);
+	const [openModal, setOpenModal] = useState(false);
 
 	const defaultValues:Comment = {
 		commentId: commentId,
@@ -60,7 +60,7 @@ export function EditCommentForm(props: Props) {
 	return (
 		<>
 			<Button onClick={() => setOpenModal(true)}>Edit Comment</Button>
-			<Modal show={openModal} size="lg" onClose={onCloseModal} popup>
+			<Modal dismissible show={openModal} size="lg" onClose={onCloseModal}>
 				<ModalHeader/>
 				<ModalBody>
 					<form onSubmit={handleSubmit(fireServerAction)} className="mt-8 bg-white p-4 rounded-lg shadow">
