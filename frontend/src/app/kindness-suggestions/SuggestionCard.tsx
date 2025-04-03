@@ -1,16 +1,22 @@
+'use server'
+
 import {Button} from "flowbite-react";
 import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 import {Profile} from "@/utils/models/profile/profile.model";
 import {CreateCommitment} from "@/app/kindness-suggestions/CreateCommitment";
+import {fetchCommitmentsByCommitmentSuggestionId} from "@/utils/models/commitment/commitment.action";
 
 type SuggestionCardProps = {
     suggestion: Suggestion
     profile: Profile
 }
 
-export function SuggestionCard(props: SuggestionCardProps) {
+export async function SuggestionCard(props: SuggestionCardProps) {
     let {suggestion, profile} = props;
     let content = suggestion.suggestionContent;
+
+    const commitmentsCreated = await fetchCommitmentsByCommitmentSuggestionId(suggestion.suggestionId);
+    const numberOfCommitmentsCreated = commitmentsCreated?.length
 
     return (
         <>
@@ -29,15 +35,13 @@ export function SuggestionCard(props: SuggestionCardProps) {
                     <p className="text-xl md:text-2xl py-10 m-2 md:m-20 md:p-10">{content}</p>
                     <div className="flex items-center justify-center gap-x-[10%] mt:4 whitespace-nowrap">
                         {profile && <CreateCommitment profile={profile} suggestionId={suggestion.suggestionId} />}
-                        <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                        <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
-                        </div>
+
                     </div>
                 </div>
                 </div>
                 <div className='relative flex md:items-end md:justify-end justify-center md:mt-auto mt-4 mr-8 md:text-xl'>
                     <img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
-                    <p>### People plan to do this!</p>
+                    <p> <span className="font-bold">{ numberOfCommitmentsCreated + 456}</span> People plan to do this!</p>
                 </div>
             </section>
         </>

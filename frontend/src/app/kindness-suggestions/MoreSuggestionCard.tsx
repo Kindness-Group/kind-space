@@ -1,7 +1,12 @@
+'use server'
+
 import {Button} from "flowbite-react";
 import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 import {Profile} from "@/utils/models/profile/profile.model";
 import {CreateCommitment} from "@/app/kindness-suggestions/CreateCommitment";
+import {fetchCommitmentsByCommitmentSuggestionId} from "@/utils/models/commitment/commitment.action";
+import {CommitmentCompleted} from "@/app/viewprofile/CommitmentCompleted";
+import React from "react";
 
 type MoreSuggestionProps = {
     suggestion: Suggestion
@@ -9,9 +14,12 @@ type MoreSuggestionProps = {
 }
 
 
-export function MoreSuggestionCard(props: MoreSuggestionProps) {
+export async function MoreSuggestionCard(props: MoreSuggestionProps) {
 
     let {suggestion, profile} = props;
+    const commitmentsCreated = await fetchCommitmentsByCommitmentSuggestionId(suggestion.suggestionId);
+    const numberOfCommitmentsCreated = commitmentsCreated?.length
+
 
     return (
         <section>
@@ -32,7 +40,7 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
         <div id="below-image" className="position:relative flex flex-col items-center justify-center w-full mt-[2vh] mb-[12vh]">
             <div className="flex items-center justify-center my-4">
                 <img src="/heart-icon-cropped.png" className="w-5" alt="heart icon"/>
-                <p>### People plan to do this!</p>
+                <p><span className="font-bold">{ numberOfCommitmentsCreated }</span> People plan to do this!</p>
             </div>
             <div className="flex items-center justify-center gap-x-[10%] whitespace-nowrap mb-16">
                 <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
@@ -40,9 +48,6 @@ export function MoreSuggestionCard(props: MoreSuggestionProps) {
                     <CreateCommitment profile={profile} suggestionId={suggestion.suggestionId}/>}
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-                    <Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
-                </div>
 
             </div>
         </div>

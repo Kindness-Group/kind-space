@@ -31,8 +31,6 @@ export function CreateLike(props:Props) {
                 router.refresh()
 
             }
-
-
         }
         catch (error) {
             console.error(error);
@@ -44,10 +42,11 @@ export function CreateLike(props:Props) {
     return (
     <>
     <div onClick={fireServerAction} className="flex items-center">
-        <span className="mr-3"><img
-            src="https://img.icons8.com/flat_round/30/000000/hearts.png" alt="heart image"/></span>
+
         <span className="uppercase font-bold text-sm text-gray-600 hover:underline">Love</span>
     </div>
         </>
     )
 }
+
+// {actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}
