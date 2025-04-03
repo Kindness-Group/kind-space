@@ -56,7 +56,8 @@ create table if not exists commitment (
   commitment_completed boolean,
   commitment_date_time timestamp with time zone not null,
   foreign key (commitment_suggestion_id) references suggestion (suggestion_id),
-  foreign key (commitment_profile_id) references profile (profile_id)
+  foreign key (commitment_profile_id) references profile (profile_id),
+  primary key (commitment_profile_id, commitment_suggestion_id)
 );
 create index on commitment(commitment_suggestion_id);
 create index on commitment(commitment_profile_id);

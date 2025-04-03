@@ -6,6 +6,7 @@ import {Status} from "@/utils/interfaces/Status";
 import {postCommitment} from "@/utils/models/commitment/commitment.action";
 import {Profile} from "@/utils/models/profile/profile.model";
 import {DisplayStatus} from "@/components/display-status";
+import {useRouter} from "next/navigation";
 
 type Props = {
     suggestionId:string
@@ -17,6 +18,8 @@ export function CreateCommitment(props: Props) {
 
     const {suggestionId, profile} = props;
 
+    const router = useRouter();
+
     const fireServerAction = async () => {
         const commitment = {
             commitmentSuggestionId: suggestionId,
@@ -27,6 +30,9 @@ export function CreateCommitment(props: Props) {
        try {
            const response = await postCommitment(commitment)
                setStatus(response)
+           if (response.status === 200) {
+               router.refresh()
+           }
        }
        catch (error) {
             console.error(error);

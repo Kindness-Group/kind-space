@@ -50,6 +50,12 @@ export async function postCommitmentController(request: Request, response: Respo
             commitmentDateTime: null
         }
 
+        //select commitment by commitmentSuggestionId and commitmentProfileId
+        const selectedCommitment = await selectCommitmentByProfileAndSuggestionId(commitment.commitmentSuggestionId, commitment.commitmentProfileId)
+        //if commitment is not null return response "commitment already exists"
+        if (selectedCommitment) {
+            return (response.json({status: 400, data: null, message: "You have already committed to this suggestion"}))
+        }
         //create a status object
         const status: Status = {
             status: 200,
