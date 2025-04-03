@@ -7,6 +7,7 @@ import {getSession} from "@/utils/auth.utils";
 import {PageProps} from "@/utils/interfaces/NextComponent";
 import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
 import {fetchActByActId} from "@/utils/models/act/act.action";
+import {EditCommentForm} from "@/app/postdetails/[actId]/edit-comment-form";
 
 
 export default async function (props: PageProps<{actId:string}>) {
@@ -27,11 +28,13 @@ export default async function (props: PageProps<{actId:string}>) {
 					<h2 className="text-2xl font-bold mb-4">Comments</h2>
 					<div className="space-y-4">
 						{comments.map((comment, index) => (
-							<CommentCard content={comment} key={index} />
+							<div key={index}>
+								<CommentCard content={comment} />
+								<EditCommentForm comment={comment} />
+							</div>
 						))}
 					</div>
 					{(commentProfileId && commentActId) && <CommentForm commentActId={commentActId} commentProfileId={commentProfileId}/>}
-
 				</div>
 			</section>
 		</>
