@@ -17,6 +17,7 @@ const router = Router()
 //define commitment route for postCommitment
 router.route('/')
     .post(isLoggedInController, postCommitmentController)
+    .put(isLoggedInController, putCommitmentController)
 
 router.route('/commitmentSuggestionId/:commitmentSuggestionId')
     .delete(isLoggedInController, deleteCommitmentController)
@@ -24,9 +25,6 @@ router.route('/commitmentSuggestionId/:commitmentSuggestionId')
 
 router.route('/commitmentProfileId/:commitmentProfileId')
     .get(getCommitmentsByCommitmentProfileIdController)
-
-router.route('/:commitmentSuggestionId/:commitmentProfileId')
-    .put(isLoggedInController, putCommitmentController)
 
 //export the router with the basePath and router object
 export const commitmentRoute = {basePath, router}

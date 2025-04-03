@@ -17,7 +17,6 @@ export default async function (props: PageProps<{actId:string}>) {
     const profile = session?.profile
     const actProfileId = profile?.profileId
     const act = await fetchActByActId(actId)
-    console.log(act)
 
     return (
         <>

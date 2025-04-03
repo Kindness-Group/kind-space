@@ -56,7 +56,7 @@ export async function postCommitment(commitment: Commitment) : Promise<Status> {
 
 export async function putCommitment(commitment: Commitment) : Promise<Status> {
 	console.log(commitment)
-	return fetch (`${process.env.PUBLIC_API_URL}/apis/commitment/${commitment.commitmentSuggestionId}/${commitment.commitmentProfileId}`,
+	return fetch (`${process.env.PUBLIC_API_URL}/apis/commitment`,
 		{
 			method: 'put',
 			headers: await setHeaders(),

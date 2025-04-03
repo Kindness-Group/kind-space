@@ -193,6 +193,7 @@ export async function putCommitmentController(request: Request, response: Respon
 
         //validate the updated commitment data coming from the request body
         const validationResultForRequestBody = CommitmentSchema.safeParse(request.body)
+        console.log(validationResultForRequestBody.success)
 
         // if the validation of the body is unsuccessful, return a preformatted response to the client
         if (!validationResultForRequestBody.success) {
@@ -229,6 +230,7 @@ export async function putCommitmentController(request: Request, response: Respon
 
 
     } catch (error: unknown) {
+        console.error(error)
         // if an error occurs, return a preformatted response to the client
         return response.json({status: 500, message: "internal server error", data: null})
     }

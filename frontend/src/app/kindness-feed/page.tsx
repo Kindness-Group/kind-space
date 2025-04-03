@@ -10,7 +10,6 @@ import {Act} from "@/utils/models/act/act.model";
 import {Like} from "@/utils/models/like/like.model";
 
 export default async function KindnessFeed() {
-    // Sample data - in a real app, you would fetch this from an API
     const acts = await fetchAllActs()
     const session=await getSession()
     const profileId =session?.profile.profileId
@@ -42,7 +41,7 @@ export default async function KindnessFeed() {
             <div className="max-w-2xl mx-auto">
                 {acts.map((post, index) => (
                     <ActCard act={post} key={index}
-                     isLiked={likedActs[post.actId] !==undefined}/>
+                     isLiked={likedActs[post.actId] !== undefined}/>
 
                 ))}
             </div>

@@ -78,9 +78,11 @@ export async function updateCommitment(commitment: Commitment): Promise<string> 
     return 'Commitment successfully updated'
 }
 
-export async function selectCommitmentByProfileAndSuggestionId(commitmentSuggestionId: string, commitmentProfileId: string): Promise<Commitment> {
+export async function selectCommitmentByProfileAndSuggestionId(commitmentSuggestionId: string, commitmentProfileId: string): Promise<Commitment | null> {
     // select the commitments from the commitment table by commitmentSuggestionId
-    const rowList = await sql`SELECT commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time FROM commitment WHERE commitment_suggestion_id = ${commitmentSuggestionId} AND commitment_profile_id = ${commitmentProfileId}`
+    const rowList = <Commitment[]>await sql`SELECT commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time FROM commitment WHERE commitment_suggestion_id = ${commitmentSuggestionId} AND commitment_profile_id = ${commitmentProfileId}`
 
-    return CommitmentSchema.parse(rowList)
+    const result = CommitmentSchema.array().max(1).parse(rowList)
+
+    return result?.length === 1 ? result[0] : null
 }

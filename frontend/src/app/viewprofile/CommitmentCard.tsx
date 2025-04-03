@@ -4,6 +4,7 @@ import React from "react";
 import {Button} from "flowbite-react";
 import {Commitment} from "@/utils/models/commitment/commitment.model";
 import {fetchSuggestionBySuggestionId} from "@/utils/models/suggestion/suggestion.action";
+import {CommitmentCompleted} from "@/app/viewprofile/CommitmentCompleted";
 
 
 type Props = {
@@ -11,9 +12,9 @@ type Props = {
 }
 
 export async function CommitmentCard(props: Props) {
-	let {commitment: {commitmentSuggestionId}} = props
+	let {commitment} = props
 	// now get the suggestion using commitmentSuggestionId
-	const suggestion = await fetchSuggestionBySuggestionId(commitmentSuggestionId);
+	const suggestion = await fetchSuggestionBySuggestionId(commitment.commitmentSuggestionId);
 
 	return (
 
@@ -26,12 +27,7 @@ export async function CommitmentCard(props: Props) {
 					{suggestion.suggestionContent}
 				</p>
 				<div className="flex space-x-8 mb-1">
-					<div className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
-						{/* TO-DO: make button work with backend to have commitmentCompleted be true when button is
-						 clicked */}
-						<Button color={"light"} className="font-bold bg-white  group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Done!</Button>
-					</div>
-
+					<CommitmentCompleted commitment={commitment} />
 				</div>
 			</div>
 			<div className="relative flex md:mt-auto mb-4 px-8">
