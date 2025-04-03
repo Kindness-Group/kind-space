@@ -1,7 +1,11 @@
 import {Request, Response} from 'express'
 import {
-    Commitment, deleteCommitment,
-    insertCommitment, selectCommitmentsByCommitmentProfileId, selectCommitmentsByCommitmentSuggestionId,
+    Commitment,
+    deleteCommitment,
+    insertCommitment, selectCommitmentByProfileAndSuggestionId,
+    selectCommitmentsByCommitmentProfileId,
+    selectCommitmentsByCommitmentSuggestionId,
+    updateCommitment,
 } from "./commitment.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status";
@@ -9,6 +13,9 @@ import {CommitmentSchema} from "./commitment.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {z} from "zod";
 import {LikeSchema} from "../like/like.validator";
+import {ActSchema} from "../act/act.validator";
+import {Act, selectActByActId, updateActByActId} from "../act/act.model";
+import {Geocod, LocationResponse} from "../act/geocod";
 
 /**
  * Handles GET request for all commitments associated with a thread
@@ -179,4 +186,51 @@ export async function getCommitmentsByCommitmentSuggestionId(request: Request, r
             data: []
         })
     }
+}
+
+export async function putCommitmentController(request: Request, response: Response): Promise<Response<Status>> {
+    try {
+
+        //validate the updated commitment data coming from the request body
+        const validationResultForRequestBody = CommitmentSchema.safeParse(request.body)
+
+        // if the validation of the body is unsuccessful, return a preformatted response to the client
+        if (!validationResultForRequestBody.success) {
+            return zodErrorResponse(response, validationResultForRequestBody.error)
+        }
+
+        //grab the profileId form the session
+        const profileFromSession = request.session?.profile
+        const profileIdFromSession = profileFromSession?.profileId
+
+        //grab the data off the request body
+        const{commitmentSuggestionId, commitmentProfileId, commitmentCompleted} = validationResultForRequestBody.data
+
+        //grab the commitment by commitmentSuggestionId
+        const commitment: Commitment | null = await selectCommitmentByProfileAndSuggestionId(commitmentSuggestionId, commitmentProfileId)
+
+        //if the commitment does not exist, return a preformatted response to the client
+        if (commitment === null) {
+            return response.json({status: 400, message: 'Commitment does not exist', data: null})
+        }
+
+        if (profileIdFromSession !== commitment.commitmentProfileId) {
+            return response.json({status: 400, message: "you cannot update a commitment that is not yours", data: null})
+        }
+
+        //update the commitment with the new data
+        commitment.commitmentCompleted = commitmentCompleted
+
+        //update the commitment in the database
+        await updateCommitment(commitment)
+
+        //return a response to the client with a success message
+        return response.json({status: 200, message: "commitment successfully updated", data: null})
+
+
+    } catch (error: unknown) {
+        // if an error occurs, return a preformatted response to the client
+        return response.json({status: 500, message: "internal server error", data: null})
+    }
+
 }

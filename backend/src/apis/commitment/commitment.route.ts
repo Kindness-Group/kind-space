@@ -4,7 +4,7 @@ import {
     deleteCommitmentController,
     getCommitmentsByCommitmentProfileIdController,
     getCommitmentsByCommitmentSuggestionId,
-    postCommitmentController
+    postCommitmentController, putCommitmentController
 } from "./commitment.controller";
 import {getLikesByLikeProfileIdController} from "../like/like.controller";
 
@@ -24,6 +24,9 @@ router.route('/commitmentSuggestionId/:commitmentSuggestionId')
 
 router.route('/commitmentProfileId/:commitmentProfileId')
     .get(getCommitmentsByCommitmentProfileIdController)
+
+router.route('/:commitmentSuggestionId/:commitmentProfileId')
+    .put(isLoggedInController, putCommitmentController)
 
 //export the router with the basePath and router object
 export const commitmentRoute = {basePath, router}

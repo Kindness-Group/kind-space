@@ -1,6 +1,7 @@
 import {z} from 'zod'
 import {CommitmentSchema} from "./commitment.validator";
 import {sql} from "../../utils/database.utils";
+import {Act} from "../act/act.model";
 
 // The shape of a commitment object
 export type Commitment = z.infer<typeof CommitmentSchema>
@@ -68,4 +69,18 @@ export async function selectCommitmentsByCommitmentSuggestionId(commitmentSugges
     const rowList = <Commitment[]>await sql`SELECT commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time FROM commitment WHERE commitment_suggestion_id = ${commitmentSuggestionId}`
 
     return CommitmentSchema.array().parse(rowList)
+}
+
+export async function updateCommitment(commitment: Commitment): Promise<string> {
+    const {commitmentSuggestionId, commitmentCompleted, commitmentProfileId} = commitment
+    await sql `UPDATE commitment Set commitment_completed = ${commitmentCompleted}
+    WHERE commitment_suggestion_id = ${commitmentSuggestionId} AND commitment_profile_id = ${commitmentProfileId}`
+    return 'Commitment successfully updated'
+}
+
+export async function selectCommitmentByProfileAndSuggestionId(commitmentSuggestionId: string, commitmentProfileId: string): Promise<Commitment> {
+    // select the commitments from the commitment table by commitmentSuggestionId
+    const rowList = await sql`SELECT commitment_suggestion_id, commitment_profile_id, commitment_completed, commitment_date_time FROM commitment WHERE commitment_suggestion_id = ${commitmentSuggestionId} AND commitment_profile_id = ${commitmentProfileId}`
+
+    return CommitmentSchema.parse(rowList)
 }

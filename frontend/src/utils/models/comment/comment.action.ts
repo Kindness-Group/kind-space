@@ -72,3 +72,20 @@ export async function fetchCommentByCommentId(commentId: string): Promise<Commen
     })
     return CommentSchema.parse(data)
 }
+
+export async function DeleteComment(commentId: string) : Promise<Status> {
+    const result = await fetch(`${process.env.PUBLIC_API_URL}/apis/comment/${commentId}`, {
+        method: 'DELETE',
+        headers: await setHeaders()
+    }).then(response => {
+        if( !response.ok ) {
+            throw new Error('Network response failed')
+        }
+        return response.json()
+    }).catch(error => {
+        console.error(error)
+        throw error
+    })
+    console.log(result)
+    return result
+}

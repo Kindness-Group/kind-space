@@ -11,12 +11,13 @@ export async function CommentCard (prop: CommentProps) {
 	let {content: {commentContent, commentDateTime, commentId}} = prop
 	const session = await getSession()
 	const profileUserName = session?.profile.profileUsername
+	const profilePictureUrl = session?.profile.profilePictureUrl
+
 	return (
 		<>
 			<div className="bg-white p-4 rounded-lg shadow">
 				<div className="flex items-center mb-2">
-					<img src="https://imageplaceholder.net/200" alt="User Avatar"
-						  className="w-10 h-10 rounded-full mr-3"/>
+					<img src={profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="w-10 h-10 rounded-full mr-3"/>
 					<div>
 						<h3 className="font-semibold">{profileUserName}</h3>
 						<p className="text-sm text-gray-500">{`Posted on ${commentDateTime?.toDateString()}`}</p>
