@@ -48,7 +48,7 @@ export default async function Home() {
                         <p className="p-8 text-center text-lg">Today's act of kindness suggestion:</p>
                         <div className="container mx-auto">
                             <a href="/kindness-suggestions">
-                            <SuggestionCard suggestion = {suggestion}/>
+                                <SuggestionCard suggestion = {suggestion}/>
                             </a>
                         </div>
                     </div>

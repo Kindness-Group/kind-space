@@ -21,11 +21,16 @@ export default async function () {
 	const acts = await fetchActsByActProfileId(profileFromSession.profileId)
 	return (
 		<>
-			<div className="bg-gray-300 mx-auto md:max-w-[44rem] lg:max-w-[55rem] min-h-screen">
+			<div className="bg-cover bg-center" style={{ backgroundImage: "url('/sunset2.png')" }}>
+			<div className=" mx-auto md:max-w-[44rem] lg:max-w-[55rem] min-h-screen">
 				<ProfileCard profile={profile} />
+				<div className="bg-white">
+					<h2 className="pt-4 text-xl font-semibold text-center">Your Posts</h2>
 				{acts.map((act, index) => (
 					<ActCard act={act} key={index} />
 				))}
+				</div>
+			</div>
 			</div>
 		</>
 	)

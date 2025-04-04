@@ -21,10 +21,11 @@ export default async function KindnessFeed() {
     }
 
     return (
+        <div className="bg-cover bg-center" style={{ backgroundImage: "url('/sunset2.png')" }}>
         <div className="container mx-auto px-4 py-8">
             <div className="text-center mb-8">
                 <section id="banner" className="text-black mt-16 mb-4 flex items-center justify-center">
-                    <img src="/heart-icon.png" className="w-12" alt="heart-icon" />
+                    <img src="/heart-icon-cropped.png" className="w-12" alt="heart-icon" />
                     <h1 className="md:text-2xl text-xl text-center font-bold">Kindness Feed</h1>
                 </section>
                 <p className="text-xl">Spreading Kindness One Post at Time</p>
@@ -45,6 +46,7 @@ export default async function KindnessFeed() {
 
                 ))}
             </div>
+        </div>
         </div>
     );
 }
