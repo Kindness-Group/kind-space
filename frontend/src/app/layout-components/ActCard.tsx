@@ -5,12 +5,8 @@ import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
 import {fetchLikesByLikeActId, fetchLikesByLikeProfileId, postLike} from "@/utils/models/like/like.action";
 import {fetchCommentsByCommentActId} from "@/utils/models/comment/comment.action";
 import {CreateLike} from "@/app/layout-components/CreateLike";
-import {DeleteAct} from "@/utils/models/act/act.action";
-import {DeleteButton} from "@/components/delete-button";
 import React from "react";
-import {getSession} from "@/utils/auth.utils";
-import {Button, Dropdown, DropdownItem} from "flowbite-react";
-import {HiDotsVertical} from "react-icons/hi";
+import {Dropdown, DropdownItem} from "flowbite-react";
 
 
 type ActProps = {
@@ -39,7 +35,7 @@ export async function ActCard (props: ActProps) {
 					<h3 className="text-lg font-bold"><a href={`../viewprofile/${profile.profileUsername}`}>{profile.profileUsername}</a></h3>
 					<Dropdown label={""} inline>
 						<DropdownItem>
-						<a href={`/postdetails/${actId}`}>edit post</a>
+						<a href={`/kind-act-post/${actId}`}>edit post</a>
 						{/*<DeleteButton actId={actId} />*/}
 						</DropdownItem>
 					</Dropdown>
