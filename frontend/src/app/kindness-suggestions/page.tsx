@@ -11,9 +11,11 @@ export default async function DailySuggestionPage() {
     const session = await getSession();
     const profile = session?.profile
 
-    const today = new Date();
-    const todayDate = today.toISOString().split("T")[0];
+    const { DateTime } = require('luxon');
+    const todayDate = DateTime.now().setZone('America/Denver').toISODate();
     console.log(todayDate)
+    // const today = new Date();
+    // const todayDate = today.toISOString().split("T")[0];
     const suggestions = await fetchSuggestionsBySuggestionDate(new Date(todayDate))
     console.log(suggestions)
     const todaySuggestion = suggestions.shift();
