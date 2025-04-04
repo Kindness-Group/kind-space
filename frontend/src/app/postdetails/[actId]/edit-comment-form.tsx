@@ -1,7 +1,7 @@
 'use client'
 import { Status } from '@/utils/interfaces/Status'
 
-import { Button, Checkbox, Modal, ModalBody, ModalHeader} from "flowbite-react";
+import {Button, Checkbox, Dropdown, DropdownItem, Modal, ModalBody, ModalHeader} from "flowbite-react";
 import {v7 as uuid} from "uuid";
 import {Comment, CommentSchema} from "@/utils/models/comment/comment.model";
 import {z} from "zod";
@@ -60,7 +60,11 @@ export function EditCommentForm(props: Props) {
 
 	return (
 		<>
-			<Button onClick={() => setOpenModal(true)} size="xs" color="blue" className="text-justify">Edit Comment</Button>
+			<Dropdown label={""} inline>
+				<DropdownItem>
+			<a onClick={() => setOpenModal(true)} size="xs" color="blue" className="text-justify">Edit Comment</a>
+				</DropdownItem>
+			</Dropdown>
 			<Modal dismissible show={openModal} size="lg" onClose={onCloseModal}>
 				<ModalHeader/>
 				<ModalBody>

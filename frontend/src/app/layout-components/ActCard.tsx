@@ -37,7 +37,7 @@ export async function ActCard (props: ActProps) {
 				<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
 				<div className="flex justify-between space-x-3">
 					<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
-					<Dropdown label={<HiDotsVertical className="w-5 h-5 text-gray-600" />} inline>
+					<Dropdown label={""} inline>
 						<DropdownItem>
 						<a href={`/postdetails/${actId}`}>edit post</a>
 						{/*<DeleteButton actId={actId} />*/}
