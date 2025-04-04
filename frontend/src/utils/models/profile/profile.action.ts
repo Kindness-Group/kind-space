@@ -19,7 +19,6 @@ export async function fetchProfileByProfileId(profileId: string): Promise<Profil
 }
 
 export async function putProfile(profile: Profile) : Promise<Status> {
-    console.log(profile)
     return fetch (`${process.env.PUBLIC_API_URL}/apis/profile/${profile.profileId}`,
         {
             method: 'put',
