@@ -43,7 +43,7 @@ export function CreateLike(props:Props) {
     <>
     <div onClick={fireServerAction} className="flex items-center">
 
-        <span className="uppercase font-bold text-sm text-gray-600 hover:underline">Love</span>
+        <span className="cursor-pointer uppercase font-bold text-sm text-gray-600 hover:underline">Love</span>
     </div>
         </>
     )
