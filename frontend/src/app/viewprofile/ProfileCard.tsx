@@ -25,9 +25,9 @@ export async function ProfileCard(props: Props) {
 
 	return (
 		<>
-			<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded">
+			<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-auto max-h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded">
 				{/* Header */}
-				<ProfileBanner profile={profile}/>
+
 				{/* Profile Section */}
 				<section className="text-center mb-6 p-4">
 					<img src={profile?.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile picture" className="w-48 h-48 mx-auto"/>
@@ -37,11 +37,19 @@ export async function ProfileCard(props: Props) {
 					</p>
 				</section>
 				{/* Daily Kindness Section */}
-				{commitments.map((commitment, index) => (
-					<CommitmentCard commitment={commitment} key={index} />
-				))}
+				{commitments.length > 1 ?
+					<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded">
+						{(commitments.map((commitment, index) => (
+					<CommitmentCard commitment={commitment} key={index} />)))}
+					</div>
+					: (<p>You think you're all bad or what? You don't have any commitments, click to view today's
+						<a href="../kindness-suggestions" className="hover:text-yellow-400 font-bold text-purple-800 justify-center"> Act of Kindness Suggestions</a>
+					</p>)
+				}
+
 			</div>
 		</>
 	)
 }
 
+// isLiked ? "https://img.icons8.com/flat_round/30/000000/hearts.png" : "/heart-icon-cropped.png"

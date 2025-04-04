@@ -1,8 +1,9 @@
 'use server'
 
 import React from "react";
-import {Profile} from "@/app/viewprofile/page";
+
 import {getSession} from "@/utils/auth.utils";
+import {Profile} from "@/utils/models/profile/profile.model";
 
 type Props = {
     profile: Profile;

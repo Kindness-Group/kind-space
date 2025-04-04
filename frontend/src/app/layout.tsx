@@ -20,12 +20,14 @@ export default function RootLayout(props : RootLayoutProps) {
     const { children } = props
     return (
         <html  lang="en" suppressHydrationWarning>
-        <body>
+        <body className="min-h-screen flex flex-col">
         <Navigation/>
+        <div className="flex-grow">
         {children}
-        <div className="bg-gray-900 text-white p-6 text-center">
-            <p>placeholder footer</p>
         </div>
+        <footer className="bg-gray-900 text-white p-6 text-center">
+            <p>KindSpace Created by: Kindness Group, Deep Dive Full-Stack Coding Bootcamp 2026</p>
+        </footer>
         </body>
         </html>
     )

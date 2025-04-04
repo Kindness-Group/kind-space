@@ -36,7 +36,7 @@ export async function ActCard (props: ActProps) {
 				{actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}<header className="p-4">
 				<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
 				<div className="flex justify-between space-x-3">
-					<h3 className="text-lg font-bold">{profile.profileUsername}</h3>
+					<h3 className="text-lg font-bold"><a href={`../viewprofile/${profile.profileUsername}`}>{profile.profileUsername}</a></h3>
 					<Dropdown label={""} inline>
 						<DropdownItem>
 						<a href={`/postdetails/${actId}`}>edit post</a>

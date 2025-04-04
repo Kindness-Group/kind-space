@@ -7,6 +7,7 @@ import {fetchActsByActProfileId} from "@/utils/models/act/act.action";
 import {getSession} from "@/utils/auth.utils";
 import {redirect} from "next/navigation";
 import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
+import {ProfileBanner} from "@/app/viewprofile/ProfileBanner";
 
 
 export default async function () {
@@ -23,6 +24,7 @@ export default async function () {
 		<>
 			<div className="bg-cover bg-center" style={{ backgroundImage: "url('/sunset2.png')" }}>
 			<div className=" mx-auto md:max-w-[44rem] lg:max-w-[55rem] min-h-screen">
+				<ProfileBanner profile={profile}/>
 				<ProfileCard profile={profile} />
 				<div className="bg-white">
 					<h2 className="pt-4 text-xl font-semibold text-center">Your Posts</h2>

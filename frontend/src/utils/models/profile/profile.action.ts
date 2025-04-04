@@ -35,3 +35,17 @@ export async function putProfile(profile: Profile) : Promise<Status> {
     })
 }
 
+export async function fetchProfileByProfileUsername(profileUsername: string): Promise<Profile> {
+    const {data} = await fetch (`${process.env.PUBLIC_API_URL}/apis/profile/profileUsername/${profileUsername}`,
+        {
+            method: "GET",
+            headers: await setHeaders()
+        }).then (response => {
+        if(!response.ok) {
+            throw new Error('Request failed')
+        }
+        return response.json()
+    })
+    return ProfileSchema.parse(data)
+}
+

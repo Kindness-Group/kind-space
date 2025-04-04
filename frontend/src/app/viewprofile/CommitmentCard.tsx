@@ -18,7 +18,7 @@ export async function CommitmentCard(props: Props) {
 	const suggestion = await fetchSuggestionBySuggestionId(commitment.commitmentSuggestionId);
 const commitments = await fetchCommitmentsByCommitmentProfileId(commitment.commitmentProfileId)
 	const completedCommitments = commitments.filter(commitment => {
-		return commitment.commitmentCompleted === true
+		return commitment.commitmentCompleted
 	})
 
 	const numberCompletedCommitments = completedCommitments?.length
