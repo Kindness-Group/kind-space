@@ -2,7 +2,7 @@
 
 import {SuggestionCard} from "@/app/kindness-suggestions/SuggestionCard";
 import {MoreSuggestionCard} from "@/app/kindness-suggestions/MoreSuggestionCard";
-import {fetchSuggestionsBySuggestionDate} from "@/utils/models/suggestion/suggestion.action";
+import {fetchRandomSuggestions, fetchSuggestionsBySuggestionDate} from "@/utils/models/suggestion/suggestion.action";
 import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 import {getSession} from "@/utils/auth.utils";
 
@@ -18,6 +18,8 @@ export default async function DailySuggestionPage() {
     console.log(suggestions)
     const todaySuggestion = suggestions.shift();
 
+    const moreSuggestions = await fetchRandomSuggestions()
+
     return (
         <>
             <section id="banner" className="text-black m-16 flex items-center justify-center">
@@ -29,7 +31,7 @@ export default async function DailySuggestionPage() {
             <section id="more-suggestions" className="text-black">
                 <h1 className="md:text-4xl text-2xl text-center font-bold m-16">More Suggestions</h1>
                 <div className="flex flex-col items-center gap-y-32 md:flex-row md:gap-x-[10%] md:mx-8 justify-center" >
-                    {suggestions.map((element, index) => (
+                    {moreSuggestions.map((element, index) => (
                         <MoreSuggestionCard key={index} profile={profile} suggestion={element} />
                     ))}
                 </div>

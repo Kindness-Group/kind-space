@@ -3,7 +3,7 @@ import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controlle
 import {
 	getSuggestionsBySuggestionDateController,
 	getSuggestionBySuggestionIdController,
-	postSuggestionController
+	postSuggestionController, getRandomSuggestions
 } from "./suggestion.controller";
 
 
@@ -12,6 +12,9 @@ const basePath = '/apis/suggestion'
 
 // instantiate a new router object
 const router = Router()
+
+router.route('/')
+	.get(getRandomSuggestions)
 
 router.route ('/suggestionId/:suggestionId')
     .get(getSuggestionBySuggestionIdController)

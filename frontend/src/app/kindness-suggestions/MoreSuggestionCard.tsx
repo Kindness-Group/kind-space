@@ -10,7 +10,7 @@ import React from "react";
 
 type MoreSuggestionProps = {
     suggestion: Suggestion
-    profile: Profile
+    profile?: Profile
 }
 
 

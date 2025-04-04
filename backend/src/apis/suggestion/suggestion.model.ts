@@ -52,3 +52,8 @@ export async function selectSuggestionsBySuggestionDate(suggestionDate: Date): P
 
     return SuggestionSchema.array().parse(rowList)
 }
+
+export async function selectRandomSuggestions(): Promise<Suggestion[]> {
+   const rowList = await sql `SELECT * FROM suggestion ORDER BY RANDOM() LIMIT 3`
+    return SuggestionSchema.array().parse(rowList)
+}

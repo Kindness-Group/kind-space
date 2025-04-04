@@ -1,6 +1,6 @@
 import {Request, Response} from 'express'
 import {
-    insertSuggestion, selectSuggestionsBySuggestionDate, selectSuggestionBySuggestionId
+    insertSuggestion, selectSuggestionsBySuggestionDate, selectSuggestionBySuggestionId, selectRandomSuggestions
 } from "./suggestion.model"
 import {Status} from "../../utils/interfaces/Status";
 import {SuggestionSchema} from "./suggestion.validator";
@@ -97,6 +97,22 @@ export async function getSuggestionsBySuggestionDateController (request: Request
 
         // get the suggestion from the database by suggestionDate and store it in a variable called data
         const data = await selectSuggestionsBySuggestionDate(suggestionDate)
+
+        // return the response with the status code 200, a message, and the suggestion as data
+        return response.json({status: 200, message: null, data})
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+export async function getRandomSuggestions (request: Request, response: Response): Promise<Response<Status>> {
+        // get the suggestion from the database by suggestionDate and store it in a variable called data
+    try {
+    const data = await selectRandomSuggestions()
 
         // return the response with the status code 200, a message, and the suggestion as data
         return response.json({status: 200, message: null, data})

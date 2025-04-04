@@ -28,3 +28,16 @@ export async function fetchSuggestionBySuggestionId(suggestionId: string): Promi
     })
     return SuggestionSchema.parse(data)
 }
+
+export async function fetchRandomSuggestions (): Promise<Suggestion[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/suggestion/`, {
+        method: "GET",
+        headers: await setHeaders()
+    }).then(response => {
+        if(!response.ok) {
+            throw new Error('Request Failed')
+        }
+        return response.json()
+    })
+    return SuggestionSchema.array().parse(data)
+}
