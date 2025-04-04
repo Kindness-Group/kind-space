@@ -28,7 +28,7 @@ export function EditCommentForm(props: Props) {
 		commentId: commentId,
 		commentActId: commentActId,
 		commentProfileId: commentProfileId,
-		commentContent: '',
+		commentContent: commentContent,
 		commentDateTime: commentDateTime
 	}
 

@@ -14,6 +14,7 @@ import {z} from "zod";
 import {router} from "next/client";
 import {postImage} from "@/utils/models/image/image.action";
 import {ImageUploadDropZone} from "@/components/image-upload-dropzone";
+import {useRouter} from "next/navigation";
 
 type Props = {actProfileId: string};
 
