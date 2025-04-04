@@ -8,7 +8,7 @@ import {fetchCommitmentsByCommitmentSuggestionId} from "@/utils/models/commitmen
 
 type SuggestionCardProps = {
     suggestion: Suggestion
-    profile: Profile
+    profile?: Profile
 }
 
 export async function SuggestionCard(props: SuggestionCardProps) {
