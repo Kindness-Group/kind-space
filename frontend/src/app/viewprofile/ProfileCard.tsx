@@ -25,7 +25,7 @@ export async function ProfileCard(props: Props) {
 
 	return (
 		<>
-			<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded bg-white">
+			<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded">
 				{/* Header */}
 				<ProfileBanner profile={profile}/>
 				{/* Profile Section */}

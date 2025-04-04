@@ -4,7 +4,7 @@
 import React from "react";
 import {z} from "zod";
 import {Controller, UseFormClearErrors} from "react-hook-form";
-import {TextInput} from "flowbite-react";
+import {Button, TextInput} from "flowbite-react";
 import {useDropzone} from "react-dropzone";
 
 type Props = {
@@ -69,10 +69,12 @@ export function ImageUploadDropZone(props:Props) {
                 const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
                 return (
+
                     <div {...getRootProps()}>
-                        <div className="mb-2 block">
-                            <label className="form-label" htmlFor="actImageUrl">Upload Image</label>
-                        </div>
+                        <span>Click or Drag and Drop Image Below</span>
+                        {/*<div className="mb-2 block">*/}
+                        {/*    <label className="form-label" htmlFor="actImageUrl">Upload Image</label>*/}
+                        {/*</div>*/}
                         <TextInput
                             {...getInputProps()}
                             aria-label="Image drag and drop area"
@@ -81,9 +83,12 @@ export function ImageUploadDropZone(props:Props) {
                         />
                         {
                             isDragActive ?
-                                <span className="align-items-center">Drop image here</span> :
-                                <span
-                                    className="align-items-center">Drag and drop image here, or click here to select an image</span>
+                                <div className="inline-flex bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                                    <Button color={"light"}  className=" font-bold bg-white group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Drop Image Here</Button>
+                                </div> :
+                                <div className="inline-flex bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded-xl" >
+                                    <Button color={"light"}  className=" font-bold bg-white group-hover:from-teal-400 group-hover:to-purple-700 text-black focus:ring-4 focus:outline-none focus:ring-amber-500 hover:ring-amber-500 hover:ring-4">Upload Image</Button>
+                                </div>
                         }
                     </div>
                 )

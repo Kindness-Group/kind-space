@@ -9,7 +9,7 @@ import {DeleteAct} from "@/utils/models/act/act.action";
 import {DeleteButton} from "@/components/delete-button";
 import React from "react";
 import {getSession} from "@/utils/auth.utils";
-import {Dropdown, DropdownItem} from "flowbite-react";
+import {Button, Dropdown, DropdownItem} from "flowbite-react";
 import {HiDotsVertical} from "react-icons/hi";
 
 
@@ -29,8 +29,8 @@ export async function ActCard (props: ActProps) {
 
 	return (
 		<>
-		<section className="bg-white rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
-
+		<section className="bg-gradient-to-br from-amber-400 via-purple-700 to-teal-400 p-0.5 rounded shadow mx-auto max-w-sm sm:max-w-[28rem] md:max-w-[40rem] lg:max-w-screen-md mt-20">
+			<div className="bg-white ">
 
 			<section>
 				{actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}<header className="p-4">
@@ -67,6 +67,7 @@ export async function ActCard (props: ActProps) {
 					<p className="text-sm text-gray-900"><span className="font-bold"> {numberOfLikes} </span> People loved this Post!</p>
 				</div>
 			</footer>
+			</div>
 		</section>
 		</>
 	)
