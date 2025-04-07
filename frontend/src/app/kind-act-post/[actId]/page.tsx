@@ -7,10 +7,12 @@ import {EditActForm} from "@/app/kind-act-post/[actId]/edit-act-form";
 import {Act} from "@/utils/models/act/act.model";
 import {fetchActByActId} from "@/utils/models/act/act.action";
 import {PageProps} from "@/utils/interfaces/NextComponent";
+import {unstable_noStore} from "next/cache";
 
 
 
-export default async function (props: PageProps<{actId:string}>) {
+export default async function (props: PageProps<Promise<{actId:string}>>) {
+    unstable_noStore()
     const params = await props.params
     const actId = params.actId
     const session = await getSession()

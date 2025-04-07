@@ -26,6 +26,15 @@ services:
     volumes:
       - ./backend/src:/home/node/app/src
       - ./backend/tsconfig.json:/home/node/app/tsconfig.json
+  app:
+    build: frontend
+    user: "node"
+    env_file:
+      - ./project.env
+    depends_on:
+      - node
+    ports:
+      - '80:3000'
 volumes:
   capstone:
     driver: local

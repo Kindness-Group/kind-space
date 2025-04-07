@@ -1,12 +1,12 @@
 
-import {Button} from "flowbite-react";
 import {KindnessMap} from "@/app/kindness-map/kindness-map";
 import {fetchAllActs} from "@/utils/models/act/act.action";
+import {unstable_noStore} from "next/cache";
 
 export default async function () {
-
+	unstable_noStore()
 	let acts = (await fetchAllActs()).filter(act => act.actLat)
-console.log(acts)
+
 	return (
 		<>
 			<section id="replace-banner" className="text-black m-16 flex items-center justify-center">

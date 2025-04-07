@@ -5,15 +5,16 @@ import {MoreSuggestionCard} from "@/app/kindness-suggestions/MoreSuggestionCard"
 import {fetchRandomSuggestions, fetchSuggestionsBySuggestionDate} from "@/utils/models/suggestion/suggestion.action";
 import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 import {getSession} from "@/utils/auth.utils";
+import {unstable_noStore} from "next/cache";
 
 export default async function DailySuggestionPage() {
-
+   unstable_noStore()
     const session = await getSession();
     const profile = session?.profile
 
     const { DateTime } = require('luxon');
     const todayDate = DateTime.now().setZone('America/Denver').toISODate();
-    console.log(todayDate)
+
     // const today = new Date();
     // const todayDate = today.toISOString().split("T")[0];
     const suggestions = await fetchSuggestionsBySuggestionDate(new Date(todayDate))

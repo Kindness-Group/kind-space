@@ -62,7 +62,7 @@ export function EditCommentForm(props: Props) {
 		<>
 			<Dropdown label={""} inline>
 				<DropdownItem>
-			<a onClick={() => setOpenModal(true)} size="xs" color="blue" className="text-justify">Edit Comment</a>
+			<a onClick={() => setOpenModal(true)} color="blue" className="text-justify">Edit Comment</a>
 				</DropdownItem>
 			</Dropdown>
 			<Modal dismissible show={openModal} size="lg" onClose={onCloseModal}>

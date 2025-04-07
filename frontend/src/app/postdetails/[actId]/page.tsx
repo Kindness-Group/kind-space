@@ -10,15 +10,16 @@ import {fetchActByActId} from "@/utils/models/act/act.action";
 import {EditCommentForm} from "@/app/postdetails/[actId]/edit-comment-form";
 
 
-export default async function (props: PageProps<{actId:string}>) {
-	const commentActId = await props.params.actId;
+export default async function (props: PageProps<Promise<{actId:string}>>) {
+	const params = await props.params;
+	const commentActId = params.actId;
 	const [session, comments, act ]= await Promise.all([getSession(), fetchCommentsByCommentActId(commentActId), fetchActByActId(commentActId)]);
 	const commentProfileId = session?.profile.profileId
 
 	return (
 		<>
 			<section id="replace-banner" className="text-black m-16 flex items-center justify-center">
-				<img src="/heart-icon.png" className="w-12"/>
+				<img src="/heart-icon.png" alt="heart-icon" className="w-12"/>
 				<h1 className="md:text-2xl text-xl text-center font-bold">View Comments</h1>
 			</section>
 			<ActCard act={act} />

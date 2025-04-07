@@ -8,7 +8,7 @@ import {putProfile} from "@/utils/models/profile/profile.action";
 import {reset} from "next/dist/lib/picocolors";
 import {Button, Label, Textarea, TextInput} from "flowbite-react";
 import {register} from "node:module";
-import {DisplayError} from "@/components/display-error";
+import {DisplayError, DisplayImageError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
 import {z} from "zod";
 import {postImage} from "@/utils/models/image/image.action";
@@ -69,6 +69,8 @@ export function EditProfileForm(props: {profile: Profile}) {
         }
     }
 
+    // @ts-ignore
+    const imageError = errors?.profilePictureUrl?.message?.message as any
     return (
         <>
             <form onSubmit={handleSubmit(fireServerAction)}>
@@ -82,7 +84,7 @@ export function EditProfileForm(props: {profile: Profile}) {
                         )}
                     </div>
                     <ImageUploadDropZone control={control} fieldValue={'profilePictureUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors}/>
-                    <DisplayError error={errors?.profilePictureUrl?.message?.message as any}/>
+                    <DisplayImageError error={imageError}/>
                 </div>
                 <div className="flex items-center">
                     <Label htmlFor="name" className="w-32 text-lg font-medium">Name:</Label>

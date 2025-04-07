@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { Status } from '@/utils/interfaces/Status'
 import {postAct} from "@/utils/models/act/act.action";
-import {DisplayError} from "@/components/display-error";
+import {DisplayError, DisplayImageError} from "@/components/display-error";
 import {DisplayStatus} from "@/components/display-status";
 import {v7 as uuid} from "uuid";
 import {z} from "zod";
@@ -86,7 +86,8 @@ export function ActForm(props: Props ) {
             setStatus({status:500, message: 'Internal Server Error, try again later', data: undefined})
         }
     }
-
+    // @ts-ignore
+    const imageError = errors?.actImageUrl?.message?.message as any
     return (
         <>
             <form onSubmit={handleSubmit(fireServerAction)} className="flex flex-col gap-4">
@@ -113,7 +114,7 @@ export function ActForm(props: Props ) {
                     <DisplayError error={errors?.actAddress?.message}></DisplayError>
                 </div>
                 <ImageUploadDropZone control={control} fieldValue={'actImageUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors} />
-                <DisplayError error={errors?.actImageUrl?.message?.message as any}/>
+                <DisplayImageError error={imageError}/>
                 {selectedImage ? <img src={selectedImage} alt='image to upload'></img>: <></>}
                 <hr className="border-gray-300" />
                 <div className="flex justify-end">

@@ -6,10 +6,11 @@ import {ActCard} from "@/app/layout-components/ActCard";
 import {fetchAllActs} from "@/utils/models/act/act.action";
 import {fetchLikesByLikeProfileId} from "@/utils/models/like/like.action";
 import {getSession} from "@/utils/auth.utils";
-import {Act} from "@/utils/models/act/act.model";
 import {Like} from "@/utils/models/like/like.model";
+import {unstable_noStore} from 'next/cache'
 
-export default async function KindnessFeed() {
+export default async function page() {
+    unstable_noStore()
     const acts = await fetchAllActs()
     const session=await getSession()
     const profileId =session?.profile.profileId

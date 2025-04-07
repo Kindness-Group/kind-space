@@ -5,14 +5,18 @@ import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 import {Profile} from "@/utils/models/profile/profile.model";
 import {CreateCommitment} from "@/app/kindness-suggestions/CreateCommitment";
 import {fetchCommitmentsByCommitmentSuggestionId} from "@/utils/models/commitment/commitment.action";
+import {unstable_noStore} from "next/cache";
 
 type SuggestionCardProps = {
-    suggestion: Suggestion
+    suggestion?: Suggestion
     profile?: Profile
 }
 
 export async function SuggestionCard(props: SuggestionCardProps) {
     let {suggestion, profile} = props;
+    if (suggestion === undefined) {
+        return <></>
+    }
     let content = suggestion.suggestionContent;
 
     const commitmentsCreated = await fetchCommitmentsByCommitmentSuggestionId(suggestion.suggestionId);

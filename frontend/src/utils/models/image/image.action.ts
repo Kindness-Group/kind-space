@@ -1,6 +1,5 @@
 'use server'
 
-import {Act} from "@/app/kindness-feed/page";
 import {Status} from "@/utils/interfaces/Status";
 import {headers as incomingHeaders} from "next/dist/server/request/headers";
 import {getSession} from "@/utils/auth.utils";

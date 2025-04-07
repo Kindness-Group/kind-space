@@ -9,7 +9,7 @@ import {PageProps} from "@/utils/interfaces/NextComponent";
 import {ProfileBanner} from "@/app/viewprofile/ProfileBanner";
 
 
-export default async function (props: PageProps<{profileUsername:string}>) {
+export default async function (props: PageProps<Promise<{profileUsername:string}>>) {
     const params = await props.params
     const profileUsername = params.profileUsername
     console.log(profileUsername)
