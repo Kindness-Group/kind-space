@@ -21,16 +21,14 @@ export default function () {
                             </div>
                             <h2 className="text-xl font-semibold">Kind Space</h2>
                         </div>
-
                         <p className="text-gray-500 text-sm mt-6">WELCOME BACK 👋</p>
                         <h3 className="text-2xl font-semibold text-gray-800 mb-6">Continue to your Account.</h3>
-
                         <div className="relative flex py-5 items-center">
                             <div className="flex-grow border-t border-gray-200"></div>
                             <span className="flex-shrink mx-4 text-gray-500 text-sm">Use Email</span>
                             <div className="flex-grow border-t border-gray-200"></div>
                         </div>
-                        {/* Form */}
+                        {/* Sign In Form */}
                         <SignInForm />
                         <p className="text-center text-gray-500 text-sm mt-6">
                             Are you a Newbie? <Link href="/sign-up" className="font-bold text-gray-800">GET STARTED - IT'S FREE</Link>

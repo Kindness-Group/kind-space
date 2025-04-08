@@ -12,6 +12,21 @@ import {DisplayStatus} from "@/components/display-status";
 import {useRouter} from "next/navigation";
 
 
+/**
+ * SignInForm Component
+ *
+ * A form component for user authentication that allows users to sign in with their email and password.
+ *
+ * Features:
+ * - Email and password input fields with validation
+ * - Password visibility toggle
+ * - Form submission handling with server action
+ * - Error display for form validation and server responses
+ * - Automatic redirection to kindness-feed page on successful sign-in
+ *
+ * @component
+ * @returns {JSX.Element} The rendered sign-in form
+ */
 export function SignInForm() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [status, setStatus] = useState<Status|null>(null)
@@ -30,10 +45,22 @@ export function SignInForm() {
 		mode:'onBlur'
 	})
 
-	// define what happens onSubmit
+	/**
+	 * Submits the sign-in form data to the server
+	 *
+	 * This async function handles:
+	 * - Submitting user credentials to the authentication endpoint
+	 * - Processing the server response
+	 * - Redirecting on successful sign-in
+	 * - Resetting the form on success
+	 * - Error handling with appropriate user feedback
+	 *
+	 * @param {SignIn} data - The sign-in form data containing profileEmail and profilePassword
+	 * @returns {Promise<void>}
+	 */
 	const fireServerAction = async (data: SignIn) => {
 		try {
-			// call to the postSignIn server action
+			// send data to server with postSignIn function
 			const response = await postSignIn(data)
 			if (response.status === 200) {
 				// if status object returned from express is 200 resetForm

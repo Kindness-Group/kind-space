@@ -5,26 +5,6 @@ import React from "react";
 import {SignUpForm} from "@/app/sign-up/sign-up-form/sign-up-form";
 
 const SignupPage: React.FC = () => {
-    /* THIS CODE MAY NOT BE NEEDED */
-    // const [formData, setFormData] = useState({
-    //     email: '',
-    //     password: '',
-    //     username: ''
-    // });
-    //
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { id, value } = e.target;
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         [id]: value
-    //     }));
-    // };
-    //
-    // const handleSubmit = (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     console.log('Signup submitted:', formData);
-    //     // Add registration logic here
-    // };
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -50,13 +30,11 @@ const SignupPage: React.FC = () => {
                             <span className="flex-shrink mx-4 text-gray-500 text-sm">Use Email</span>
                             <div className="flex-grow border-t border-gray-200"></div>
                         </div>
-
+                        {/* Sign Up Form */}
                         <SignUpForm />
-
                         <p className="text-xs text-gray-500 mt-4 text-center">
                             By Signing up to Kind Space, means you agree to our Privacy Policy and Terms of Service
                         </p>
-
                         <p className="text-center text-gray-500 text-sm mt-6">
                             Already a Member? <Link href="/sign-in" className="font-bold text-gray-800">LOG IN</Link>
                         </p>
