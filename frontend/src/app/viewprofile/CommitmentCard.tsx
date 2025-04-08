@@ -16,7 +16,7 @@ export async function CommitmentCard(props: Props) {
 	let {commitment} = props
 	// now get the suggestion using commitmentSuggestionId
 	const suggestion = await fetchSuggestionBySuggestionId(commitment.commitmentSuggestionId);
-const commitments = await fetchCommitmentsByCommitmentProfileId(commitment.commitmentProfileId)
+	const commitments = await fetchCommitmentsByCommitmentProfileId(commitment.commitmentProfileId)
 	const completedCommitments = commitments.filter(commitment => {
 		return commitment.commitmentCompleted
 	})

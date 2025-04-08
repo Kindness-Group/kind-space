@@ -18,19 +18,23 @@ import {ImageUploadDropZone} from "@/components/image-upload-dropzone";
  * Handles the submission of the user's profile data, including profile picture upload
  * and updating profile information on the server.
  *
- * @param {ProfileSchema} data - The user's profile data.
- *
  * Features:
  * - Validates profile picture field.
  * - Uploads profile picture and updates profile data.
  * - Displays success or error messages.
  * - Resets form on successful submission.
- */
+ * @param props
  */
 export function EditProfileForm(props: {profile: Profile}) {
 	const [status, setStatus] = useState<Status | null>(null)
 	const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
+	/**
+	 * Extended schema for profile validation
+	 * Extends the base ProfileSchema to handle the profile picture URL field
+	 * The profilePictureUrl field is preprocessed to convert empty strings to null
+	 * and is made optional to allow profiles without pictures
+	 */
 	const profileSchema = ProfileSchema.extend({
 		profilePictureUrl: z.preprocess((val) => (val === "" ? null : val), z.any().optional())
 	})
@@ -44,16 +48,30 @@ export function EditProfileForm(props: {profile: Profile}) {
 		mode: 'onBlur'
 	})
 
-
+	/**
+	 * Submits the profile form data to the server
+	 *
+	 * This function handles:
+	 * 1. Validating image errors
+	 * 2. Uploading any new profile image
+	 * 3. Updating the profile data on the server
+	 * 4. Managing form state based on server responses
+	 *
+	 * @param {ProfileSchema} data - The validated form data from React Hook Form
+	 * @returns {Promise<void>} - A promise that resolves when the submission process is complete
+	 */
 	const fireServerAction = async (data: ProfileSchema) => {
 		console.log(data)
 		try {
+			// check for image errors
 			if(errors?.profilePictureUrl) {
 				setStatus({status: 500, message: 'Select a new image', data: undefined})
 				return
 			}
 			let profilePictureUrl = null
+			// check if there is a new image to upload
 			if (data.profilePictureUrl) {
+				// upload the image and get the URL
 				const response = await postImage(data.profilePictureUrl)
 				if (response.status === 200) {
 					profilePictureUrl = response.message
@@ -62,6 +80,7 @@ export function EditProfileForm(props: {profile: Profile}) {
 					return
 				}
 			}
+			// call to the putProfile server action
 			const finalResponse = await putProfile({...data, profilePictureUrl})
 			//use setStatus to display status from express
 			setStatus(finalResponse)
@@ -79,6 +98,7 @@ export function EditProfileForm(props: {profile: Profile}) {
 
 	// @ts-ignore
 	const imageError = errors?.profilePictureUrl?.message?.message as any
+
 	return (
 		<>
 			<form onSubmit={handleSubmit(fireServerAction)}>
@@ -91,6 +111,7 @@ export function EditProfileForm(props: {profile: Profile}) {
 							</div>
 						)}
 					</div>
+					{/* Image upload drop zone */}
 					<ImageUploadDropZone control={control} fieldValue={'profilePictureUrl'} setSelectedImage={setSelectedImage} setError={setError} clearErrors={clearErrors}/>
 					<DisplayImageError error={imageError}/>
 				</div>
