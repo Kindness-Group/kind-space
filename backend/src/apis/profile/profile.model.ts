@@ -51,24 +51,16 @@ export async function updateProfile(profile: PrivateProfile): Promise<string> {
 		profileId,
 		profileBio,
 		profileActivationToken,
-		profileHash,
 		profileEmail,
 		profileUsername,
 		profileName,
 		profilePictureUrl,
-		profileJoinDate
 	} = profile
-
-	const formattedDate = profileJoinDate
-		? `${profileJoinDate.getFullYear()}-${profileJoinDate.getMonth()+1}-${profileJoinDate.getDay()} ${profileJoinDate.getHours()}:${profileJoinDate.getMinutes()}:${profileJoinDate.getSeconds()}.${profileJoinDate.getMilliseconds()}`
-		: null
 
 	await sql`UPDATE profile
 				 SET profile_bio=${profileBio},
 					  profile_activation_token=${profileActivationToken},
 					  profile_username=${profileUsername},
-					  profile_hash=${profileHash},
-					  profile_join_date=${formattedDate},
 					  profile_picture_url=${profilePictureUrl},
 					  profile_name=${profileName},
 					  profile_email=${profileEmail}
