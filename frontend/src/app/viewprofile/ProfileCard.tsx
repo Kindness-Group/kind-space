@@ -3,7 +3,6 @@
 import React from 'react';
 import {CommitmentCard} from "@/app/viewprofile/CommitmentCard";
 import {Profile} from "@/utils/models/profile/profile.model";
-// import ProfileBanner from "@/app/viewprofile/ProfileBanner";
 import {getSession} from "@/utils/auth.utils";
 import {ProfileBanner} from "@/app/viewprofile/ProfileBanner";
 import {fetchCommitmentsByCommitmentProfileId} from "@/utils/models/commitment/commitment.action";
@@ -12,22 +11,25 @@ type Props = {
 	profile: Profile;
 }
 
+/**
+ * Renders a profile card with user information and commitments
+ *
+ * This component displays a user's profile information including their
+ * profile picture, username, and bio. It also shows their commitments
+ * if they have any, or a message encouraging them to make commitments
+ * if they don't have any.
+ *
+ * @param {Props} props - Component props
+ * @param {Profile} props.profile - The user profile data to display
+ * @returns {Promise<JSX.Element>} The rendered profile card component
+ */
 export async function ProfileCard(props: Props) {
 	const profile = props.profile
-	// here we want to get the suggestion based off of the commitmentSuggestionId
-	// to know what suggestionIds to use, we must get the commitments based on the commitmentProfileId --> get
-	// commitments
 	const commitments = await fetchCommitmentsByCommitmentProfileId(profile.profileId)
-	/*
-	get individual commitments to display with CommitmentCard component
-	pass commitments with .map and let them render on CommitmentCard.tsx
-	*/
 
 	return (
 		<>
 			<div className="w-full border flex flex-col pt-14 pb-10 border-gray-200 h-auto max-h-[935px] overflow-x-hidden overflow-y-auto md:px-9 shadow-sm rounded">
-				{/* Header */}
-
 				{/* Profile Section */}
 				<section className="text-center mb-6 p-4">
 					<img src={profile?.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile picture" className="w-48 h-48 mx-auto"/>

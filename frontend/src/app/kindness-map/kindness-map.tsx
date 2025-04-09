@@ -5,6 +5,17 @@ import {Act} from "@/utils/models/act/act.model";
 import {useState} from "react";
 
 /**
+ * Props for the KindnessMap component
+ * @typedef {Object} MapCardProps
+ * @property {Act[]} acts - Array of Act objects to display on the map
+ * @property {string} [searchLocation] - Optional search location string
+ */
+type MapCardProps = {
+	acts: Act[];
+	searchLocation?: string
+}
+
+/**
  * KindnessMap - Renders a map displaying acts of kindness as markers
  *
  * This component uses react-map-gl to create an interactive map that displays
@@ -22,22 +33,6 @@ import {useState} from "react";
  * @example
  * <KindnessMap acts={actsList} />
  */
-
-// If using with mapbox-gl v1:
-// import Map from 'react-map-gl/mapbox-legacy';
-
-/**
- * Props for the KindnessMap component
- * @typedef {Object} MapCardProps
- * @property {Act[]} acts - Array of Act objects to display on the map
- * @property {string} [searchLocation] - Optional search location string
- */
-
-type MapCardProps = {
-	acts: Act[];
-	searchLocation?: string
-}
-
 export function KindnessMap(props: MapCardProps) {
 
 	/**

@@ -12,15 +12,29 @@ type Props = {
  commitment: Commitment
 }
 
+/**
+ * CommitmentCard component displays a commitment card with details of a daily act of kindness.
+ *
+ * This component fetches and displays:
+ * - The suggestion content associated with the commitment
+ * - Commitment completion status
+ * - Total number of completed commitments for the profile
+ *
+ * @param props - Component properties
+ * @param props.commitment - The commitment object to display
+ * @returns A styled card showing commitment details and completion status
+ */
 export async function CommitmentCard(props: Props) {
 	let {commitment} = props
-	// now get the suggestion using commitmentSuggestionId
+	// Fetch the suggestion content based on the commitment's suggestion ID
 	const suggestion = await fetchSuggestionBySuggestionId(commitment.commitmentSuggestionId);
 	const commitments = await fetchCommitmentsByCommitmentProfileId(commitment.commitmentProfileId)
+	// Filter the commitments to find the completed ones
 	const completedCommitments = commitments.filter(commitment => {
 		return commitment.commitmentCompleted
 	})
 
+	// Get the number of completed commitments
 	const numberCompletedCommitments = completedCommitments?.length
 
 	return (
@@ -40,7 +54,7 @@ export async function CommitmentCard(props: Props) {
 			<div className="relative flex md:mt-auto mb-4 px-8">
 				<img src="/heart-icon-cropped.png" className="w-6" alt="heart icon"/>
 				<p className="text-sm text-gray-900">
-					You’ve Completed <span className="font-bold">{numberCompletedCommitments}</span> Daily Acts of Kindness!
+					You've Completed <span className="font-bold">{numberCompletedCommitments}</span> Daily Acts of Kindness!
 				</p>
 
 			</div>
