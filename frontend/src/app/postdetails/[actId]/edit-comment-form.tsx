@@ -16,6 +16,15 @@ import {useRouter} from "next/navigation";
 
 type Props = {comment:Comment};
 
+/**
+ * EditCommentForm Component
+ *
+ * This component provides a form to edit an existing comment.
+ * It displays an edit button in a dropdown that opens a modal with the edit form.
+ *
+ * @param {Props} props - Component props containing the comment to edit
+ * @returns {JSX.Element} - Rendered component
+ */
 export function EditCommentForm(props: Props) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const {comment:{commentId, commentProfileId, commentContent, commentDateTime, commentActId}} = props;
@@ -24,6 +33,10 @@ export function EditCommentForm(props: Props) {
 	const[status, setStatus] = useState<Status|null>(null)
 	const [openModal, setOpenModal] = useState(false);
 
+	/**
+	 * Default values for the comment form
+	 * Populated with the current comment data
+	 */
 	const defaultValues:Comment = {
 		commentId: commentId,
 		commentActId: commentActId,
@@ -32,18 +45,26 @@ export function EditCommentForm(props: Props) {
 		commentDateTime: commentDateTime
 	}
 
-	// get access to return values from React hook form and provide validation
+	/**
+	 * Setup for React Hook Form with Zod validation
+	 * Uses the CommentSchema for validation rules
+	 */
 	const {register, handleSubmit, reset, formState:{errors}} = useForm<Comment>({
 		resolver: zodResolver(CommentSchema),
 		defaultValues,
 		mode:'onBlur'
 	})
 
-	// define what happens onSubmit
+	/**
+	 * Handles the form submission
+	 * Sends the updated comment data to the server and manages response
+	 *
+	 * @param {Comment} data - The form data to submit
+	 */
 	const fireServerAction = async (data: Comment) => {
 		try {
 			const addComment = {data}
-			const response=await editComment(data)
+			const response = await editComment(addComment.data)
 			if (response.status === 200) {
 				reset()
 				router.refresh()
@@ -54,6 +75,9 @@ export function EditCommentForm(props: Props) {
 		}
 	}
 
+	/**
+	 * Closes the edit comment modal
+	 */
 	function onCloseModal() {
 		setOpenModal(false)
 	}

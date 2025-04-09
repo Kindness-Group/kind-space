@@ -38,25 +38,23 @@ export async function ActCard (props: ActProps) {
 			<div className="bg-white ">
 
 			<section>
-				{actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}<header className="p-4">
-				<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
-				<div className="flex justify-between space-x-3">
-					<h3 className="text-lg font-bold"><a href={`../viewprofile/${profile.profileUsername}`}>{profile.profileUsername}</a></h3>
-					<Dropdown label={""} inline>
-						<DropdownItem>
-						<a href={`/kind-act-post/${actId}`}>edit post</a>
-						{/*<DeleteButton actId={actId} />*/}
-						</DropdownItem>
-					</Dropdown>
-				</div>
-				<p className="text-sm text-gray-600">{actAddress} - {actDateTime?.toDateString()}</p>
-
-			</header>
+				{actImageUrl && (<img src={actImageUrl} alt="kind image" className="w-[95%] mx-auto"/>)}
+				<header className="p-4">
+					<img src={profile.profilePictureUrl ?? "/blank_profile.jpg"} alt="profile pic" className="float-left rounded-full w-14 h-14 m-1 mr-3"/>
+					<div className="flex justify-between space-x-3">
+						<h3 className="text-lg font-bold"><a href={`../viewprofile/${profile.profileUsername}`}>{profile.profileUsername}</a></h3>
+						<Dropdown label={""} inline>
+							<DropdownItem>
+								<a href={`/kind-act-post/${actId}`}>edit post</a>
+								{/*<DeleteButton actId={actId} />*/}
+							</DropdownItem>
+						</Dropdown>
+					</div>
+					<p className="text-sm text-gray-600">{actAddress} - {actDateTime?.toDateString()}</p>
+				</header>
 
 				<p className="bg-gray-100 mx-auto text-base text-gray-900 w-[95%] p-4 my-4">{actContent}</p>
 			</section>
-
-
 
 			<footer className="px-6 pb-6 flex justify-between">
 				<div className="flex gap-10">
