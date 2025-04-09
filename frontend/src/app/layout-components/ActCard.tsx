@@ -14,6 +14,15 @@ type ActProps = {
 	isLiked?: boolean;
 }
 
+// This is a server component
+// It fetches the profile of the act and the likes and comments for the act
+// and passes them to the ActCard component for rendering
+// It also handles the session and checks if the user has liked any acts
+// It uses the fetchAllActs and fetchLikesByLikeProfileId functions to get the data
+// It uses the ActCard component to render each act
+// It uses the getSession function to get the session data
+
+
 export async function ActCard (props: ActProps) {
 	let {isLiked, act: {actId, actProfileId, actContent, actDateTime, actImageUrl, actAddress}} = props;
 	const profile = await fetchProfileByProfileId(actProfileId)

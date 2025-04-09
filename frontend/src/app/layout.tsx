@@ -26,7 +26,7 @@ export default function RootLayout(props : RootLayoutProps) {
         {children}
         </div>
         <footer className="bg-gray-900 text-white p-6 text-center">
-            <p>KindSpace Created by: Kindness Group, Deep Dive Full-Stack Coding Bootcamp 2026</p>
+            <p>KindSpace Created by: Kindness Group, Deep Dive Full-Stack Coding Bootcamp 2025</p>
         </footer>
         </body>
         </html>

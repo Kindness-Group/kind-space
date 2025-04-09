@@ -3,7 +3,6 @@
 import {SuggestionCard} from "@/app/kindness-suggestions/SuggestionCard";
 import {MoreSuggestionCard} from "@/app/kindness-suggestions/MoreSuggestionCard";
 import {fetchRandomSuggestions, fetchSuggestionsBySuggestionDate} from "@/utils/models/suggestion/suggestion.action";
-import {Suggestion} from "@/utils/models/suggestion/suggestion.model";
 import {getSession} from "@/utils/auth.utils";
 import {unstable_noStore} from "next/cache";
 
@@ -18,22 +17,17 @@ import {unstable_noStore} from "next/cache";
 export default async function DailySuggestionPage() {
     // Opt out of caching for this page
    unstable_noStore()
-
     // Retrieve user session and profile information
     const session = await getSession();
     const profile = session?.profile
-
     // Get current date in Mountain Time (America/Denver)
     const { DateTime } = require('luxon');
     const todayDate = DateTime.now().setZone('America/Denver').toISODate();
-
     // Fetch suggestions scheduled for today's date
     const suggestions = await fetchSuggestionsBySuggestionDate(new Date(todayDate))
     console.log(suggestions)
-
     // Get the first suggestion as today's featured suggestion
     const todaySuggestion = suggestions.shift();
-
     // Fetch additional random suggestions to display
     const moreSuggestions = await fetchRandomSuggestions()
 
@@ -47,7 +41,7 @@ export default async function DailySuggestionPage() {
 
             {/* Display today's suggestion or fallback text if none available */}
             {todaySuggestion ?
-                (<SuggestionCard profile= {profile} suggestion={todaySuggestion}/>) : (<p>Compliment a Stranger: Give a genuine compliment to someone you don't know—tell a barista they made a great coffee, let a coworker know their outfit looks nice, or appreciate someone's kindness.</p>)}
+                (<SuggestionCard profile= {profile} suggestion={todaySuggestion}/>) : (<SuggestionCard profile= {profile} suggestion={moreSuggestions[0]}/>)}
 
             {/* More suggestions section */}
             <section id="more-suggestions" className="text-black">
@@ -61,6 +55,10 @@ export default async function DailySuggestionPage() {
         </>
     )
 }
+
+
+
+
 /**
  * Example Suggestion Data
  *

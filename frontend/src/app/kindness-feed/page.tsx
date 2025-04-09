@@ -9,6 +9,16 @@ import {getSession} from "@/utils/auth.utils";
 import {Like} from "@/utils/models/like/like.model";
 import {unstable_noStore} from 'next/cache'
 
+
+// This is a server component
+// It fetches all acts and their likes from the server
+// and passes them to the ActCard component for rendering
+// It also handles the session and checks if the user has liked any acts
+// It uses the fetchAllActs and fetchLikesByLikeProfileId functions to get the data
+// It uses the ActCard component to render each act
+// It uses the getSession function to get the session data
+
+
 export default async function page() {
     unstable_noStore()
     const acts = await fetchAllActs()
