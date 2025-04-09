@@ -60,7 +60,7 @@ export function EditProfileForm(props: {profile: Profile}) {
 	 * @param {ProfileSchema} data - The validated form data from React Hook Form
 	 * @returns {Promise<void>} - A promise that resolves when the submission process is complete
 	 */
-	const fireServerAction = async (data: ProfileSchema) => {
+	const fireServerAction = async (data: ProfileSchema): Promise<void> => {
 		console.log(data)
 		try {
 			// check for image errors
